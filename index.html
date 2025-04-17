@@ -10,9 +10,9 @@
 <body>
 
   <div id="setupScreen" class="screen visible">
-    <h1>DICTIONARY</h1>
+    <h1>DICTIONARY V1</h1>
     
-    <!--<h1>Setup</h1>-->
+    <h1>Setup</h1>-->
     <select id="csvSelector"></select>
     <select id="topicSelector">
       <option value="">Select Mode</option>
@@ -25,6 +25,12 @@
   </div>
 
   <div id="studyScreen" class="screen">
+    <div id="menuContainer" class="hidden">
+  <input type="text" id="searchBar" placeholder="Search words...">
+  <div id="navMenu"></div>
+  <div id="searchResults"></div>
+  <button id="closeBtn">Close</button>
+    </div>
     <div class="top-bar">
       <div>
       <input type="text" id="searchBar" placeholder="Search in dictionary..." />
