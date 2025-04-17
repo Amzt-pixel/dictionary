@@ -6,11 +6,14 @@ let currentIndex = 0;
 let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
+let isSearchActive = false;
 
+const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
-  checkInputs(); // Enable Start button if defaults are valid
+  checkInputs(); 
+  const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button// Enable Start button if defaults are valid
 };
 
 // Event Listeners
@@ -32,7 +35,8 @@ document.getElementById("completeBtn").addEventListener("click", completeSession
 document.getElementById("restartBtn").addEventListener("click", () => showScreen("study"));
 document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
-document.getElementById("clearSearch").addEventListener("click", clearSearch);
+searchActionBtn.addEventListener("click", () => {
+  isSearchActive ? clearSearch() : handleSearch({ target: document.getElementById("wordSearch") });
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -223,6 +227,7 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
+
 function handleSearch(e) {
   // Safeguard 1: Validate studyList
   if (!studyList || studyList.length === 0) {
@@ -237,9 +242,9 @@ function handleSearch(e) {
     return;
   }
 
-  // Safeguard 3: Minimum search length
-  if (term.length < 2) {
-    alert("Please enter at least 2 characters.");
+  // NEW: Minimum 3-letter requirement
+  if (term.length < 3) {
+    if (term.length === 0) clearSearch();
     return;
   }
 
@@ -249,15 +254,41 @@ function handleSearch(e) {
     .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
     .sort();
 
-  // Safeguard 4: Defensive UI updates
+  // NEW: Handle "No words found"
+  const noResultsDiv = document.getElementById("noResults") || document.createElement("div");
+  noResultsDiv.id = "noResults";
+  noResultsDiv.textContent = "No words found";
+  noResultsDiv.className = "no-results";
+
+  // Update UI
+  updateResultsUI(exactMatch, closeMatches, noResultsDiv);
+  isSearchActive = true;
+  searchActionBtn.textContent = "Collapse";
+  document.getElementById("searchResults").classList.remove("hidden");
+}
+
+// NEW: Helper function
+function updateResultsUI(exactMatch, closeMatches, noResultsDiv) {
   const exactMatchSection = document.getElementById("exactMatchSection");
   const closeMatchesSection = document.getElementById("closeMatchesSection");
   const exactMatchDiv = document.getElementById("exactMatch");
   const closeMatchesDiv = document.getElementById("closeMatches");
+  const searchResults = document.getElementById("searchResults");
 
+  // Clear previous
   exactMatchDiv.innerHTML = "";
   closeMatchesDiv.innerHTML = "";
+  if (document.getElementById("noResults")) {
+    searchResults.removeChild(document.getElementById("noResults"));
+  }
 
+  // Handle no results
+  if (!exactMatch && closeMatches.length === 0) {
+    searchResults.appendChild(noResultsDiv);
+    return;
+  }
+
+  // Update matches
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
@@ -271,26 +302,22 @@ function handleSearch(e) {
       .join("");
   }
 
-  // Show results
-  document.getElementById("searchResults").classList.remove("hidden");
-  document.getElementById("clearSearch").classList.remove("hidden");
-
-  // Safeguard 5: Secure click-jump
+  // NEW: Add click handler with alert
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
       const selectedWord = item.textContent;
-      if (!studyList.includes(selectedWord)) {
-        alert("Word not available in current session.");
-        return;
-      }
+      alert(`Opening new word: '${selectedWord}'!`);
       currentIndex = studyList.indexOf(selectedWord);
+      wordsSeen++;
       displayWord();
       clearSearch();
     });
   });
 }
+  
 function clearSearch() {
   document.getElementById("wordSearch").value = "";
   document.getElementById("searchResults").classList.add("hidden");
-  document.getElementById("clearSearch").classList.add("hidden");
+  searchActionBtn.textContent = "Look Up";
+  isSearchActive = false;
 }
