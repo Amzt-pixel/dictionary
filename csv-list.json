@@ -1,10 +1,10 @@
 [
   {
     "name": "Full Set",
-    "url": "https://raw.githubusercontent.com/amzt-pixel/word/main/csvs/vocab.csv"
+    "url": "https://raw.githubusercontent.com/amzt-pixel/dictionary/main/csvs/vb.csv"
   },
   {
     "name": "General English Set",
-    "url": "https://raw.githubusercontent.com/amzt-pixel/Vocabulary/main/csvs/general.csv"
+    "url": "https://raw.githubusercontent.com/amzt-pixel/dictionary/main/csvs/gn.csv"
   }
 ]
