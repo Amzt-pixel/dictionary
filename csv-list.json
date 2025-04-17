@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Full Set",
+    "url": "https://raw.githubusercontent.com/amzt-pixel/word/main/csvs/vocab.csv"
+  },
+  {
+    "name": "General English Set",
+    "url": "https://raw.githubusercontent.com/amzt-pixel/Vocabulary/main/csvs/general.csv"
+  }
+]
