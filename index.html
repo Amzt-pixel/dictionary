@@ -26,7 +26,14 @@
 
   <div id="studyScreen" class="screen">
     <div id="menuContainer" class="hidden">
-  <input type="text" id="searchBar" placeholder="Search words...">
+ <!--<input type="text" id="searchBar" placeholder="Search words...">
+      <!-- Inside #menuContainer (sidebar) -->
+<input type="text" id="menuSearchBar" placeholder="Search words...">
+<div id="menuSearchResults"></div>
+
+<!-- Inside .top-bar (main study screen) -->
+<input type="text" id="mainSearchBar" placeholder="Search in dictionary...">
+<div id="mainSearchResults" class="hidden"></div>
   <div id="navMenu"></div>
   <div id="searchResults"></div>
   <button id="closeBtn">Close</button>
