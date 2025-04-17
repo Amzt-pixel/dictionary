@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vocabulary Study App</title>
+  <link rel="stylesheet" href="ui.css">
+  </style>
+</head>
+<body>
+
+  <div id="setupScreen" class="screen visible">
+    <h1>DICTIONARY</h1>
+    
+    <!--<h1>Setup</h1>-->
+    <select id="csvSelector"></select>
+    <select id="topicSelector">
+      <option value="">Select Mode</option>
+      <option value="alphabetic">Alphabetical (A-Z)</option>
+      <option value="reverse">Reverse Alphabetical (Z-A)</option>
+      <option value="Random">Random</option>
+    </select>
+    <input type="number" id="wordCountInput" placeholder="Number of Words to Study" min="1"/>
+    <button id="startBtn" disabled>Start</button>
+  </div>
+
+  <div id="studyScreen" class="screen">
+    <div class="top-bar">
+      <div>
+      <input type="text" id="searchBar" placeholder="Search in dictionary..." />
+       <button id="clearSearchBtn" class="clear-search-btn">×</button>
+      </div>
+      <div id="searchResults" class="hidden"></div>
+      <div id="clock">Time: </div>
+      <div id="metaInfo">
+  <p id="wordOrder"></p>
+  <p id="wordTotal"></p>
+  <p id="modeDisplay"></p>
+  <p id="questionCount"></p>
+      </div>
+      <button id="completeBtn">Complete</button>
+    </div>
+    <!-- Replace your existing search bar (in studyScreen div) with this: -->
+
+
+<!-- Add these right before </body> -->
+<!-- Bootstrap JS -->
+    <div class="word-card">
+      <div class="label">Word:</div>
+      <div id="wordDisplay"></div>
+      <div class="label">Synonyms:</div>
+      <div id="synDisplay"></div>
+      <div class="label">Antonyms:</div>
+      <div id="antDisplay"></div>
+    </div>
+
+    <div class="footer-buttons">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <div id="completeScreen" class="screen">
+    <h1>Study Session Complete</h1>
+    <div id="sessionStats"></div>
+    <div class="footer-buttons">
+      <button id="restartBtn">Restart</button>
+      <button id="goHomeBtn">Home</button>
+    </div>
+  </div>
+  <!-- Add this popup div just before closing body tag -->
+<div id="wordPopup" class="popup">
+  <div class="popup-content">
+    <button id="closePopupBtn" class="close-btn">×</button>
+    <h3 id="popupWordTitle"></h3>
+    <div class="label">Synonyms:</div>
+    <div id="popupSynDisplay"></div>
+    <div class="label">Antonyms:</div>
+    <div id="popupAntDisplay"></div>
+  </div>
+</div>
+<!-- Just before closing body tag -->
+<script src="dictionary.js"></script>
+
+</body>
+</html>
+
+​
