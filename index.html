@@ -26,10 +26,20 @@
 
   <div id="studyScreen" class="screen">
     <div class="top-bar">
-      <div>
-      <input type="text" id="searchBar" placeholder="Search in dictionary..." />
-       <button id="clearSearchBtn" class="clear-search-btn">×</button>
-      </div>
+      <div class="search-container">
+  <input type="text" id="wordSearch" placeholder="Search words..." autocomplete="off">
+  <button id="clearSearch" class="hidden">Close</button>
+</div>
+<div id="searchResults" class="hidden">
+  <div id="exactMatchSection" class="hidden">
+    <h4>Exact Match</h4>
+    <div id="exactMatch"></div>
+  </div>
+  <div id="closeMatchesSection" class="hidden">
+    <h4>Close Matches</h4>
+    <div id="closeMatches"></div>
+  </div>
+</div>
       <div id="searchResults" class="hidden"></div>
       <div id="clock">Time: </div>
       <div id="metaInfo">
