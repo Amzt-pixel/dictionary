@@ -223,3 +223,112 @@ function shuffleArray(array) {
   return shuffled;
 }
 
+// =============================
+// Navigation + Search Features
+// =============================
+
+function gotoWord(index) {
+  currentIndex = index;
+  wordsSeen++;
+  displayWord();
+}
+
+// Group words in studyList by starting letter
+function groupWordsByLetter(list) {
+  const groups = {};
+  list.forEach((word, index) => {
+    const firstLetter = word[0].toUpperCase();
+    if (!groups[firstLetter]) groups[firstLetter] = [];
+    groups[firstLetter].push({ word, index });
+  });
+  return groups;
+}
+
+function generateNavigationMenu() {
+  const navContainer = document.getElementById("navMenu");
+  navContainer.innerHTML = "";
+
+  const grouped = groupWordsByLetter(studyList);
+  const sortedLetters = Object.keys(grouped).sort();
+
+  sortedLetters.forEach(letter => {
+    const letterItem = document.createElement("div");
+    letterItem.className = "navLetter";
+    letterItem.textContent = letter;
+
+    const submenu = document.createElement("div");
+    submenu.className = "submenu";
+
+    grouped[letter].forEach(({ word, index }) => {
+      const wordItem = document.createElement("div");
+      wordItem.className = "navWord";
+      wordItem.textContent = word;
+      wordItem.onclick = () => gotoWord(index);
+      submenu.appendChild(wordItem);
+    });
+
+    letterItem.onclick = () => {
+      submenu.classList.toggle("visible");
+    };
+
+    letterItem.appendChild(submenu);
+    navContainer.appendChild(letterItem);
+  });
+}
+
+function searchWords() {
+  const input = document.getElementById("searchBar").value.toLowerCase();
+  const exactMatches = [];
+  const containingMatches = [];
+
+  studyList.forEach((word, index) => {
+    const lowerWord = word.toLowerCase();
+    if (lowerWord === input) {
+      exactMatches.push({ word, index });
+    } else if (lowerWord.includes(input)) {
+      containingMatches.push({ word, index });
+    }
+  });
+
+  exactMatches.sort((a, b) => a.word.localeCompare(b.word));
+  containingMatches.sort((a, b) => a.word.localeCompare(b.word));
+
+  displaySearchResults(exactMatches, containingMatches);
+}
+
+function displaySearchResults(exact, contains) {
+  const resultDiv = document.getElementById("searchResults");
+  resultDiv.innerHTML = "";
+
+  const section = (title, items) => {
+    if (items.length === 0) return;
+    const group = document.createElement("div");
+    group.innerHTML = `<strong>${title}</strong>`;
+    items.forEach(({ word, index }) => {
+      const item = document.createElement("div");
+      item.className = "searchItem";
+      item.textContent = word;
+      item.onclick = () => gotoWord(index);
+      group.appendChild(item);
+    });
+    resultDiv.appendChild(group);
+  };
+
+  section("Exact Matches", exact);
+  section("Containing Matches", contains);
+}
+
+function toggleMenu() {
+  const menu = document.getElementById("menuContainer");
+  menu.classList.toggle("hidden");
+}
+
+// Hook into your startSession function
+const originalStartSession = startSession;
+startSession = function () {
+  originalStartSession(); // preserve existing logic
+  generateNavigationMenu();
+  document.getElementById("searchBar").addEventListener("input", searchWords);
+  document.getElementById("closeBtn").addEventListener("click", toggleMenu);
+  document.getElementById("menuContainer").classList.remove("hidden");
+};
