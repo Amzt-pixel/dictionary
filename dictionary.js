@@ -12,7 +12,7 @@ const searchActionBtn = document.getElementById("searchActionBtn"); // Will be p
 window.onload = async () => {
   await loadCSVList();
   checkInputs(); 
-  /**const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button// Enable Start button if defaults are valid
+  //const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button// Enable Start button if defaults are valid
 };
 
 // Event Listeners
