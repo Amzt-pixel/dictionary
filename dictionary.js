@@ -6,7 +6,8 @@ let currentIndex = 0;
 let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
-
+// Save the original startSession before modifying it
+const originalStartSession = startSession;
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
@@ -31,6 +32,10 @@ document.getElementById("prevBtn").addEventListener("click", prevWord);
 document.getElementById("completeBtn").addEventListener("click", completeSession);
 document.getElementById("restartBtn").addEventListener("click", () => showScreen("study"));
 document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
+document.getElementById("clearSearchBtn").addEventListener("click", () => {
+  document.getElementById("mainSearchBar").value = "";
+  document.getElementById("mainSearchResults").classList.add("hidden");
+});
 
 
 function checkInputs() {
@@ -134,10 +139,19 @@ function startSession() {
 
   if (timerInterval) clearInterval(timerInterval);
   timerInterval = setInterval(updateClock, 1000);
-
+document.getElementById("mainSearchBar").addEventListener("input", searchWords);
   showScreen("study");
   displayWord();
 }
+
+// Override startSession (now with access to the original)
+startSession = function () {
+  originalStartSession(); // ✅ Now works!
+  generateNavigationMenu();
+  document.getElementById("mainSearchBar").addEventListener("input", searchWords);
+  document.getElementById("closeBtn").addEventListener("click", toggleMenu);
+  document.getElementById("menuContainer").classList.add("hidden");
+};
 
 function displayWord() {
   const word = studyList[currentIndex];
@@ -277,7 +291,9 @@ function generateNavigationMenu() {
 }
 
 function searchWords() {
-  const input = document.getElementById("searchBar").value.toLowerCase();
+  //const input = document.getElementById("searchBar").value.toLowerCase();
+  const input = document.getElementById("mainSearchBar").value.toLowerCase(); // Use mainSearchBar
+  const resultDiv = document.getElementById("mainSearchResults"); // Use mainSearchResults
   const exactMatches = [];
   const containingMatches = [];
 
@@ -297,9 +313,16 @@ function searchWords() {
 }
 
 function displaySearchResults(exact, contains) {
-  const resultDiv = document.getElementById("searchResults");
+  const resultDiv = document.getElementById("mainSearchResults");
   resultDiv.innerHTML = "";
 
+  // Show/hide based on results
+  if (exact.length + contains.length > 0) {
+    resultDiv.classList.remove("hidden");
+  } else {
+    resultDiv.classList.add("hidden");
+  }
+  // ... rest of your code ...
   const section = (title, items) => {
     if (items.length === 0) return;
     const group = document.createElement("div");
