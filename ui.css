@@ -92,11 +92,11 @@ body {
         width: 100%;
       }
 }
-.search-container { 
+/*.search-container { 
   margin: 10px 0; 
   display: flex;
   gap: 5px;
-}
+}*/
 #searchResults { 
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -114,4 +114,29 @@ body {
 .search-result-item:hover {
   background: #f0f0f0;
 }
+/* Add these new rules to your existing CSS */
+.search-container {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+#wordSearch {
+  flex: 1; /* Takes remaining width */
+  min-width: 0; /* Prevents overflow */
+}
+
+#searchActionBtn {
+  white-space: nowrap; /* Prevents button text wrapping */
+  width: auto; /* Don't force full width */
+}
+
+#noResults {
+  padding: 10px;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Keep all your existing styles below */
 .hidden { display: none; }
