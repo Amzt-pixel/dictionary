@@ -7,13 +7,12 @@ let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
 let isSearchActive = false;
-
 const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
   checkInputs(); 
-  const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button// Enable Start button if defaults are valid
+  /**const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button// Enable Start button if defaults are valid
 };
 
 // Event Listeners
