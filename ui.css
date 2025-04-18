@@ -23,7 +23,7 @@ body {
       text-align: center;
       margin-bottom: 20px;
     }
-/*
+
     select, input[type="number"], input[type="text"] {
       padding: 10px;
       width: 50%;
@@ -44,44 +44,48 @@ body {
       color: white;
       cursor: pointer;
     }
-*/
-
-.search-container { 
-  margin: 10px 0;
-  display: flex;
-  align-items: center; /* Fixes vertical misalignment */
-  gap: 5px;
-  background: #f5f5f5;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-select, input[type="number"], input[type="text"] {
-  padding: 10px;
-  width: 50%;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  height: 38px; /* Matches button height */
-  box-sizing: border-box;
-}
-
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #111999;
-  color: white;
-  cursor: pointer;
-  height: 38px; /* Matches input height */
-  box-sizing: border-box;
-}
 
     button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
     }
+
+/* Only target inputs/buttons INSIDE .search-container */
+.search-container input[type="text"],
+.search-container button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+/* Input-specific styles (scoped) */
+.search-container input[type="text"] {
+  width: 50%;
+  border: 1px solid #ccc;
+}
+
+/* Button-specific styles (scoped) */
+.search-container button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  background-color: #111999;
+  color: white;
+  cursor: pointer;
+}
+
+/* Flex container (unchanged) */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0px;
+  padding-left: 10px;
+  background-color: #99ff99;
+}
+
 /*
     .top-bar {
       display: flex;
