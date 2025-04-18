@@ -51,8 +51,7 @@ body {
     }
 
 /* Only target inputs/buttons INSIDE .search-container */
-.search-container input[type="text"],
-.search-container button {
+.search-container .Bar{
   padding: 10px;
   font-size: 16px;
   border-radius: 4px;
@@ -61,13 +60,13 @@ body {
 }
 
 /* Input-specific styles (scoped) */
-.search-container input[type="text"] {
+.search-container .inPut{
   width: 50%;
   border: 1px solid #ccc;
 }
 
 /* Button-specific styles (scoped) */
-.search-container button {
+.search-container .Click {
   padding: 10px 15px;
   margin: 5px;
   border: none;
