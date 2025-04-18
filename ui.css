@@ -87,7 +87,12 @@ body {
   height: 38px; /* Matches input height */
   box-sizing: border-box;
 }
-
+.search-no-results {
+  padding: 10px;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
 /*
     .top-bar {
       display: flex;
