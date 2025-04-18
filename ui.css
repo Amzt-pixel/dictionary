@@ -70,7 +70,7 @@ body {
   padding: 10px 15px;
   margin: 5px;
   border: none;
-  background-color: #111999;
+  background-color: #ffcc00;
   color: white;
   cursor: pointer;
 }
@@ -82,7 +82,7 @@ body {
   gap: 5px;
   margin: 10px 0px;
   padding-left: 10px;
-  background-color: #99ff99;
+  background-color: #00ccff;
 }
 
 /*
