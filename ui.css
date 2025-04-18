@@ -62,7 +62,7 @@ body {
   border-radius: 4px;
 }
 
-input[type="text"] .search-box{
+input[type="text"].search-box{
   padding: 10px;
   width: 50%;
   font-size: 16px;
