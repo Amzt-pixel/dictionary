@@ -299,7 +299,7 @@ if (!exactMatch && closeMatches.length === 0) {
     searchResults.innerHTML = '<div class="search-no-results">No word found...</div>';
     searchResults.classList.remove("hidden");
     document.getElementById("clearSearch").classList.remove("hidden");
-    return;
+    //return;
   }
 
   exactMatchSection.classList.toggle("hidden", !exactMatch);
