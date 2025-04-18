@@ -277,7 +277,6 @@ function handleSearch(e) {
 
   // Safeguard 3: Minimum search length (keep existing)
   if (term.length < 3) {
-    //alert("Please enter at least 3 characters.");
     return;
   }
 
@@ -295,6 +294,13 @@ function handleSearch(e) {
 
   exactMatchDiv.innerHTML = "";
   closeMatchesDiv.innerHTML = "";
+
+if (!exactMatch && closeMatches.length === 0) {
+    searchResults.innerHTML = '<div class="search-no-results">No word found...</div>';
+    searchResults.classList.remove("hidden");
+    document.getElementById("clearSearch").classList.remove("hidden");
+    return;
+  }
 
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
@@ -325,6 +331,7 @@ function handleSearch(e) {
         return;
       }
       currentIndex = studyList.indexOf(selectedWord);
+      alert("Opened New Word!!");
       displayWord();
       clearSearch();
     });
