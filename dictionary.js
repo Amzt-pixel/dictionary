@@ -233,6 +233,9 @@ function initSearch() {
   // Default state - button-triggered search
   searchButton.addEventListener("click", () => {
     const term = searchInput.value.trim();
+    if (term.length < 3) {
+      return; // Exit if too short
+    }
     if (term) {
       isSearchActive = true;
       handleSearch({ target: { value: term } });
@@ -255,73 +258,6 @@ function initSearch() {
     }
   });
 }
-/*
-function handleSearch(e) {
-  // Safeguard 1: Validate studyList
-  if (!studyList || studyList.length === 0) {
-    console.error("Study list not loaded!");
-    return;
-  }
-
-  // Safeguard 2: Sanitize input
-  const term = e.target.value.trim().toLowerCase();
-  if (!term) {
-    clearSearch();
-    return;
-  }
-
-  // Safeguard 3: Minimum search length
-  if (term.length < 2) {
-    alert("Please enter at least 2 characters.");
-    return;
-  }
-
-  // Find matches
-  const exactMatch = studyList.find(word => word.toLowerCase() === term);
-  const closeMatches = studyList
-    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
-    .sort();
-
-  // Safeguard 4: Defensive UI updates
-  const exactMatchSection = document.getElementById("exactMatchSection");
-  const closeMatchesSection = document.getElementById("closeMatchesSection");
-  const exactMatchDiv = document.getElementById("exactMatch");
-  const closeMatchesDiv = document.getElementById("closeMatches");
-
-  exactMatchDiv.innerHTML = "";
-  closeMatchesDiv.innerHTML = "";
-
-  exactMatchSection.classList.toggle("hidden", !exactMatch);
-  closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
-
-  if (exactMatch) {
-    exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
-  }
-
-  if (closeMatches.length > 0) {
-    closeMatchesDiv.innerHTML = closeMatches
-      .map(word => `<div class="search-result-item">${word}</div>`)
-      .join("");
-  }
-
-  // Show results
-  document.getElementById("searchResults").classList.remove("hidden");
-  document.getElementById("clearSearch").classList.remove("hidden");
-
-  // Safeguard 5: Secure click-jump
-  document.querySelectorAll(".search-result-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const selectedWord = item.textContent;
-      if (!studyList.includes(selectedWord)) {
-        alert("Word not available in current session.");
-        return;
-      }
-      currentIndex = studyList.indexOf(selectedWord);
-      displayWord();
-      clearSearch();
-    });
-  });
-}*/
 function handleSearch(e) {
   // Only proceed if in dynamic mode OR this is a manual trigger (added line)
   if (!isSearchActive && e.type !== 'manual') return;
@@ -340,8 +276,8 @@ function handleSearch(e) {
   }
 
   // Safeguard 3: Minimum search length (keep existing)
-  if (term.length < 2) {
-    alert("Please enter at least 2 characters.");
+  if (term.length < 3) {
+    alert("Please enter at least 3 characters.");
     return;
   }
 
