@@ -10,7 +10,7 @@
 <body>
 
   <div id="setupScreen" class="screen visible">
-    <h1>DICTIONARY v7.3</h1>
+    <h1>DICTIONARY v7.4</h1>
     
     <!--<h1>Setup</h1>-->
     <select id="csvSelector"></select>
@@ -69,6 +69,15 @@
       <div class="label">Antonyms:</div>
       <div id="antDisplay"></div>
     </div>
+    <div>
+    <select id="stepSelector">
+      <option value="1">Step 1 and -1</option>
+      <option value="5">Step 5 and -5</option>
+      <option value="10">Reverse Alphabetical (Z-A)</option>
+      <option value="25">Random</option>
+      <option value="100">Step 100 and -100</option>  
+    </select>
+    </div>  
 
     <div class="footer-buttons">
       <button id="prevBtn">Previous</button>
