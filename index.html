@@ -10,7 +10,7 @@
 <body>
 
   <div id="setupScreen" class="screen visible">
-    <h1>DICTIONARY v5.0</h1>
+    <h1>DICTIONARY v5.1</h1>
     
     <!--<h1>Setup</h1>-->
     <select id="csvSelector"></select>
@@ -24,11 +24,16 @@
   </div>
 
   <div id="studyScreen" class="screen">
-    <div class="search-container">
+  <!-- <div class="search-container">
   <input type="text" id="wordSearch" placeholder="Search words..." autocomplete="off">
   <button>Look Up</button>    
   <button id="clearSearch" class="hidden">Close</button>
-</div>
+</div> -->
+    <div class="search-container">
+  <input type="text" id="wordSearch" placeholder="Search words..." autocomplete="off">
+  <button>Look Up</button>    
+  <button id="clearSearch" class="hidden">Collapse</button>
+    </div>
 <div id="searchResults" class="hidden">
   <div id="exactMatchSection" class="hidden">
     <h4>Exact Match</h4>
