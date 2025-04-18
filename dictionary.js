@@ -276,10 +276,10 @@ function handleSearch(e) {
   }
 
   // Safeguard 3: Minimum search length (keep existing)
-  /*if (term.length < 3) {
-    alert("Please enter at least 3 characters.");
+  if (term.length < 3) {
+    //alert("Please enter at least 3 characters.");
     return;
-  }*/
+  }
 
   // Find matches (keep existing)
   const exactMatch = studyList.find(word => word.toLowerCase() === term);
