@@ -27,8 +27,8 @@ body {
     select {
       padding: 10px;
       width: 100%;
-      background-color: #ff0066;
-      color: #00e6e6;
+      background-color: #9fbfdf;
+      color: #204060;
       margin-bottom: 15px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -42,8 +42,8 @@ body {
       border: none;
       border-radius: 4px;
      /* background-color: steelblue;*/
-      background-color: #111999;
-      color: white;
+      background-color: #204060;
+      color: #9fbfdf;
       cursor: pointer;
     }
 
@@ -65,11 +65,11 @@ body {
 /*input[type="text"]*/
 .search-box{
   padding: 10px;
-  width: 50%;
+  width: 70%;
   font-size: 16px;
-  color: #fff;
+  color: #202060;
   border: 1px solid #ccc;
-  background-color: #ff00ff;
+  background-color: #fff;
   border-radius: 4px;
   height: 38px; /* Matches button height */
   box-sizing: border-box;
@@ -81,7 +81,7 @@ body {
   border: none;
   border-radius: 4px;
   background-color: #9fbfdf;
-  color: white;
+  color: #204060;
   cursor: pointer;
   height: 38px; /* Matches input height */
   box-sizing: border-box;
