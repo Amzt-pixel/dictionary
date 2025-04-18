@@ -14,7 +14,7 @@ window.onload = async () => {
   checkInputs(); 
   //const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button// Enable Start button if defaults are valid
 };
-const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button
+//const searchActionBtn = document.getElementById("searchActionBtn"); // Will be permanent button
 // Event Listeners
 document.getElementById("csvSelector").addEventListener("change", async (e) => {
   selectedCSVUrl = e.target.value;
