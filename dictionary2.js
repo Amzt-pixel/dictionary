@@ -7,15 +7,15 @@ let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
 let isSearchActive = false; 
-/*
+
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
   checkInputs();
-  initSearch();// Enable Start button if defaults are valid
+  //initSearch();// Enable Start button if defaults are valid
 };
-*/
 
+/*
 window.onload = async () => {
   try {
     const TIMEOUT = 5000; // 5 seconds
@@ -33,7 +33,7 @@ window.onload = async () => {
     alert(error.message);
   }
 };
-
+*/
 
 // Event Listeners
 document.getElementById("csvSelector").addEventListener("change", async (e) => {
