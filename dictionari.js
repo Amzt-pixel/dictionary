@@ -11,7 +11,8 @@ let isSearchActive = false;
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
-  checkInputs(); // Enable Start button if defaults are valid
+  checkInputs();// Enable Start button if defaults are valid
+  initSearch ();
 };
 
 // Event Listeners
@@ -224,6 +225,41 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
+
+function initSearch() {
+  const searchInput = document.getElementById("wordSearch");
+  const searchButton = document.querySelector(".searchBar-button");
+  const clearButton = document.getElementById("clearSearch");
+
+  // Default state - button-triggered search
+  searchButton.addEventListener("click", () => {
+    const term = searchInput.value.trim();
+    if (term.length < 3) {
+      return; // Exit if too short
+    }
+    if (term) {
+      isSearchActive = true;
+      handleSearch({ target: { value: term } });
+      // Switch to dynamic search after first trigger
+      searchInput.addEventListener("input", handleSearch);
+    }
+  });
+
+  // Clear button returns to default state
+  clearButton.addEventListener("click", () => {
+    clearSearch();
+    isSearchActive = false;
+    searchInput.removeEventListener("input", handleSearch);
+  });
+
+  // Optional: Enter key support
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      searchButton.click();
+    }
+  });
+}
+
 function handleSearch(e) {
   // Safeguard 1: Validate studyList
   if (!studyList || studyList.length === 0) {
