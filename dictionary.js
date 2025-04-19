@@ -7,8 +7,8 @@ let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
 let isSearchActive = false; 
-let idMatch = null;
-let letterMatch = null;
+//let idMatch = null;
+//let letterMatch = null;
 // Track if search is in dynamic mode
 
 // Initialize app
@@ -273,11 +273,12 @@ function handleSearch(e) {
 
   // Safeguard 2: Sanitize input (keep existing)
   const term = e.target.value.trim().toLowerCase();
+  let idMatch = null;
+  let letterMatch = null;
   if (!term) {
     clearSearch();
     return;
   }
-
   // Safeguard 3: Minimum search length (keep existing)
   if (term.length < 3) {
     return;
