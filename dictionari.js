@@ -259,7 +259,7 @@ function initSearch() {
     }
   });
 }
-
+/*
 function handleSearch(e) {
   // Safeguard 1: Validate studyList
   if (!studyList || studyList.length === 0) {
@@ -330,4 +330,135 @@ function clearSearch() {
   document.getElementById("wordSearch").value = "";
   document.getElementById("searchResults").classList.add("hidden");
   document.getElementById("clearSearch").classList.add("hidden");
+}
+*/
+function handleSearch(e) {
+  // Only proceed if in dynamic mode OR this is a manual trigger (added line)
+  if (!isSearchActive && e.type !== 'manual') return;
+
+  // Safeguard 1: Validate studyList (keep existing)
+  if (!studyList || studyList.length === 0) {
+    console.error("Study list not loaded!");
+    return;
+  }
+
+  // Safeguard 2: Sanitize input (keep existing)
+  const term = e.target.value.trim().toLowerCase();
+  let idMatch = null;
+  let letterMatch = null;
+  if (!term) {
+    clearSearch();
+    return;
+  }
+  // Safeguard 3: Minimum search length (keep existing)
+  if (term.length < 3) {
+    return;
+  }
+
+  // Find matches (keep existing)
+  const exactMatch = studyList.find(word => word.toLowerCase() === term);
+  const closeMatches = studyList
+    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
+    .sort();
+
+  // Safeguard 4: Defensive UI updates (keep existing)
+  const exactMatchSection = document.getElementById("exactMatchSection");
+  const closeMatchesSection = document.getElementById("closeMatchesSection");
+  const exactMatchDiv = document.getElementById("exactMatch");
+  const closeMatchesDiv = document.getElementById("closeMatches");
+  const searchResults = document.getElementById("searchResults");
+  const noResultsMessage = document.getElementById("noResultsMessage");
+
+  exactMatchDiv.innerHTML = "";
+  closeMatchesDiv.innerHTML = "";
+  noResultsMessage.classList.add("hidden");
+
+/*if (!exactMatch && closeMatches.length === 0) {
+    searchResults.innerHTML = '<div class="search-no-results">No word found...</div>';
+    searchResults.classList.remove("hidden");
+    document.getElementById("clearSearch").classList.remove("hidden");
+    return;
+  }*/
+
+  exactMatchSection.classList.toggle("hidden", !exactMatch);
+  closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
+
+    // ID Search Functionality
+  idMatch = term.match(/^id(\d+)$/i);
+  if (idMatch) {
+    const idNum = parseInt(idMatch[1]);
+    if (idNum > 0 && idNum <= studyList.length) {
+      const word = studyList[idNum - 1];
+      document.getElementById("wordsLocated").innerHTML = 
+        `<div class="search-result-item">${word} (${idNum})</div>`;
+      document.getElementById("wordsLocatedSection").classList.remove("hidden");
+      document.getElementById("searchResults").classList.remove("hidden");
+      document.getElementById("clearSearch").classList.remove("hidden");
+      
+      //return;
+    }
+    idMatch = null;
+  }
+  //First letter search
+  letterMatch = term.match(/^50([a-z])$/i);
+  if (letterMatch) {
+    const searchLetter = letterMatch[1].toUpperCase();
+    const matchingWords = studyList
+      .filter(word => word.charAt(0).toUpperCase() === searchLetter)
+      .sort((a, b) => a.localeCompare(b));
+    
+    if (matchingWords.length > 0) {
+      document.getElementById("wordsFound").innerHTML = matchingWords
+        .map(word => `<div class="search-result-item">${word}</div>`)
+        .join("");
+      document.getElementById("wordsFoundSection").classList.remove("hidden");
+      document.getElementById("searchResults").classList.remove("hidden");
+      document.getElementById("clearSearch").classList.remove("hidden");
+    }
+    letterMatch = null;
+  }
+  
+  if (exactMatch) {
+    exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
+  }
+
+  if (closeMatches.length > 0) {
+    closeMatchesDiv.innerHTML = closeMatches
+      .map(word => `<div class="search-result-item">${word}</div>`)
+      .join("");
+  }
+  //if (!exactMatch && closeMatches.length === 0) {
+  else {
+    noResultsMessage.classList.remove("hidden");
+  }
+  
+  // Show results (keep existing)
+  searchResults.classList.remove("hidden");
+  document.getElementById("searchResults").classList.remove("hidden");
+  document.getElementById("clearSearch").classList.remove("hidden");
+
+  // Activate dynamic mode after manual trigger (added line)
+  if (e.type === 'manual') isSearchActive = true;
+
+  // Safeguard 5: Secure click-jump (keep existing)
+  document.querySelectorAll(".search-result-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const selectedWord = item.textContent;
+      if (!studyList.includes(selectedWord)) {
+        alert("Word not available in current session.");
+        return;
+      }
+      currentIndex = studyList.indexOf(selectedWord);
+      alert("Opened New Word!!");
+      displayWord();
+      clearSearch();
+    });
+  });
+}
+function clearSearch() {
+  document.getElementById("wordSearch").value = "";
+  document.getElementById("searchResults").classList.add("hidden");
+  document.getElementById("clearSearch").classList.add("hidden");
+  document.getElementById("noResultsMessage").classList.add("hidden");
+
 }
