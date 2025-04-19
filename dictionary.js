@@ -322,9 +322,9 @@ function handleSearch(e) {
       //return;
     }
   }
-//First letter search
+  //First letter search
   const letterMatch = term.match(/^0x([a-z])$/i);
-  if (letterMatch) {
+  else if (letterMatch) {
     const searchLetter = letterMatch[1].toUpperCase();
     const matchingWords = studyList
       .filter(word => word.charAt(0).toUpperCase() === searchLetter)
@@ -339,7 +339,6 @@ function handleSearch(e) {
       document.getElementById("clearSearch").classList.remove("hidden");
     }
   }
-
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
   }
@@ -349,10 +348,11 @@ function handleSearch(e) {
       .map(word => `<div class="search-result-item">${word}</div>`)
       .join("");
   }
-  if (!exactMatch && closeMatches.length === 0) {
+  //if (!exactMatch && closeMatches.length === 0) {
+  else {
     noResultsMessage.classList.remove("hidden");
   }
-
+  
   // Show results (keep existing)
   searchResults.classList.remove("hidden");
   document.getElementById("searchResults").classList.remove("hidden");
