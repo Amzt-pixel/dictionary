@@ -308,6 +308,21 @@ function handleSearch(e) {
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
+    // ID Search Functionality
+  const idMatch = term.match(/^id(\d+)$/i);
+  if (idMatch) {
+    const idNum = parseInt(idMatch[1]);
+    if (idNum > 0 && idNum <= studyList.length) {
+      const word = studyList[idNum - 1];
+      document.getElementById("wordsLocated").innerHTML = 
+        `<div class="search-result-item">${word} (${idNum})</div>`;
+      document.getElementById("wordsLocatedSection").classList.remove("hidden");
+      document.getElementById("searchResults").classList.remove("hidden");
+      document.getElementById("clearSearch").classList.remove("hidden");
+      //return;
+    }
+  }
+
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
   }
