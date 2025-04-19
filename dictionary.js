@@ -329,7 +329,7 @@ function handleSearch(e) {
   }
   //First letter search
   letterMatch = term.match(/^0x([a-z])$/i);
-  else if (letterMatch) {
+  if (letterMatch) {
     const searchLetter = letterMatch[1].toUpperCase();
     const matchingWords = studyList
       .filter(word => word.charAt(0).toUpperCase() === searchLetter)
