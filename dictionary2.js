@@ -14,6 +14,25 @@ window.onload = async () => {
   checkInputs();
   initSearch();// Enable Start button if defaults are valid
 };
+/*
+window.onload = async () => {
+  try {
+    const TIMEOUT = 5000; // 5 seconds
+
+    await Promise.race([
+      loadCSVList(),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Loading timed out. Please try again.")), TIMEOUT)
+      )
+    ]);
+
+    checkInputs();
+    initSearch();
+  } catch (error) {
+    alert(error.message);
+  }
+};
+*/
 
 // Event Listeners
 document.getElementById("csvSelector").addEventListener("change", async (e) => {
