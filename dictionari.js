@@ -275,8 +275,8 @@ function handleSearch(e) {
   }
 
   // Safeguard 3: Minimum search length
-  if (term.length < 2) {
-    alert("Please enter at least 2 characters.");
+  if (term.length < 3) {
+    //alert("Please enter at least 2 characters.");
     return;
   }
 
