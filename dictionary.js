@@ -291,16 +291,19 @@ function handleSearch(e) {
   const closeMatchesSection = document.getElementById("closeMatchesSection");
   const exactMatchDiv = document.getElementById("exactMatch");
   const closeMatchesDiv = document.getElementById("closeMatches");
+  const searchResults = document.getElementById("searchResults");
+  const noResultsMessage = document.getElementById("noResultsMessage");
 
   exactMatchDiv.innerHTML = "";
   closeMatchesDiv.innerHTML = "";
+  noResultsMessage.classList.add("hidden");
 
-if (!exactMatch && closeMatches.length === 0) {
+/*if (!exactMatch && closeMatches.length === 0) {
     searchResults.innerHTML = '<div class="search-no-results">No word found...</div>';
-    //searchResults.classList.remove("hidden");
-    //document.getElementById("clearSearch").classList.remove("hidden");
-    //return;
-  }
+    searchResults.classList.remove("hidden");
+    document.getElementById("clearSearch").classList.remove("hidden");
+    return;
+  }*/
 
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
@@ -314,8 +317,12 @@ if (!exactMatch && closeMatches.length === 0) {
       .map(word => `<div class="search-result-item">${word}</div>`)
       .join("");
   }
+  if (!exactMatch && closeMatches.length === 0) {
+    noResultsMessage.classList.remove("hidden");
+  }
 
   // Show results (keep existing)
+  searchResults.classList.remove("hidden");
   document.getElementById("searchResults").classList.remove("hidden");
   document.getElementById("clearSearch").classList.remove("hidden");
 
@@ -341,4 +348,6 @@ function clearSearch() {
   document.getElementById("wordSearch").value = "";
   document.getElementById("searchResults").classList.add("hidden");
   document.getElementById("clearSearch").classList.add("hidden");
+  document.getElementById("noResultsMessage").classList.add("hidden");
+
 }
