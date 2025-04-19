@@ -12,7 +12,7 @@ let isSearchActive = false;
 window.onload = async () => {
   await loadCSVList();
   checkInputs();
-  //initSearch();// Enable Start button if defaults are valid
+  initSearch();// Enable Start button if defaults are valid
 };
 
 /*
