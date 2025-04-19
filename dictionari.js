@@ -460,5 +460,5 @@ function clearSearch() {
   document.getElementById("searchResults").classList.add("hidden");
   document.getElementById("clearSearch").classList.add("hidden");
   document.getElementById("noResultsMessage").classList.add("hidden");
-
+  idMatch = null;
 }
