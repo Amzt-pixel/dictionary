@@ -6,6 +6,7 @@ let currentIndex = 0;
 let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
+let isSearchActive = false;
 
 // Initialize app
 window.onload = async () => {
