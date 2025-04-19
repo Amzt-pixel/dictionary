@@ -313,7 +313,7 @@ function handleSearch(e) {
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
     // ID Search Functionality
-  idMatch = term.match(/^id(\d+)$/i);
+  idMatch = term.match(/^?=(\d+)$/i);
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
     if (idNum > 0 && idNum <= studyList.length) {
@@ -329,7 +329,7 @@ function handleSearch(e) {
     idMatch = null;
   }
   //First letter search
-  letterMatch = term.match(/^0x([a-z])$/i);
+  letterMatch = term.match(/^**([a-z])$/i);
   if (letterMatch) {
     const searchLetter = letterMatch[1].toUpperCase();
     const matchingWords = studyList
