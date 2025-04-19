@@ -323,9 +323,10 @@ function handleSearch(e) {
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       document.getElementById("searchResults").classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
-      idMatch = null;
+      
       //return;
     }
+    idMatch = null;
   }
   //First letter search
   letterMatch = term.match(/^0x([a-z])$/i);
@@ -342,9 +343,10 @@ function handleSearch(e) {
       document.getElementById("wordsFoundSection").classList.remove("hidden");
       document.getElementById("searchResults").classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
-      letterMatch = null;
     }
+    letterMatch = null;
   }
+  
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
   }
