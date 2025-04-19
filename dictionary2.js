@@ -245,7 +245,7 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
-
+/*
 function initSearch() {
   const searchInput = document.getElementById("wordSearch");
   const searchButton = document.querySelector(".searchBar-button");
@@ -279,6 +279,8 @@ function initSearch() {
     }
   });
 }
+*/
+
 function handleSearch(e) {
   // Only proceed if in dynamic mode OR this is a manual trigger (added line)
   if (!isSearchActive && e.type !== 'manual') return;
