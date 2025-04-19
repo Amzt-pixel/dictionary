@@ -322,6 +322,23 @@ function handleSearch(e) {
       //return;
     }
   }
+//First letter search
+  const letterMatch = term.match(/^0x([a-z])$/i);
+  if (letterMatch) {
+    const searchLetter = letterMatch[1].toUpperCase();
+    const matchingWords = studyList
+      .filter(word => word.charAt(0).toUpperCase() === searchLetter)
+      .sort((a, b) => a.localeCompare(b));
+    
+    if (matchingWords.length > 0) {
+      document.getElementById("wordsFound").innerHTML = matchingWords
+        .map(word => `<div class="search-result-item">${word}</div>`)
+        .join("");
+      document.getElementById("wordsFoundSection").classList.remove("hidden");
+      document.getElementById("searchResults").classList.remove("hidden");
+      document.getElementById("clearSearch").classList.remove("hidden");
+    }
+  }
 
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
