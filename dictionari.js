@@ -34,7 +34,7 @@ document.getElementById("completeBtn").addEventListener("click", completeSession
 document.getElementById("restartBtn").addEventListener("click", () => showScreen("study"));
 document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
-document.getElementById("clearSearch").addEventListener("click", clearSearch);
+//document.getElementById("clearSearch").addEventListener("click", clearSearch);
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -225,7 +225,7 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
-
+/*//version -1
 function initSearch() {
   const searchInput = document.getElementById("wordSearch");
   const searchButton = document.querySelector(".searchBar-button");
@@ -259,7 +259,47 @@ function initSearch() {
     }
   });
 }
-/*
+*/
+
+function initSearch() {
+  const searchInput = document.getElementById("wordSearch");
+  const searchButton = document.querySelector(".searchBar-button");
+
+  // State tracking
+  let resultsVisible = false;
+
+  const toggleSearch = () => {
+    if (!resultsVisible) {
+      const term = searchInput.value.trim();
+      if (term.length < 3) return;
+
+      // Manually trigger search
+      isSearchActive = true;
+      handleSearch({ target: { value: term }, type: "manual" });
+
+      // Enable dynamic updates
+      searchInput.addEventListener("input", handleSearch);
+      searchButton.textContent = "Collapse";
+      resultsVisible = true;
+    } else {
+      clearSearch();
+      searchInput.removeEventListener("input", handleSearch);
+      searchButton.textContent = "Search";
+      resultsVisible = false;
+    }
+  };
+
+  searchButton.addEventListener("click", toggleSearch);
+
+  // Optional: Enter key support
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      toggleSearch();
+    }
+  });
+}
+
+/* version 00
 function handleSearch(e) {
   // Safeguard 1: Validate studyList
   if (!studyList || studyList.length === 0) {
@@ -332,7 +372,7 @@ function clearSearch() {
   document.getElementById("clearSearch").classList.add("hidden");
 }
 */
-/*
+/* version -1
 function handleSearch(e) {
   // Only proceed if in dynamic mode OR this is a manual trigger (added line)
   if (!isSearchActive && e.type !== 'manual') return;
@@ -565,7 +605,7 @@ function handleSearch(e) {
     });
   });
 }
-
+/* ver -1
 function clearSearch() {
   document.getElementById("wordSearch").value = "";
   document.getElementById("searchResults").classList.add("hidden");
@@ -575,4 +615,18 @@ function clearSearch() {
   document.getElementById("wordsLocatedSection").classList.add("hidden");
   document.getElementById("exactMatchSection").classList.add("hidden");
   document.getElementById("closeMatchesSection").classList.add("hidden");
+}
+*/
+function clearSearch() {
+  document.getElementById("wordSearch").value = "";
+  document.getElementById("searchResults").classList.add("hidden");
+  document.getElementById("noResultsMessage").classList.add("hidden");
+  document.getElementById("exactMatch").innerHTML = "";
+  document.getElementById("closeMatches").innerHTML = "";
+  document.getElementById("wordsFound").innerHTML = "";
+  document.getElementById("wordsLocated").innerHTML = "";
+  document.getElementById("exactMatchSection").classList.add("hidden");
+  document.getElementById("closeMatchesSection").classList.add("hidden");
+  document.getElementById("wordsFoundSection").classList.add("hidden");
+  document.getElementById("wordsLocatedSection").classList.add("hidden");
 }
