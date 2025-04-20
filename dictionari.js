@@ -175,8 +175,13 @@ function displayWord() {
 
 function prevWord() {
   if (currentIndex === 0) return;
-
-  currentIndex--;
+  else if(currentIndex + 1 > stepNumber) {
+    currentIndex=currentIndex - stepNumber;
+  }
+  else {
+    alert("Reduce step");
+    retun;
+  }
   wordsSeen++;
   displayWord();
 }
@@ -189,7 +194,13 @@ function nextWord() {
     document.getElementById("nextBtn").onclick = () => startSession();
     return;
   }
-
+  else if(currentIndex + stepNumber > studyList.length - 1) {
+    alert("Reduce step!");
+    return;
+  }
+  else {
+    currentIndex = currentIndex + stepNumber;
+  }
   currentIndex++;
   wordsSeen++;
   displayWord();
@@ -607,6 +618,7 @@ function handleSearch(e) {
       }
       currentIndex = studyList.indexOf(selectedWord);
       alert("Opened New Word!!");
+      wordsSeen++;
       displayWord();
       clearSearch();
     });
