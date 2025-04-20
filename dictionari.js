@@ -587,7 +587,7 @@ function handleSearch(e) {
   }
  //PREVENTS OLD CLOSE BUTTON FROM POPPING UP. 
     searchResults.classList.remove("hidden");
- // document.getElementById("clearSearch").classList.remove("hidden");
+    document.getElementById("clearSearch").classList.remove("hidden");
 
   if (e.type === 'manual') isSearchActive = true;
 
