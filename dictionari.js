@@ -201,7 +201,7 @@ function nextWord() {
   else {
     currentIndex = currentIndex + stepNumber;
   }
-  currentIndex++;
+//  currentIndex++;
   wordsSeen++;
   displayWord();
 }
