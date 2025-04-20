@@ -564,7 +564,7 @@ function handleSearch(e) {
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
   // ID Search
-  const idMatch = term.match(/^id(\d+)$/i);
+  const idMatch = term.match(/^\?=(\d+)$/i);
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
     if (idNum > 0 && idNum <= studyList.length) {
@@ -578,7 +578,7 @@ function handleSearch(e) {
   }
 
   // First letter search
-  const letterMatch = term.match(/^50([a-z])$/i);
+  const letterMatch = term.match(/^\*\*([a-z])$/i);
   if (letterMatch) {
     const searchLetter = letterMatch[1].toUpperCase();
     const matchingWords = studyList
