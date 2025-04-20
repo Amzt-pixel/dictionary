@@ -291,9 +291,6 @@ function initSearch() {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) return;
-      if (isSearchActive) {
-        searchButton.textContent = "Reset";
-      }
 
       // Manually trigger search
       isSearchActive = true;
