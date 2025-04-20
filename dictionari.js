@@ -8,6 +8,7 @@ let startTime = null;
 let timerInterval;
 let isSearchActive = false;
 let stepNumber = 1;
+let resultsVisible = false;
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
@@ -35,6 +36,8 @@ document.getElementById("completeBtn").addEventListener("click", completeSession
 document.getElementById("restartBtn").addEventListener("click", () => showScreen("study"));
 document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
+const searchInput = document.getElementById("wordSearch");
+const searchButton = document.querySelector(".searchBar-button");
 //document.getElementById("clearSearch").addEventListener("click", clearSearch);
 
 function checkInputs() {
@@ -281,12 +284,6 @@ function initStepSelector() {
 }
 
 function initSearch() {
-  const searchInput = document.getElementById("wordSearch");
-  const searchButton = document.querySelector(".searchBar-button");
-
-  // State tracking
-  let resultsVisible = false;
-
   const toggleSearch = () => {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
@@ -316,9 +313,16 @@ function initSearch() {
       toggleSearch();
     }
   });
-  if (isSearchActive && !resultsVisible) {
-        searchButton.textContent = "Reset";
+  document.addEventListener("click", (e) => {
+  if (
+    resultsVisible &&
+    searchInput.value.trim() === "" &&
+    e.target !== searchInput &&
+    !searchInput.contains(e.target)
+  ) {
+    toggleSearch(); // This will reset the search
   }
+});
 }
 /* version 00
 function handleSearch(e) {
@@ -624,6 +628,9 @@ function handleSearch(e) {
       wordsSeen++;
       displayWord();
       clearSearch();
+      // New lines to reset button state
+    searchButton.textContent = "Search";
+    resultsVisible = false;
     });
   });
 }
