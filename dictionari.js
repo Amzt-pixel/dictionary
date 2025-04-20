@@ -629,7 +629,7 @@ function handleSearch(e) {
       displayWord();
       clearSearch();
       // New lines to reset button state
-  // searchButton.textContent = "Search";
+    searchButton.textContent = "Search";
     resultsVisible = false;
     isSearchActive = false;
     });
