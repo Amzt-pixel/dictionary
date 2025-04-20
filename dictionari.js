@@ -7,12 +7,13 @@ let wordsSeen = 0;
 let startTime = null;
 let timerInterval;
 let isSearchActive = false;
-
+let stepNumber = 1;
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
   checkInputs();// Enable Start button if defaults are valid
   initSearch ();
+  initStepSelector();
 };
 
 // Event Listeners
@@ -260,6 +261,13 @@ function initSearch() {
   });
 }
 */
+function initStepSelector() {
+  const stepSelector = document.getElementById("stepSelector");
+  stepSelector.addEventListener("change", (e) => {
+    stepNumber = parseInt(e.target.value);
+    console.log("Step size changed to:", stepNumber); // For debugging
+  });
+}
 
 function initSearch() {
   const searchInput = document.getElementById("wordSearch");
