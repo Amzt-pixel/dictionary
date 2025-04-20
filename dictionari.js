@@ -39,6 +39,14 @@ document.getElementById("wordSearch").addEventListener("input", handleSearch);
 const searchInput = document.getElementById("wordSearch");
 const searchButton = document.querySelector(".searchBar-button");
 //document.getElementById("clearSearch").addEventListener("click", clearSearch);
+document.getElementById("infoButton").addEventListener("click", function() {
+  alert(
+  "1. You must enter minimum 3 characters for search.\n" +
+  "2. Search input(=@ID) : Word at ID-th position.\n" +
+  "3. Search input(=#LETTER) : Words starting with LETTER.\n" +
+  "4. Adjust step value for Previous and Next from Step field (Default : 1)."
+);
+});
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -597,7 +605,7 @@ function handleSearch(e) {
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
   // ID Search
-  const idMatch = term.match(/^\?=(\d+)$/i);
+  const idMatch = term.match(/^=@(\d+)$/);
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
     if (idNum > 0 && idNum <= studyList.length) {
@@ -611,7 +619,7 @@ function handleSearch(e) {
   }
 
   // First letter search
-  const letterMatch = term.match(/^\*\*([a-z])$/i);
+  const letterMatch = term.match(/^=#([a-z])$/i);
   if (letterMatch) {
     const searchLetter = letterMatch[1].toUpperCase();
     const matchingWords = studyList
