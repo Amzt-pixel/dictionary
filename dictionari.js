@@ -159,10 +159,25 @@ function displayWord() {
       if (id1 === -id2) antonyms.add(w2);
     });
   });
-
+/*
   document.getElementById("wordDisplay").textContent = `Word ${currentIndex + 1}: ${word}`;
   document.getElementById("synDisplay").textContent = [...synonyms].join(", ") || "None";
   document.getElementById("antDisplay").textContent = [...antonyms].join(", ") || "None";
+*/
+  // Display in requested format
+  document.getElementById("wordOrderDisplay").textContent =
+    `Word ${currentIndex + 1} of ${studyList.length} :`;
+  document.getElementById("wordDisplay").textContent = word;
+
+  document.getElementById("synLabel").textContent =
+    `Synonyms (${synonyms.size}) :`;
+  document.getElementById("synDisplay").textContent =
+    [...synonyms].join(", ") || "None";
+
+  document.getElementById("antLabel").textContent =
+    `Antonyms (${antonyms.size}) :`;
+  document.getElementById("antDisplay").textContent =
+    [...antonyms].join(", ") || "None";
 
   document.getElementById("wordOrder").textContent = `Word ${currentIndex + 1}`;
   document.getElementById("wordTotal").textContent = `Total Words: ${studyList.length}`;
