@@ -316,6 +316,9 @@ function initSearch() {
       toggleSearch();
     }
   });
+  if (isSearchActive && !resultsVisible) {
+        searchButton.textContent = "Reset";
+  }
 }
 /* version 00
 function handleSearch(e) {
