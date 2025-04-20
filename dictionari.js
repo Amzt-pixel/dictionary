@@ -291,6 +291,9 @@ function initSearch() {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) return;
+      if (isSearchActive) {
+        searchButton.textContent = "Reset";
+      }
 
       // Manually trigger search
       isSearchActive = true;
@@ -617,7 +620,7 @@ function handleSearch(e) {
         return;
       }
       currentIndex = studyList.indexOf(selectedWord);
-      alert("Opened New Word!!");
+      alert("Opened Searched Word!!");
       wordsSeen++;
       displayWord();
       clearSearch();
