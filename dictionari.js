@@ -325,9 +325,6 @@ function initSearch() {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) {
-        if (resultsVisible) {
-          resultsVisible = false;
-        }
         return;
       }
 
