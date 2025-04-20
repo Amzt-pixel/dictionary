@@ -324,7 +324,12 @@ function initSearch() {
   const toggleSearch = () => {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
-      if (term.length < 3) return;
+      if (term.length < 3) {
+        if (resultsVisible) {
+          resultsVisible = false;
+        }
+        return;
+      }
 
       // Manually trigger search
       isSearchActive = true;
@@ -582,7 +587,10 @@ function handleSearch(e) {
   }
 
   if (term.length < 3) {
-    return;
+        if (resultsVisible) {
+          resultsVisible = false;
+        }
+        return;
   }
 
   const exactMatch = studyList.find(word => word.toLowerCase() === term);
@@ -618,6 +626,9 @@ function handleSearch(e) {
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
     }
+    else {
+      noResultsMessage.classList.remove("hidden");
+    }
   }
   // First letter search
   if (letterMatch) {
@@ -633,6 +644,9 @@ function handleSearch(e) {
       document.getElementById("wordsFoundSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
+    }
+    else {
+      noResultsMessage.classList.remove("hidden");
     }
   }
 
