@@ -260,7 +260,7 @@ function initSearch() {
   });
 }
 */
-/*version -1
+
 function initSearch() {
   const searchInput = document.getElementById("wordSearch");
   const searchButton = document.querySelector(".searchBar-button");
@@ -292,37 +292,6 @@ function initSearch() {
   searchButton.addEventListener("click", toggleSearch);
 
   // Optional: Enter key support
-  searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      toggleSearch();
-    }
-  });
-}
-*/
-function initSearch() {
-  const searchInput = document.getElementById("wordSearch");
-  const searchButton = document.querySelector(".searchBar-button");
-
-  let resultsVisible = false;
-
-  const toggleSearch = () => {
-    const term = searchInput.value.trim();
-    
-    if (!resultsVisible) {
-      if (term.length < 3) return;
-      
-      handleSearch({ target: { value: term }, type: "manual" });
-      resultsVisible = true;
-      searchButton.textContent = "Collapse";
-    } else {
-      clearSearch();
-      resultsVisible = false;
-      searchButton.textContent = "Search";
-    }
-  };
-
-  searchButton.addEventListener("click", toggleSearch);
-
   searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       toggleSearch();
@@ -545,8 +514,7 @@ function handleSearch(e) {
 
   const term = e.target.value.trim().toLowerCase();
   if (!term) {
-    //clearSearch();
-    hideSearchResults();
+    clearSearch();
     return;
   }
 
@@ -617,9 +585,8 @@ function handleSearch(e) {
     noResultsMessage.classList.remove("hidden");
   }
  //PREVENTS OLD CLOSE BUTTON FROM POPPING UP. 
-   // searchResults.classList.remove("hidden");
-   // document.getElementById("clearSearch").classList.remove("hidden");
-  showSearchResults();
+   searchResults.classList.remove("hidden");
+   document.getElementById("clearSearch").classList.remove("hidden");
 
   if (e.type === 'manual') isSearchActive = true;
 
@@ -649,22 +616,10 @@ function clearSearch() {
   document.getElementById("closeMatchesSection").classList.add("hidden");
 }
 */
-function showSearchResults() {
-  document.getElementById("searchResults").classList.remove("hidden");
-  // Update the button text if needed
-  document.querySelector(".searchBar-button").textContent = "Collapse";
-}
 
-function hideSearchResults() {
-  document.getElementById("searchResults").classList.add("hidden");
-  document.getElementById("wordSearch").value = "";
-  // Reset the button text
-  document.querySelector(".searchBar-button").textContent = "Search";
-}
 function clearSearch() {
-  //document.getElementById("wordSearch").value = "";
-  //document.getElementById("searchResults").classList.add("hidden");
-  hideSearchResults();
+  document.getElementById("wordSearch").value = "";
+  document.getElementById("searchResults").classList.add("hidden");
   document.getElementById("noResultsMessage").classList.add("hidden");
   document.getElementById("exactMatch").innerHTML = "";
   document.getElementById("closeMatches").innerHTML = "";
