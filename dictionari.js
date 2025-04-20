@@ -604,8 +604,10 @@ function handleSearch(e) {
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
-  // ID Search
+  
   const idMatch = term.match(/^=@(\d+)$/);
+  const letterMatch = term.match(/^=#([a-z])$/i);
+  //Id Match
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
     if (idNum > 0 && idNum <= studyList.length) {
@@ -617,9 +619,7 @@ function handleSearch(e) {
       document.getElementById("clearSearch").classList.remove("hidden");
     }
   }
-
   // First letter search
-  const letterMatch = term.match(/^=#([a-z])$/i);
   if (letterMatch) {
     const searchLetter = letterMatch[1].toUpperCase();
     const matchingWords = studyList
