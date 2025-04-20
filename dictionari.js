@@ -190,8 +190,8 @@ function prevWord() {
 function nextWord() {
   if (currentIndex === studyList.length - 1) {
     alert("All words studied!");
-    document.getElementById("nextBtn").textContent = "Restart";
-    document.getElementById("nextBtn").onclick = () => startSession();
+    //document.getElementById("nextBtn").textContent = "Restart";
+    //document.getElementById("nextBtn").onclick = () => startSession();
     return;
   }
   else if(currentIndex + stepNumber > studyList.length - 1) {
