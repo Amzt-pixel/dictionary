@@ -208,13 +208,27 @@ function nextWord() {
   wordsSeen++;
   displayWord();
 }
-
+/*
 function completeSession() {
   clearInterval(timerInterval);
   const elapsed = Math.floor((new Date() - startTime) / 1000);
   const mins = Math.floor(elapsed / 60);
   const secs = elapsed % 60;
   
+  document.getElementById("sessionStats").textContent = 
+    `You studied ${wordsSeen} words in ${mins}m ${secs}s.`;
+  showScreen("complete");
+}
+*/
+
+function completeSession() {
+  const confirmQuit = confirm("Are you sure you want to quit?");
+  if (!confirmQuit) return; // Exit if user cancels
+
+  clearInterval(timerInterval);
+  const elapsed = Math.floor((new Date() - startTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
   document.getElementById("sessionStats").textContent = 
     `You studied ${wordsSeen} words in ${mins}m ${secs}s.`;
   showScreen("complete");
