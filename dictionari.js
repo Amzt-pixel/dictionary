@@ -599,9 +599,8 @@ function handleSearch(e) {
   const searchResults = document.getElementById("searchResults");
   const noResultsMessage = document.getElementById("noResultsMessage");
 
-  exactMatchDiv.innerHTML = "";
-  closeMatchesDiv.innerHTML = "";
   noResultsMessage.classList.add("hidden");
+  resetSearchSections();
 
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
@@ -692,6 +691,18 @@ function clearSearch() {
   document.getElementById("closeMatchesSection").classList.add("hidden");
 }
 */
+
+function resetSearchSections() {
+  document.getElementById("wordsFoundSection").classList.add("hidden");
+  document.getElementById("wordsLocatedSection").classList.add("hidden");
+  document.getElementById("exactMatchSection").classList.add("hidden");
+  document.getElementById("closeMatchesSection").classList.add("hidden");
+
+  document.getElementById("exactMatch").innerHTML = "";
+  document.getElementById("closeMatches").innerHTML = "";
+  document.getElementById("wordsFound").innerHTML = "";
+  document.getElementById("wordsLocated").innerHTML = "";
+}
 
 function clearSearch() {
   document.getElementById("wordSearch").value = "";
