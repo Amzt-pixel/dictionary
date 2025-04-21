@@ -664,7 +664,7 @@ function handleSearch(e) {
 
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
-      const selectedWord = item.textContent.split(" (")[0]; // support word with ID suffix
+      const selectedWord = item.textContent.split("(")[0]; // support word with ID suffix
       if (!studyList.includes(selectedWord)) {
         alert("Word not available in current session.");
         return;
