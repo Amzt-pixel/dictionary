@@ -622,6 +622,7 @@ function handleSearch(e) {
     else {
       noResultsMessage.classList.remove("hidden");
     }
+    return;
   }
   // First letter search
   if (letterMatch) {
@@ -641,6 +642,7 @@ function handleSearch(e) {
     else {
       noResultsMessage.classList.remove("hidden");
     }
+    return;
   }
  
   if (exactMatch) {
