@@ -606,15 +606,15 @@ function handleSearch(e) {
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
   
-  const idMatch = term.match(/^=@(\d+)$/);
-  const letterMatch = term.match(/^=#([a-z])$/i);
+  const idMatch = term.match(/^@#(\d+)$|^(\d+)$/);
+  const letterMatch = term.match(/^_\/([a-z])$|^([a-z])$/i);
   //Id Match
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
     if (idNum > 0 && idNum <= studyList.length) {
       const word = studyList[idNum - 1];
       document.getElementById("wordsLocated").innerHTML =
-        `<div class="search-result-item">${word}(#${idNum})</div>`;
+        `<div class="search-result-item">${word} (#${idNum})</div>`;
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
