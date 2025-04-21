@@ -614,7 +614,7 @@ function handleSearch(e) {
     if (idNum > 0 && idNum <= studyList.length) {
       const word = studyList[idNum - 1];
       document.getElementById("wordsLocated").innerHTML =
-        `<div class="search-result-item">${word} (${idNum})</div>`;
+        `<div class="search-result-item">${word}(${idNum})</div>`;
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
