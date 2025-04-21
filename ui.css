@@ -63,6 +63,12 @@ body {
   border-radius: 4px;
 }
 
+#clock{
+      text-align: center;
+      color: red;
+      display: block;
+}
+
 /*input[type="text"]*/
 .search-box{
   padding: 10px;
