@@ -584,9 +584,6 @@ function handleSearch(e) {
   }
 
   if (term.length < 3) {
-        if (resultsVisible) {
-          resultsVisible = false;
-        }
         return;
   }
 
