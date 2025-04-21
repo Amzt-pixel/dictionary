@@ -614,7 +614,7 @@ function handleSearch(e) {
     if (idNum > 0 && idNum <= studyList.length) {
       const word = studyList[idNum - 1];
       document.getElementById("wordsLocated").innerHTML =
-        `<div class="search-result-item">${word}(${idNum})</div>`;
+        `<div class="search-result-item">${word}(#${idNum})</div>`;
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
@@ -622,6 +622,7 @@ function handleSearch(e) {
     else {
       noResultsMessage.classList.remove("hidden");
     }
+    searchResultClick();
     return;
   }
   // First letter search
@@ -642,6 +643,7 @@ function handleSearch(e) {
     else {
       noResultsMessage.classList.remove("hidden");
     }
+    searchResultClick();
     return;
   }
  
@@ -662,24 +664,7 @@ function handleSearch(e) {
 
   if (e.type === 'manual') isSearchActive = true;
 
-  document.querySelectorAll(".search-result-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const selectedWord = item.textContent.split("(")[0]; // support word with ID suffix
-      if (!studyList.includes(selectedWord)) {
-        alert("Word not available in current session.");
-        return;
-      }
-      currentIndex = studyList.indexOf(selectedWord);
-      alert("Opened Searched Word!!");
-      wordsSeen++;
-      displayWord();
-      clearSearch();
-      // New lines to reset button state
-    searchButton.textContent = "Search";
-    resultsVisible = false;
-    isSearchActive = false;
-    });
-  });
+  searchResultClick();
 }
 /* ver -1
 function clearSearch() {
@@ -693,6 +678,25 @@ function clearSearch() {
   document.getElementById("closeMatchesSection").classList.add("hidden");
 }
 */
+function searchResultClick() {
+  document.querySelectorAll(".search-result-item").forEach(item => {
+    item.addEventListener("click", () => {
+       const selectedWord = item.textContent.replace(/\s*(#\d+)$/, "").trim();// trim helps prevent whitespace bugs
+      if (!studyList.includes(selectedWord)) {
+        alert("Word not available in current session.");
+        return;
+      }
+      currentIndex = studyList.indexOf(selectedWord);
+      alert("Opened Searched Word!!");
+      wordsSeen++;
+      displayWord();
+      clearSearch();
+      searchButton.textContent = "Search";
+      resultsVisible = false;
+      isSearchActive = false;
+    });
+  });
+}
 
 function resetSearchSections() {
   document.getElementById("wordsFoundSection").classList.add("hidden");
