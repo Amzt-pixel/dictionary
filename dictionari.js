@@ -584,7 +584,6 @@ function handleSearch(e) {
   }
 
   if (term.length < 3) {
-        clearSearch();
         return;
   }
 
