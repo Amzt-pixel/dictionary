@@ -606,8 +606,8 @@ function handleSearch(e) {
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
   
-  const idMatch = term.match(/^@#(\d+)$|^(\d+)$/);
-  const letterMatch = term.match(/^_\/([a-z])$|^([a-z])$/i);
+  const idMatch = term.match(/^\{(\d+)\}$/);
+  const letterMatch = term.match(/^\{([a-z])\}$/i);
   //Id Match
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
