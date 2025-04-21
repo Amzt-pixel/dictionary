@@ -609,6 +609,7 @@ function handleSearch(e) {
   
   const idMatch = term.match(/^=@(\d+)$/);
   const letterMatch = term.match(/^=#([a-z])$/i);
+  /*
   //Id Match
   if (idMatch) {
     const idNum = parseInt(idMatch[1]);
@@ -643,7 +644,33 @@ function handleSearch(e) {
       noResultsMessage.classList.remove("hidden");
     }
   }
-
+*/
+  //LATEST UPDATE 
+  const idNum = parseInt(idMatch[1]);
+if (idNum > 0 && idNum <= studyList.length) {
+      const word = studyList[idNum - 1];
+document.getElementById("wordsLocated").innerHTML =
+        `<div class="search-result-item">${word} (${idNum})</div>`;
+document.getElementById("wordsLocatedSection").classList.remove("hidden");
+searchResults.classList.remove("hidden");
+document.getElementById("clearSearch").classList.remove("hidden");
+    } else { noResultsMessage.classList.remove("hidden");
+    }
+  // First letter search
+    const searchLetter = letterMatch[1].toUpperCase();
+    const matchingWords = studyList
+      .filter(word => word.charAt(0).toUpperCase() === searchLetter)
+      .sort((a, b) => a.localeCompare(b));
+    if (matchingWords.length > 0) {
+document.getElementById("wordsFound").innerHTML = matchingWords
+        .map(word => `<div class="search-result-item">${word}</div>`)
+        .join("");
+      document.getElementById("wordsFoundSection").classList.remove("hidden");
+      searchResults.classList.remove("hidden");
+      document.getElementById("clearSearch").classList.remove("hidden");
+    }else {
+noResultsMessage.classList.remove("hidden");
+    }
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
   }
