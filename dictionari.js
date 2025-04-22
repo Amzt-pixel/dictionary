@@ -632,7 +632,9 @@ function displayWord() {
   // Display word info
   document.getElementById("wordOrderDisplay").textContent = 
     `Word ${currentIndex + 1} of ${studyList.length} :`;
-  document.getElementById("wordDisplay").textContent = word;
+  //document.getElementById("wordDisplay").textContent = word;
+  const wordDisplay = document.getElementById("wordDisplay");
+  wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
 
   // Create styled synonym buttons
   document.getElementById("synLabel").textContent = 
