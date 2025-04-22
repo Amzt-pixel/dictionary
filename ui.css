@@ -198,3 +198,7 @@ body {
   color: #6c757d;
   font-style: italic;
 }
+.search-button-hold {
+  background-color: #ffa500 !important; /* Orange for hold effect */
+  color: white;
+}
