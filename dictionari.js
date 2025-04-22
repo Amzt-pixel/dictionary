@@ -394,6 +394,7 @@ function initSearch() {
 });
 }
 */
+
 function initSearch() {
   let holdTimer = null;
   const holdDuration = 1000; // 1 second
@@ -402,6 +403,7 @@ function initSearch() {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) {
+        alert("Press and Hold for Info");
         return;
       }
 
@@ -419,53 +421,38 @@ function initSearch() {
     }
   };
 
-  // Mouse events (for desktop)
-  searchButton.addEventListener('mousedown', (e) => {
+  const startHold = () => {
     if (holdTimer === null) {
+      searchButton.classList.add("search-button-hold");
       holdTimer = setTimeout(() => {
         alert("You held the search button!");
         holdTimer = null;
+        searchButton.classList.remove("search-button-hold");
       }, holdDuration);
     }
-  });
+  };
 
-  searchButton.addEventListener('mouseup', (e) => {
+  const cancelHold = () => {
     if (holdTimer) {
       clearTimeout(holdTimer);
       holdTimer = null;
     }
-  });
+    searchButton.classList.remove("search-button-hold");
+  };
 
-  searchButton.addEventListener('mouseleave', (e) => {
-    if (holdTimer) {
-      clearTimeout(holdTimer);
-      holdTimer = null;
-    }
-  });
+  // Mouse events (for desktop)
+  searchButton.addEventListener('mousedown', startHold);
+  searchButton.addEventListener('mouseup', cancelHold);
+  searchButton.addEventListener('mouseleave', cancelHold);
 
   // Mobile support (touch events)
   searchButton.addEventListener('touchstart', (e) => {
-    if (holdTimer === null) {
-      holdTimer = setTimeout(() => {
-        alert("You held the search button!");
-        holdTimer = null;
-      }, holdDuration);
-    }
+    startHold();
+    e.preventDefault();
   });
 
-  searchButton.addEventListener('touchend', (e) => {
-    if (holdTimer) {
-      clearTimeout(holdTimer);
-      holdTimer = null;
-    }
-  });
-
-  searchButton.addEventListener('touchcancel', (e) => {
-    if (holdTimer) {
-      clearTimeout(holdTimer);
-      holdTimer = null;
-    }
-  });
+  searchButton.addEventListener('touchend', cancelHold);
+  searchButton.addEventListener('touchcancel', cancelHold);
 
   // Original event listeners
   searchButton.addEventListener("click", toggleSearch);
@@ -485,8 +472,7 @@ function initSearch() {
     }
   });
 }
-
-
+  
 function handleSearch(e) {
   if (!isSearchActive && e.type !== 'manual') return;
 
