@@ -614,7 +614,7 @@ function handleSearch(e) {
     if (idNum > 0 && idNum <= studyList.length) {
       const word = studyList[idNum - 1];
       document.getElementById("wordsLocated").innerHTML =
-        `<div class="search-result-item">${word} (#${idNum})</div>`;
+        `<div class="search-result-item">${word}(#${idNum})</div>`;
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
@@ -681,7 +681,7 @@ function clearSearch() {
 function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
-       const selectedWord = item.textContent.replace(/\s*(#\d+)$/, "").trim();// trim helps prevent whitespace bugs
+       const selectedWord = item.textContent.replace(/\b\w+#\d+\b/g, "").trim();// trim helps prevent whitespace bugs
       if (!studyList.includes(selectedWord)) {
         alert("Word not available in current session.");
         return;
