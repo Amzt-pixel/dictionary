@@ -123,6 +123,8 @@ body {
       border-radius: 8px;
       margin: 20px 0px;
       background-color: #ebebeb;
+      max-height: 800px;
+      overflow-y: auto;
     }
 
     .label {
@@ -133,7 +135,7 @@ body {
 #wordOrderDisplay, #synLabel, #antLabel, .word-card div {
   font-size: 16px !important; /* Forces uniform size */
   color: #204060;
-  font-weight: 800;
+  font-weight: bold;
   line-height: 1.5; /* Prevents layout shifts */
   word-break: break-word; /* Handles long words gracefully */
 }
@@ -177,8 +179,9 @@ body {
 .hidden { display: none; }
 
 /* Word buttons styling */
+
 .root-word {
-  /*font-size: 16px;*/
+  font-size: 16px !important;
   color: #035e96;
   /*background-color: #92c8ed;*/
 /*  margin-top: 10px;*/
@@ -207,13 +210,15 @@ body {
 .synonym {
   background-color: #a2d729;
   color: #035e96;
-  border: 1px solid #c3e6cb;
+  font-size: 16px;
+  border: 1px solid #a2d729;
 }
 
 .antonym {
   background-color: #ff8080;
+  font-size: 16px;
   color: #035e96;
-  border: 1px solid #f5c6cb;
+  border: 1px solid #a2d729;
 }
 
 .word-button:hover {
