@@ -470,139 +470,8 @@ function clearSearch() {
   document.getElementById("clearSearch").classList.add("hidden");
 }
 */
-/* version -1
-function handleSearch(e) {
-  // Only proceed if in dynamic mode OR this is a manual trigger (added line)
-  if (!isSearchActive && e.type !== 'manual') return;
 
-  // Safeguard 1: Validate studyList (keep existing)
-  if (!studyList || studyList.length === 0) {
-    console.error("Study list not loaded!");
-    return;
-  }
-
-  // Safeguard 2: Sanitize input (keep existing)
-  const term = e.target.value.trim().toLowerCase();
-  let idMatch = null;
-  let letterMatch = null;
-  if (!term) {
-    clearSearch();
-    return;
-  }
-  // Safeguard 3: Minimum search length (keep existing)
-  if (term.length < 3) {
-    return;
-  }
-
-  // Find matches (keep existing)
-  const exactMatch = studyList.find(word => word.toLowerCase() === term);
-  const closeMatches = studyList
-    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
-    .sort();
-
-  // Safeguard 4: Defensive UI updates (keep existing)
-  const exactMatchSection = document.getElementById("exactMatchSection");
-  const closeMatchesSection = document.getElementById("closeMatchesSection");
-  const exactMatchDiv = document.getElementById("exactMatch");
-  const closeMatchesDiv = document.getElementById("closeMatches");
-  const searchResults = document.getElementById("searchResults");
-  const noResultsMessage = document.getElementById("noResultsMessage");
-
-  exactMatchDiv.innerHTML = "";
-  closeMatchesDiv.innerHTML = "";
-  noResultsMessage.classList.add("hidden");
-
-/*if (!exactMatch && closeMatches.length === 0) {
-    searchResults.innerHTML = '<div class="search-no-results">No word found...</div>';
-    searchResults.classList.remove("hidden");
-    document.getElementById("clearSearch").classList.remove("hidden");
-    return;
-  }*/
 /*
-  exactMatchSection.classList.toggle("hidden", !exactMatch);
-  closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
-
-    // ID Search Functionality
-  idMatch = term.match(/^id(\d+)$/i);
-  if (idMatch) {
-    const idNum = parseInt(idMatch[1]);
-    if (idNum > 0 && idNum <= studyList.length) {
-      const word = studyList[idNum - 1];
-      document.getElementById("wordsLocated").innerHTML = 
-        `<div class="search-result-item">${word} (${idNum})</div>`;
-      document.getElementById("wordsLocatedSection").classList.remove("hidden");
-      document.getElementById("searchResults").classList.remove("hidden");
-      document.getElementById("clearSearch").classList.remove("hidden");
-      
-      //return;
-    }
-    idMatch = null;
-  }
-  //First letter search
-  letterMatch = term.match(/^50([a-z])$/i);
-  if (letterMatch) {
-    const searchLetter = letterMatch[1].toUpperCase();
-    const matchingWords = studyList
-      .filter(word => word.charAt(0).toUpperCase() === searchLetter)
-      .sort((a, b) => a.localeCompare(b));
-    
-    if (matchingWords.length > 0) {
-      document.getElementById("wordsFound").innerHTML = matchingWords
-        .map(word => `<div class="search-result-item">${word}</div>`)
-        .join("");
-      document.getElementById("wordsFoundSection").classList.remove("hidden");
-      document.getElementById("searchResults").classList.remove("hidden");
-      document.getElementById("clearSearch").classList.remove("hidden");
-    }
-    letterMatch = null;
-  }
-  
-  if (exactMatch) {
-    exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
-  }
-
-  if (closeMatches.length > 0) {
-    closeMatchesDiv.innerHTML = closeMatches
-      .map(word => `<div class="search-result-item">${word}</div>`)
-      .join("");
-  }
-  //if (!exactMatch && closeMatches.length === 0) {
-  else {
-    noResultsMessage.classList.remove("hidden");
-  }
-  
-  // Show results (keep existing)
-  searchResults.classList.remove("hidden");
-  document.getElementById("searchResults").classList.remove("hidden");
-  document.getElementById("clearSearch").classList.remove("hidden");
-
-  // Activate dynamic mode after manual trigger (added line)
-  if (e.type === 'manual') isSearchActive = true;
-
-  // Safeguard 5: Secure click-jump (keep existing)
-  document.querySelectorAll(".search-result-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const selectedWord = item.textContent;
-      if (!studyList.includes(selectedWord)) {
-        alert("Word not available in current session.");
-        return;
-      }
-      currentIndex = studyList.indexOf(selectedWord);
-      alert("Opened New Word!!");
-      displayWord();
-      clearSearch();
-    });
-  });
-}
-function clearSearch() {
-  document.getElementById("wordSearch").value = "";
-  document.getElementById("searchResults").classList.add("hidden");
-  document.getElementById("clearSearch").classList.add("hidden");
-  document.getElementById("noResultsMessage").classList.add("hidden");
-  idMatch = null;
-}
-*/
-
 function handleSearch(e) {
   if (!isSearchActive && e.type !== 'manual') return;
 
@@ -700,17 +569,6 @@ function handleSearch(e) {
 
   searchResultClick();
 }
-/* ver -1
-function clearSearch() {
-  document.getElementById("wordSearch").value = "";
-  document.getElementById("searchResults").classList.add("hidden");
-  document.getElementById("clearSearch").classList.add("hidden");
-  document.getElementById("noResultsMessage").classList.add("hidden");
-  document.getElementById("wordsFoundSection").classList.add("hidden");
-  document.getElementById("wordsLocatedSection").classList.add("hidden");
-  document.getElementById("exactMatchSection").classList.add("hidden");
-  document.getElementById("closeMatchesSection").classList.add("hidden");
-}
 */
 function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
@@ -756,4 +614,64 @@ function clearSearch() {
   document.getElementById("closeMatchesSection").classList.add("hidden");
   document.getElementById("wordsFoundSection").classList.add("hidden");
   document.getElementById("wordsLocatedSection").classList.add("hidden");
+}
+function displayWord() {
+  const word = studyList[currentIndex];
+  const ids = csvData.filter(item => item.word === word).map(item => item.id);
+
+  const synonyms = new Set();
+  const antonyms = new Set();
+
+  ids.forEach(id1 => {
+    csvData.forEach(({ word: w2, id: id2 }) => {
+      if (id1 === id2 && w2 !== word) synonyms.add(w2);
+      if (id1 === -id2) antonyms.add(w2);
+    });
+  });
+
+  // Display word info
+  document.getElementById("wordOrderDisplay").textContent = 
+    `Word ${currentIndex + 1} of ${studyList.length} :`;
+  document.getElementById("wordDisplay").textContent = word;
+
+  // Create styled synonym buttons
+  document.getElementById("synLabel").textContent = 
+    `Synonyms (${synonyms.size}) :`;
+  const synDisplay = document.getElementById("synDisplay");
+  synDisplay.innerHTML = synonyms.size > 0 
+    ? [...synonyms].map(syn => 
+        `<button class="word-button synonym">${syn}</button>`
+      ).join(" ") 
+    : '<span class="no-words">None</span>';
+
+  // Create styled antonym buttons
+  document.getElementById("antLabel").textContent = 
+    `Antonyms (${antonyms.size}) :`;
+  const antDisplay = document.getElementById("antDisplay");
+  antDisplay.innerHTML = antonyms.size > 0 
+    ? [...antonyms].map(ant => 
+        `<button class="word-button antonym">${ant}</button>`
+      ).join(" ") 
+    : '<span class="no-words">None</span>';
+
+  // Add click handlers to all word buttons
+  document.querySelectorAll('.word-button').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const clickedWord = e.target.textContent;
+      if (studyList.includes(clickedWord)) {
+        currentIndex = studyList.indexOf(clickedWord);
+        wordsSeen++;
+        displayWord();
+      } else {
+        alert("This word isn't in the current study list");
+      }
+    });
+  });
+
+  // Update other UI elements
+  document.getElementById("wordOrder").textContent = `Word ${currentIndex + 1}`;
+  document.getElementById("wordTotal").textContent = `Total Words: ${studyList.length}`;
+  document.getElementById("modeDisplay").textContent = `Mode: ${selectedMode}`;
+  document.getElementById("questionCount").textContent = `Words Seen: ${wordsSeen}`;
+  document.getElementById("prevBtn").disabled = currentIndex === 0;
 }
