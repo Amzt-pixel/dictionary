@@ -715,7 +715,7 @@ function clearSearch() {
 function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
-       const selectedWord = item.textContent.replace(/\b\w+#\d+\b/g, "").trim();// trim helps prevent whitespace bugs
+       const selectedWord = item.textContent.replace(/\(#\d+\)/g, "").trim();// trim helps prevent whitespace bugs
       if (!studyList.includes(selectedWord)) {
         alert("Word not available in current session.");
         return;
