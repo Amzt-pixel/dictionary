@@ -187,7 +187,7 @@ function calculateWordSets() {
   });
   return uniqueIds.size;
 }
-
+/*
 function displayWord() {
   const word = studyList[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
@@ -201,11 +201,7 @@ function displayWord() {
       if (id1 === -id2) antonyms.add(w2);
     });
   });
-/*
-  document.getElementById("wordDisplay").textContent = `Word ${currentIndex + 1}: ${word}`;
-  document.getElementById("synDisplay").textContent = [...synonyms].join(", ") || "None";
-  document.getElementById("antDisplay").textContent = [...antonyms].join(", ") || "None";
-*/
+
   // Display in requested format
   document.getElementById("wordOrderDisplay").textContent =
     `Word ${currentIndex + 1} of ${studyList.length} :`;
@@ -231,7 +227,7 @@ function displayWord() {
   // Reset Next button if changed earlier
   document.getElementById("nextBtn").textContent = "Next";
   }
-
+*/
 
 function prevWord() {
   if (currentIndex === 0) return;
@@ -397,81 +393,7 @@ function initSearch() {
   }
 });
 }
-/* version 00
-function handleSearch(e) {
-  // Safeguard 1: Validate studyList
-  if (!studyList || studyList.length === 0) {
-    console.error("Study list not loaded!");
-    return;
-  }
 
-  // Safeguard 2: Sanitize input
-  const term = e.target.value.trim().toLowerCase();
-  if (!term) {
-    clearSearch();
-    return;
-  }
-
-  // Safeguard 3: Minimum search length
-  if (term.length < 3) {
-    //alert("Please enter at least 2 characters.");
-    return;
-  }
-
-  // Find matches
-  const exactMatch = studyList.find(word => word.toLowerCase() === term);
-  const closeMatches = studyList
-    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
-    .sort();
-
-  // Safeguard 4: Defensive UI updates
-  const exactMatchSection = document.getElementById("exactMatchSection");
-  const closeMatchesSection = document.getElementById("closeMatchesSection");
-  const exactMatchDiv = document.getElementById("exactMatch");
-  const closeMatchesDiv = document.getElementById("closeMatches");
-
-  exactMatchDiv.innerHTML = "";
-  closeMatchesDiv.innerHTML = "";
-
-  exactMatchSection.classList.toggle("hidden", !exactMatch);
-  closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
-
-  if (exactMatch) {
-    exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
-  }
-
-  if (closeMatches.length > 0) {
-    closeMatchesDiv.innerHTML = closeMatches
-      .map(word => `<div class="search-result-item">${word}</div>`)
-      .join("");
-  }
-
-  // Show results
-  document.getElementById("searchResults").classList.remove("hidden");
-  document.getElementById("clearSearch").classList.remove("hidden");
-
-  // Safeguard 5: Secure click-jump
-  document.querySelectorAll(".search-result-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const selectedWord = item.textContent;
-      if (!studyList.includes(selectedWord)) {
-        alert("Word not available in current session.");
-        return;
-      }
-      currentIndex = studyList.indexOf(selectedWord);
-      displayWord();
-      clearSearch();
-    });
-  });
-}
-function clearSearch() {
-  document.getElementById("wordSearch").value = "";
-  document.getElementById("searchResults").classList.add("hidden");
-  document.getElementById("clearSearch").classList.add("hidden");
-}
-*/
-
-/*
 function handleSearch(e) {
   if (!isSearchActive && e.type !== 'manual') return;
 
@@ -569,7 +491,8 @@ function handleSearch(e) {
 
   searchResultClick();
 }
-*/
+
+
 function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
@@ -661,9 +584,10 @@ function displayWord() {
       if (studyList.includes(clickedWord)) {
         currentIndex = studyList.indexOf(clickedWord);
         wordsSeen++;
+        alert("Opened new word!");
         displayWord();
       } else {
-        alert("This word isn't in the current study list");
+        alert("No word was found!");
       }
     });
   });
