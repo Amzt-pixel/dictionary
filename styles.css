@@ -82,7 +82,7 @@ body {
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: 4px;
-  height: 40px; /* Matches button height */
+  height: 38px; /* Matches button height */
   box-sizing: border-box;
 }
 
@@ -99,7 +99,7 @@ body {
   background-color: #ffb24d;
   color: #204060;
   cursor: pointer;
-  height: 40px; /* Matches input height */
+  height: 38px; /* Matches input height */
  /* box-sizing: border-box; */
 }
 .search-no-results {
@@ -236,6 +236,6 @@ body {
   font-style: italic;
 }
 .search-button-hold {
-  background-color: #ffa500 !important; /* Orange for hold effect */
-  color: white;
+  background-color: #a2d729 !important; /* Orange for hold effect */
+  color: #204080;
   }
