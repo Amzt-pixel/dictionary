@@ -368,7 +368,7 @@ function initSearch() {
 
       // Enable dynamic updates
       searchInput.addEventListener("input", handleSearch);
-      searchButton.textContent = "☒";
+      searchButton.textContent = "×";
       resultsVisible = true;
     } else {
       clearSearch();
