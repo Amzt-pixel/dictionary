@@ -40,7 +40,7 @@ body {
     button {
       padding: 10px 15px;
       margin: 5px;
-      font-size: 16px;
+      font-size: 20px;
       border: none;
       border-radius: 4px;
       /*background-color: steelblue;*/
@@ -181,7 +181,7 @@ body {
 /* Word buttons styling */
 
 .root-word {
-  font-size: 16px !important;
+  font-size: 22px !important;
   font-weight: 500;
   color: #035e96;
   /*background-color: #92c8ed;*/
@@ -194,6 +194,7 @@ body {
 .rootWordButton{
   background-color:#ffb24d;
   border-radius: 4px;
+  font-size: 22px;
 }
   
 .word-button {
@@ -201,7 +202,7 @@ body {
 /*  margin: 3px;*/
   border: none;
   border-radius: 4px;
-  font-size: 16px !important;
+  font-size: 22px !important;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
