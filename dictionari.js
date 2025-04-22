@@ -440,27 +440,25 @@ function initSearch() {
     searchButton.classList.remove("search-button-hold");
   };
 
-  // Mouse events (for desktop)
+  // Mouse events
   searchButton.addEventListener('mousedown', startHold);
   searchButton.addEventListener('mouseup', cancelHold);
   searchButton.addEventListener('mouseleave', cancelHold);
 
-  // Mobile support (touch events)
-  searchButton.addEventListener('touchstart', (e) => {
-    startHold();
-    e.preventDefault();
-  });
-
+  // Touch events — DO NOT call preventDefault
+  searchButton.addEventListener('touchstart', startHold);
   searchButton.addEventListener('touchend', cancelHold);
   searchButton.addEventListener('touchcancel', cancelHold);
 
-  // Original event listeners
+  // Click handler (remains functional now)
   searchButton.addEventListener("click", toggleSearch);
+
   searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       toggleSearch();
     }
   });
+
   document.addEventListener("click", (e) => {
     if (
       resultsVisible &&
