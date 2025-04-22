@@ -68,6 +68,7 @@ async function loadCSVList() {
 
     list.forEach((item) => {
       const option = new Option(item.name, item.url);
+      option.dataset.name = item.name; // Store the name as data attribute
       select.add(option);
     });
 
@@ -140,7 +141,7 @@ function filterAndSortWords(mode) {
     return shuffleArray(validWords);
   }
 }
-
+/*
 function startSession() {
   studyList=filterAndSortWords(selectedMode); // create the studyList based on mode
   currentIndex = 0;
@@ -152,6 +153,39 @@ function startSession() {
 
   showScreen("study");
   displayWord();
+}
+*/
+function startSession() {
+  studyList = filterAndSortWords(selectedMode);
+  currentIndex = 0;
+  wordsSeen = 1;
+  startTime = new Date();
+
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateClock, 1000);
+
+  // Get the selected CSV name
+  const csvSelector = document.getElementById("csvSelector");
+  const selectedOption = csvSelector.options[csvSelector.selectedIndex];
+  const csvName = selectedOption.dataset.name || "Current List";
+
+  // Calculate word sets
+  const wordSetsCount = calculateWordSets();
+
+  // Update the display
+  document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
+  document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
+
+  showScreen("study");
+  displayWord();
+}
+
+function calculateWordSets() {
+  const uniqueIds = new Set();
+  csvData.forEach(item => {
+    uniqueIds.add(Math.abs(item.id)); // Use absolute value of IDs
+  });
+  return uniqueIds.size;
 }
 
 function displayWord() {
