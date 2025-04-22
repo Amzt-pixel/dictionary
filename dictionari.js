@@ -395,23 +395,19 @@ function initSearch() {
 }
 */
 function initSearch() {
-  // Add a variable to track the hold timer
   let holdTimer = null;
-  const holdDuration = 1000; // 1 second (adjust as needed)
+  const holdDuration = 1000; // 1 second
 
   const toggleSearch = () => {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) {
-        alert("Press and Hold for info");
         return;
       }
 
-      // Manually trigger search
       isSearchActive = true;
       handleSearch({ target: { value: term }, type: "manual" });
 
-      // Enable dynamic updates
       searchInput.addEventListener("input", handleSearch);
       searchButton.textContent = "×";
       resultsVisible = true;
@@ -423,19 +419,16 @@ function initSearch() {
     }
   };
 
-  // Add press-and-hold functionality
+  // Mouse events (for desktop)
   searchButton.addEventListener('mousedown', (e) => {
-    // Start timer only if not already holding
     if (holdTimer === null) {
       holdTimer = setTimeout(() => {
         alert("You held the search button!");
-        // Optional: Clear the hold timer after alert
         holdTimer = null;
       }, holdDuration);
     }
   });
 
-  // Clear the timer if user releases before holdDuration
   searchButton.addEventListener('mouseup', (e) => {
     if (holdTimer) {
       clearTimeout(holdTimer);
@@ -443,8 +436,31 @@ function initSearch() {
     }
   });
 
-  // Also clear if mouse leaves button while holding
   searchButton.addEventListener('mouseleave', (e) => {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+  });
+
+  // Mobile support (touch events)
+  searchButton.addEventListener('touchstart', (e) => {
+    if (holdTimer === null) {
+      holdTimer = setTimeout(() => {
+        alert("You held the search button!");
+        holdTimer = null;
+      }, holdDuration);
+    }
+  });
+
+  searchButton.addEventListener('touchend', (e) => {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+  });
+
+  searchButton.addEventListener('touchcancel', (e) => {
     if (holdTimer) {
       clearTimeout(holdTimer);
       holdTimer = null;
@@ -469,6 +485,7 @@ function initSearch() {
     }
   });
 }
+
 
 function handleSearch(e) {
   if (!isSearchActive && e.type !== 'manual') return;
