@@ -162,6 +162,15 @@ body {
 .hidden { display: none; }
 
 /* Word buttons styling */
+.root-word {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ecf0f1;
+  background-color: #3498db;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
 .word-button {
   padding: 5px 10px;
   margin: 3px;
