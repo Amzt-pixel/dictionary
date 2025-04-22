@@ -349,7 +349,7 @@ function initStepSelector() {
     console.log("Step size changed to:", stepNumber); // For debugging
   });
 }
-
+/* FINAL WITHOUT PRESS AND HOLD
 function initSearch() {
   const toggleSearch = () => {
     if (!resultsVisible) {
@@ -392,6 +392,82 @@ function initSearch() {
     toggleSearch(); // This will reset the search
   }
 });
+}
+*/
+function initSearch() {
+  // Add a variable to track the hold timer
+  let holdTimer = null;
+  const holdDuration = 1000; // 1 second (adjust as needed)
+
+  const toggleSearch = () => {
+    if (!resultsVisible) {
+      const term = searchInput.value.trim();
+      if (term.length < 3) {
+        alert("Press and Hold for info");
+        return;
+      }
+
+      // Manually trigger search
+      isSearchActive = true;
+      handleSearch({ target: { value: term }, type: "manual" });
+
+      // Enable dynamic updates
+      searchInput.addEventListener("input", handleSearch);
+      searchButton.textContent = "×";
+      resultsVisible = true;
+    } else {
+      clearSearch();
+      searchInput.removeEventListener("input", handleSearch);
+      searchButton.textContent = "⌕";
+      resultsVisible = false;
+    }
+  };
+
+  // Add press-and-hold functionality
+  searchButton.addEventListener('mousedown', (e) => {
+    // Start timer only if not already holding
+    if (holdTimer === null) {
+      holdTimer = setTimeout(() => {
+        alert("You held the search button!");
+        // Optional: Clear the hold timer after alert
+        holdTimer = null;
+      }, holdDuration);
+    }
+  });
+
+  // Clear the timer if user releases before holdDuration
+  searchButton.addEventListener('mouseup', (e) => {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+  });
+
+  // Also clear if mouse leaves button while holding
+  searchButton.addEventListener('mouseleave', (e) => {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+  });
+
+  // Original event listeners
+  searchButton.addEventListener("click", toggleSearch);
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      toggleSearch();
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (
+      resultsVisible &&
+      searchInput.value.trim() === "" &&
+      e.target !== searchInput &&
+      !searchInput.contains(e.target)
+    ) {
+      toggleSearch();
+    }
+  });
 }
 
 function handleSearch(e) {
