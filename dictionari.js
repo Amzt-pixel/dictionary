@@ -368,12 +368,12 @@ function initSearch() {
 
       // Enable dynamic updates
       searchInput.addEventListener("input", handleSearch);
-      searchButton.textContent = "Collapse";
+      searchButton.textContent = "☒";
       resultsVisible = true;
     } else {
       clearSearch();
       searchInput.removeEventListener("input", handleSearch);
-      searchButton.textContent = "Search";
+      searchButton.textContent = "⌕";
       resultsVisible = false;
     }
   };
