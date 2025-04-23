@@ -129,6 +129,8 @@ body {
       border-radius: 4px;
       margin: 20px 0px;
       background-color: #fff;
+      max-height: 500px;
+      overflow-y: auto;
     }
 
     .label {
