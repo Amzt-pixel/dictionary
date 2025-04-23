@@ -40,13 +40,14 @@ body {
     button {
       padding: 10px 15px;
       margin: 10px;
+      max-width: 50%;
       font-size: 20px;
-      border: none;
+      border: 1px solid #1d4e89;
       border-radius: 4px;
       /*background-color: steelblue;*/
-      background-color: #1d4e89;
+      background-color: #7dcfb6;
       font-weight: 700;
-      color: #ffcc80;
+      color: #1d4e89;
       cursor: pointer;
       display: inline-block;
     }
@@ -202,7 +203,7 @@ body {
 .rootWordButton{
   background-color:#1d4e89;
   border-radius: 4px;
-  border: 1px solid #ffcc80;
+  border: 1px solid #7dcfb6;
   padding: 5px 10px;
   margin: 3px;
   border: none;
@@ -230,14 +231,14 @@ body {
 }
 
 .synonym {
-  background-color: #7dcfb6;
+  background-color: #ffcc80;
   color: #001a33;
   font-size: 20px;
   border: 1px solid #1d4e89;
 }
 
 .antonym {
-  background-color: #ffcc80;
+  background-color: #7dcfb6;
   color: #001a33;
   font-size: 20px;
   border: 1px solid #1d4e89;
