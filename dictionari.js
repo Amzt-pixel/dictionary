@@ -403,7 +403,8 @@ function initSearch() {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) {
-        alert("Press and Hold for Info");
+        alert("Search Inactive!\n" +
+          "Press and Hold for Info");
         return;
       }
 
@@ -588,11 +589,11 @@ function searchResultClick() {
       currentIndex = studyList.indexOf(selectedWord);
       alert("Opened Searched Word!!");
       wordsSeen++;
-      displayWord();
       clearSearch();
       searchButton.textContent = "⌕";
       resultsVisible = false;
       isSearchActive = false;
+      displayWord();
     });
   });
 }
@@ -674,7 +675,7 @@ function displayWord() {
       if (studyList.includes(clickedWord)) {
         currentIndex = studyList.indexOf(clickedWord);
         wordsSeen++;
-        alert("Opened new word!");
+        /*alert("Opened new word!");*/
         displayWord();
       } else {
         alert("No word was found!");
