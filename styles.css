@@ -48,6 +48,7 @@ body {
       font-weight: 700;
       color: #f79256;
       cursor: pointer;
+      display: block;
     }
 
     button:disabled {
