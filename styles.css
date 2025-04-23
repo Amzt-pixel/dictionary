@@ -46,7 +46,7 @@ body {
       /*background-color: steelblue;*/
       background-color: #1d4e89;
       font-weight: 700;
-      color: #f79256;
+      color: #ffcc80;
       cursor: pointer;
       display: inline-block;
     }
@@ -75,7 +75,7 @@ body {
       font-weight: 800;
 }
 .clockButton {
-  background-color:#ff9999;
+  background-color:#ffcc80;
   border: 2px solid #1d4e89;
 }
 /*input[type="text"]*/
@@ -84,10 +84,10 @@ body {
   margin-left: 10px;
   width: 90%;
   max-width: 90%;
-  font-size: 20px;
+  font-size: 16px;
   color: #001a33;
   font-weight: 400;
-  border: 2px solid #7dcfb6;
+  border: 2px solid #ffcc80;
   background-color: #fff;
   border-radius: 4px;
   height: 38px; /* Matches button height */
@@ -104,7 +104,7 @@ body {
   border: none;
   align-items: center;
   border-radius: 4px;
-  background-color: #7dcfb6;
+  background-color: #ffcc80;
   color: white;
   cursor: pointer;
   height: 38px; /* Matches input height */
@@ -131,7 +131,7 @@ body {
       border-radius: 4px;
       margin: 20px 0px;
       background-color: #fff;
-      max-height: 500px;
+      max-height: 450px;
       overflow-y: auto;
     }
 
@@ -259,6 +259,6 @@ body {
   /*font-style: italic;*/
 }
 .search-button-hold {
-  background-color: #f79256 !important; /* Orange for hold effect */
+  background-color: #7dcfb6 !important; /* Light fade green for hold effect */
   color: white;
 }
