@@ -635,11 +635,11 @@ function displayWord() {
   //document.getElementById("wordDisplay").textContent = word;
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
-
+/*
   //Display meta
   document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
   document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
-  
+*/
   // Create styled synonym buttons
   document.getElementById("synLabel").textContent = 
     `Synonyms (${synonyms.size}) :`;
