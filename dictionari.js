@@ -47,9 +47,7 @@ document.getElementById("infoButton").addEventListener("click", function() {
   "4. Adjust step value for Previous and Next from Step field (Default : 1)."
 );
 });
-document.getElementById("meta").addEventListener("click", function () {
-  alert("Here's the metadata");
-});
+document.getElementById("meta").addEventListener("click", showMetadata);
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -697,3 +695,6 @@ function displayWord() {
   document.getElementById("prevBtn").disabled = currentIndex === 0;
 }
 
+function showMetadata() {
+  alert("Here's the metadata");
+}
