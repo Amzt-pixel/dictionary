@@ -171,11 +171,11 @@ function startSession() {
 
   // Calculate word sets
   const wordSetsCount = calculateWordSets();
-
+/*
   // Update the display
   document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
   document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
-
+*/
   showScreen("study");
   displayWord();
 }
@@ -583,7 +583,7 @@ function searchResultClick() {
       wordsSeen++;
       displayWord();
       clearSearch();
-      searchButton.textContent = "Search";
+      searchButton.textContent = "⌕";
       resultsVisible = false;
       isSearchActive = false;
     });
@@ -636,6 +636,10 @@ function displayWord() {
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
 
+  //Display meta
+  document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
+  document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
+  
   // Create styled synonym buttons
   document.getElementById("synLabel").textContent = 
     `Synonyms (${synonyms.size}) :`;
