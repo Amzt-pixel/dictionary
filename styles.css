@@ -38,8 +38,8 @@ body {
     }
 
     button {
-      padding: 10px 15px;*/
-      margin: 5px;
+      padding: 10px 15px;
+      margin: 10px;
       font-size: 20px;
       border: none;
       border-radius: 4px;
@@ -201,11 +201,12 @@ body {
 .rootWordButton{
   background-color:#00b2ca;
   border-radius: 4px;
+  border: 1px solid #1d4e89;
 }
   
 .word-button {
-  padding: 5px 10px;*/
-/*  margin: 3px;*/
+  padding: 5px 10px;
+  margin: 3px;
   border: none;
   border-radius: 4px;
   font-size: 20px !important;
@@ -219,14 +220,14 @@ body {
   background-color: #7dcfb6;
   color: #001a33;
   font-size: 20px;
-  border: 1px solid #7dcfb6;
+  border: 1px solid #1d4e89;
 }
 
 .antonym {
   background-color: #f79256;
   color: #001a33;
   font-size: 20px;
-  border: 1px solid #f79256;
+  border: 1px solid #1d4e89;
 }
 
 .word-button:hover {
