@@ -690,3 +690,6 @@ function displayWord() {
   document.getElementById("questionCount").textContent = `Words Seen: ${wordsSeen}`;
   document.getElementById("prevBtn").disabled = currentIndex === 0;
 }
+document.getElementById("meta").addEventListener("click", function () {
+  alert("Here's the metadata");
+});
