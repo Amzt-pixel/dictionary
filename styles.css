@@ -29,7 +29,7 @@ body {
       font-size: 20px;
       font-weight: 500;
       width: 100%;
-      background-color: #7dcfb6;
+      background-color: #ffcc80;
       color: #001a33;
       margin-bottom: 15px;
       font-size: 16px;
@@ -127,7 +127,7 @@ body {
     .word-card {
       padding: 15px 20px;
       padding-top: 5px;
-      border: 2px solid #1d4e89;
+      border: 2px solid #001a33;
       border-radius: 4px;
       margin: 20px 0px;
       background-color: #fff;
@@ -142,7 +142,7 @@ body {
 
 #wordOrderDisplay, #synLabel, #antLabel, .word-card div {
   font-size: 20px !important; /* Forces uniform size */
-  color: #1d4e89;
+  color: #001a33;
   font-weight: 600;
   line-height: 1.5; /* Prevents layout shifts */
   word-break: break-word; /* Handles long words gracefully */
@@ -174,7 +174,7 @@ body {
 }
 #exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
   margin-left: 10px;
-  color: #004d99;
+  color: #001a33;
 }
 .search-result-item {
   size: 20px;
@@ -200,9 +200,9 @@ body {
 }
 
 .rootWordButton{
-  background-color:#001a33;
+  background-color:#1d4e89;
   border-radius: 4px;
-  border: 1px solid #1d4e89;
+  border: 1px solid #ffcc80;
   padding: 5px 10px;
   margin: 3px;
   border: none;
