@@ -41,7 +41,7 @@ const searchButton = document.querySelector(".searchBar-button");
 //document.getElementById("clearSearch").addEventListener("click", clearSearch);
 document.getElementById("infoButton").addEventListener("click", function() {
   alert(
-  "1. You must enter minimum 3 characters for search.\n" +
+  "1. You must enter minimum 3 characters to initiate search.\n" +
   "2. Search input(=@ID) : Word at ID-th position.\n" +
   "3. Search input(=#LETTER) : Words starting with LETTER.\n" +
   "4. Adjust step value for Previous and Next from Step field (Default : 1)."
@@ -407,7 +407,7 @@ function initSearch() {
       const term = searchInput.value.trim();
       if (term.length < 3) {
         alert("Search Inactive!\n" +
-          "Press and Hold for Info");
+          "Press and Hold for Help");
         return;
       }
 
@@ -430,7 +430,7 @@ function initSearch() {
       searchButton.classList.add("search-button-hold");
       holdTimer = setTimeout(() => {
         alert(
-  "1. You must enter minimum 3 characters for search.\n" +
+  "1. You must enter minimum 3 characters to initiate search.\n" +
   "2. Search by {ID} to view Word at ID-th position.\n" +
   "3. Search by {LETTER} to view Words starting with LETTER.\n" +
   "4. Adjust step value for Previous and Next from Step field (Default : 1).\n" +
@@ -696,6 +696,4 @@ function displayWord() {
   document.getElementById("questionCount").textContent = `Words Seen: ${wordsSeen}`;
   document.getElementById("prevBtn").disabled = currentIndex === 0;
 }
-document.getElementById("meta").addEventListener("click", function () {
-  alert("Here's the metadata");
-});
+
