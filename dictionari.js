@@ -425,7 +425,14 @@ function initSearch() {
     if (holdTimer === null) {
       searchButton.classList.add("search-button-hold");
       holdTimer = setTimeout(() => {
-        alert("You held the search button!");
+        alert(
+  "1. You must enter minimum 3 characters for search.\n" +
+  "2. Search by {ID} to view Word at ID-th position.\n" +
+  "3. Search by {LETTER} to view Words starting with LETTER.\n" +
+  "4. Adjust step value for Previous and Next from Step field (Default : 1).\n" +
+  "5. Click on the Words to view them.\n" +
+  "6. Click the Meta button to view Session Meta info."
+);
         holdTimer = null;
         searchButton.classList.remove("search-button-hold");
       }, holdDuration);
