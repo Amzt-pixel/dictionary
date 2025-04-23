@@ -47,6 +47,9 @@ document.getElementById("infoButton").addEventListener("click", function() {
   "4. Adjust step value for Previous and Next from Step field (Default : 1)."
 );
 });
+document.getElementById("meta").addEventListener("click", function () {
+  alert("Here's the metadata");
+});
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -648,6 +651,9 @@ function displayWord() {
   document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
   document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
 */
+  
+
+  
   // Create styled synonym buttons
   document.getElementById("synLabel").textContent = 
     `Synonyms (${synonyms.size}) :`;
