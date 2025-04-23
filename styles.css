@@ -186,7 +186,7 @@ body {
 
 /* Word buttons styling */
 .root-word {
-  /*font-size: 16px;*/
+  font-size: 22px;
   color: #001a33;
   /*background-color: #92c8ed;*/
 /*  margin-top: 10px;*/
@@ -205,7 +205,7 @@ body {
 /*  margin: 3px;*/
   border: none;
   border-radius: 4px;
-  font-size: 16px !important;
+  font-size: 22px !important;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -215,12 +215,14 @@ body {
 .synonym {
   background-color: #7dcfb6;
   color: #001a33;
+  font-size: 22px;
   border: 1px solid #c3e6cb;
 }
 
 .antonym {
   background-color: #f79256;
   color: #001a33;
+  font-size: 22px;
   border: 1px solid #f5c6cb;
 }
 
@@ -235,6 +237,7 @@ body {
 
 .no-words {
   color: #001a33;
+  font-size: 22px;
   margin-left: 10px;
   /*font-style: italic;*/
 }
