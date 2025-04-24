@@ -57,7 +57,7 @@ body {
       cursor: not-allowed;
     }
 
-   .footer-buttons buttons {
+   .footer-buttons button {
          width: 50%;
    }
    /* .clock-section {
@@ -332,6 +332,6 @@ body {
 */
 #nextBtn.holding, #prevBtn.holding {
   background-color: #7dcfb6; /* Light green for Next */
-  color: 1d4e89;
+  color: #1d4e89;
   transform: scale(0.98);
 }
