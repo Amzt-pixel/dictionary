@@ -44,9 +44,9 @@ body {
       border: 1px solid #1d4e89;
       border-radius: 4px;
       /*background-color: steelblue;*/
-      background-color: #7dcfb6;
+      color: #7dcfb6;
       font-weight: 700;
-      color: #1d4e89;
+      background-color: #1d4e89;
       cursor: pointer;
       display: inline-block;
     }
@@ -191,7 +191,7 @@ body {
 /* Word buttons styling */
 .root-word {
   font-size: 20px;
-  color: #ffcc80;
+  color: #001a33;
   /*background-color: #92c8ed;*/
 /*  margin-top: 10px;*/
   padding: 5px 0px;
@@ -209,7 +209,8 @@ body {
   overflow-y: auto;
 }
 .rootWordButton{
-  background-color:#1d4e89;
+  background-color: #7dcfb6;
+  color: #001a33;
   border-radius: 4px;
   border: 1px solid #7dcfb6;
   padding: 5px 10px;
