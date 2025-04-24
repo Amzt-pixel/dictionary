@@ -44,7 +44,7 @@ body {
       border: 1px solid #1d4e89;
       border-radius: 4px;
       /*background-color: steelblue;*/
-      color: #7dcfb6;
+      color: #ffcc80;
       font-weight: 700;
       background-color: #1d4e89;
       cursor: pointer;
@@ -55,6 +55,18 @@ body {
       background-color: #ccc;
       color: #001a33;
       cursor: not-allowed;
+    }
+    metabutton {
+          padding: 10px 15px;
+      margin: 10px;
+      font-size: 20px;
+      border: 1px solid #1d4e89;
+      border-radius: 4px;
+      color: #7dcfb6;
+      font-weight: 700;
+      background-color: #1d4e89;
+      cursor: pointer;
+      display: inline-block;
     }
 
 .search-container { 
