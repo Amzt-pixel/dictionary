@@ -624,6 +624,7 @@ function clearSearch() {
   document.getElementById("wordsFoundSection").classList.add("hidden");
   document.getElementById("wordsLocatedSection").classList.add("hidden");
 }
+/*
 function displayWord() {
   const word = studyList[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
@@ -644,12 +645,10 @@ function displayWord() {
   //document.getElementById("wordDisplay").textContent = word;
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
-/*
+
   //Display meta
-  document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
-  document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
-*/
-  
+ // document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
+//  document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
 
   
   // Create styled synonym buttons
@@ -679,7 +678,7 @@ function displayWord() {
       if (studyList.includes(clickedWord)) {
         currentIndex = studyList.indexOf(clickedWord);
         wordsSeen++;
-        /*alert("Opened new word!");*/
+        //alert("Opened new word!");
         displayWord();
       } else {
         alert("No word was found!");
@@ -693,6 +692,76 @@ function displayWord() {
   document.getElementById("modeDisplay").textContent = `Mode: ${selectedMode}`;
   document.getElementById("questionCount").textContent = `Words Seen: ${wordsSeen}`;
   document.getElementById("prevBtn").disabled = currentIndex === 0;
+}
+*/
+function displayWord() {
+  const word = studyList[currentIndex];
+  const ids = csvData.filter(item => item.word === word).map(item => item.id);
+
+  const synonyms = new Set();
+  const antonyms = new Set();
+
+  ids.forEach(id1 => {
+    csvData.forEach(({ word: w2, id: id2 }) => {
+      if (id1 === id2 && w2 !== word) synonyms.add(w2);
+      if (id1 === -id2) antonyms.add(w2);
+    });
+  });
+
+  // Display word info
+  document.getElementById("wordOrderDisplay").textContent = 
+    `Word ${currentIndex + 1} of ${studyList.length} :`;
+  const wordDisplay = document.getElementById("wordDisplay");
+  wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
+
+  // Create styled synonym buttons
+  document.getElementById("synLabel").textContent = 
+    `Synonyms (${synonyms.size}) :`;
+  const synDisplay = document.getElementById("synDisplay");
+  synDisplay.innerHTML = synonyms.size > 0 
+    ? [...synonyms].map(syn => 
+        `<button class="word-button synonym">${syn}</button>`
+      ).join(" ") 
+    : '<span class="no-words">None</span>';
+
+  // Create styled antonym buttons
+  document.getElementById("antLabel").textContent = 
+    `Antonyms (${antonyms.size}) :`;
+  const antDisplay = document.getElementById("antDisplay");
+  antDisplay.innerHTML = antonyms.size > 0 
+    ? [...antonyms].map(ant => 
+        `<button class="word-button antonym">${ant}</button>`
+      ).join(" ") 
+    : '<span class="no-words">None</span>';
+
+  // Remove click handlers and add touch-and-hold (long-press) detection
+  document.querySelectorAll('.word-button').forEach(button => {
+    let pressTimer;
+
+    // Start timer on touchstart
+    button.addEventListener('touchstart', (e) => {
+      const clickedWord = e.target.textContent;
+      pressTimer = setTimeout(() => {
+        if (studyList.includes(clickedWord)) {
+          currentIndex = studyList.indexOf(clickedWord);
+          wordsSeen++;
+          displayWord();
+        } else {
+          alert("No word was found!");
+        }
+      }, 1000); // 1000ms = 1 second hold
+    });
+
+    // Cancel timer if touch ends early
+    button.addEventListener('touchend', () => {
+      clearTimeout(pressTimer);
+    });
+
+    // Also cancel if touch moves away (optional)
+    button.addEventListener('touchmove', () => {
+      clearTimeout(pressTimer);
+    });
+  });
 }
 
 function showMetadata() {
