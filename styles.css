@@ -56,9 +56,22 @@ body {
       color: #001a33;
       cursor: not-allowed;
     }
+    .clock-section {
+          margin: 0px 0;
+          margin-top: 30px;
+          display: flex;
+          align-items: center; /* Fixes vertical misalignment */
+          gap: 5px;
+          padding: 5px;
+          border-radius: 4px;
+    }
+
     .metabutton {
-      /*padding: 10px 10px;
-      margin: 10px;*/
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /*margin: 10px;*/
       font-size: 30px;
       border: 2px solid #1d4e89;
       border-radius: 4px;
@@ -67,33 +80,29 @@ body {
       font-weight: 700;
       color: #1d4e89;
       cursor: pointer;
-      display: inline-block;
+      
     }
 
-    .clock-section {
-          margin: 0px 0;
-  display: flex;
-  align-items: center; /* Fixes vertical misalignment */
-  gap: 5px;
-  padding: 5px;
-  border-radius: 4px;
-          display: flex;
-          justify-content: center;
-          height: 38px;
-    }
 #clock{
-      text-align: center;
       /*color: red;*/
       color: #1d4e89;
-      display: inline-block;
       font-weight: 800;
+      font-size: 16px;
 }
 .clockButton {
   background-color:#ffcc80;
   border: 2px solid #1d4e89;
   width:100%;
+  margin-left: 10px;
+  padding: 10px 10px;
+  display: flex;
+      align-items: center;
+      justify-content: center;
+      /*margin: 10px;*/
+      font-size: 30px;
+      border-radius: 4px;
       height: 58px;
- /* margin: 10px;*/
+      cursor: pointer;
 }
 
     .header-buttons {
