@@ -36,7 +36,7 @@ document.getElementById("topicSelector").addEventListener("change", (e) => {
 document.getElementById("startBtn").addEventListener("click", startSession);
 document.getElementById("nextBtn").addEventListener("click", nextWord);
 document.getElementById("prevBtn").addEventListener("click", prevWord);
-document.getElementById("completeBtn").addEventListener("click", completeSession);
+//document.getElementById("completeBtn").addEventListener("click", completeSession);
 document.getElementById("restartBtn").addEventListener("click", () => showScreen("study"));
 document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
