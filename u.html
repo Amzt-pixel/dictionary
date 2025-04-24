@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vocabulary Study App</title>
+  <link rel="stylesheet" href="styles.css">
+  </style>
+</head>
+<body>
+
+  <div id="setupScreen" class="screen visible">
+    <h1>Dictionary v3.1</h1>
+    <p>Synonyms and Antonyms</p>
+    
+    <!--<h1>Setup</h1>-->
+    <select id="csvSelector"></select>
+    <select id="topicSelector">
+      <option value="">Select Mode</option>
+      <option value="alphabetic">Alphabetical (A-Z)</option>
+      <option value="reverse">Reverse Alphabetical (Z-A)</option>
+      <option value="Random">Random</option>
+    </select>
+    <div>
+    <button id="startBtn" disabled>Start</button>
+    </div>
+  </div>
+
+  <div id="studyScreen" class="screen">
+  <!-- <div class="search-container">
+  <input type="text" id="wordSearch" placeholder="Enter at least 3 letters..." autocomplete="off">
+  <button>Look Up</button>    
+  <button id="clearSearch" class="hidden">Close</button>
+</div> -->
+    <div class="search-container">
+  <input type="text" id="wordSearch" class="search-box" placeholder="Search in Dictionary" autocomplete="off">
+ <!--<button class="searchBar-button">Search</button>   
+      <button id="infoButton">ⓘ⌕</button> -->
+  <button id="clearSearch" class="searchBar-button">⌕</button>
+    </div>
+<div id="searchResults" class="hidden">
+  <div id="noResultsMessage" class="search-no-results hidden">No word found...</div>
+  <div id="exactMatchSection" class="hidden">
+    <h4>Exact Match</h4>
+    <div id="exactMatch"></div>
+  </div>
+  <div id="closeMatchesSection" class="hidden">
+    <h4>Close Matches</h4>
+    <div id="closeMatches"></div>
+  </div>
+  <div id="wordsLocatedSection" class="hidden">
+  <h4>Words Located</h4>
+  <div id="wordsLocated"></div>
+  </div>
+  <div id="wordsFoundSection" class="hidden">
+  <h4>Words Found</h4>
+  <div id="wordsFound"></div>
+  </div>
+</div>
+    <div class="top-bar">
+      <div>
+        <button id="clock" class="clockButton">Time: </button>
+      </div>
+      <!--
+      <div id="metaInfo">
+  <p id="wordOrder"></p>
+  <p id="wordTotal"></p>
+  <p id="modeDisplay"></p>
+  <p id="questionCount"></p>
+        <div id="listNameDisplay" class="info-item">List: Loading...</div>
+<div id="wordSetsDisplay" class="info-item">Word Sets: Calculating...</div>
+      </div>
+      -->
+      <div>
+      <button id="completeBtn">Complete</button>
+      <button id="meta">Metainfo</button> 
+      </div>
+    </div>
+    <!-- Replace your existing search bar (in studyScreen div) with this: -->
+
+
+<!-- Add these right before </body> -->
+<!-- Bootstrap JS -->
+    <div class="rootWordBox">
+      <div class="label" id="wordOrderDisplay"></div>
+      <button id="wordDisplay" class="rootWordButton"></button>
+    </div>
+    <div class="word-card">
+  <!--   <div class="label">Word:</div>
+      <div id="wordDisplay"></div>
+      <div class="label">Synonyms:</div>
+      <div id="synDisplay"></div>
+      <div class="label">Antonyms:</div>
+      <div id="antDisplay"></div> -->
+      
+     <!-- <div class="label" id="wordOrderDisplay"></div>
+      <button id="wordDisplay" class="rootWordButton"></button> -->
+
+<div class="label" id="synLabel"></div>
+<div id="synDisplay"></div>
+
+<div class="label" id="antLabel"></div>
+<div id="antDisplay"></div>
+    </div>
+    <div>
+    <select id="stepSelector">
+      <option value="1">Step 1 and -1</option>
+      <option value="5">Step 5 and -5</option>
+      <option value="10">Step 10 and -10</option>
+      <option value="25">Step 25 and -25</option>
+      <option value="100">Step 100 and -100</option>  
+    </select>
+    </div>  
+
+    <div class="footer-buttons">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <div id="completeScreen" class="screen">
+    <h1>Study Session Complete</h1>
+    <div id="sessionStats"></div>
+    <div class="footer-buttons">
+      <button id="restartBtn">Restart</button>
+      <button id="goHomeBtn">Home</button>
+    </div>
+  </div>
+  <!-- Add this popup div just before closing body tag -->
+<script src="dictionari.js"></script>
+
+</body>
+</html>
