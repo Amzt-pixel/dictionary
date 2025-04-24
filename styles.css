@@ -57,14 +57,14 @@ body {
       cursor: not-allowed;
     }
     .metabutton {
-      padding: 10px 15px;
+      padding: 10px 10px;
       margin: 10px;
-      font-size: 20px;
-      border: 1px solid #1d4e89;
+      font-size: 36px;
+      border: 2px solid #1d4e89;
       border-radius: 4px;
-      color: #7dcfb6;
+      background-color: #7dcfb6;
       font-weight: 700;
-      background-color: #1d4e89;
+      color: #1d4e89;
       cursor: pointer;
       display: inline-block;
     }
