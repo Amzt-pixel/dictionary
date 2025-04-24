@@ -305,3 +305,18 @@ body {
   background-color: #7dcfb6 !important; /* Light fade green for hold effect */
   color: white;
 }
+/* Add to your existing CSS */
+#prevBtn, #nextBtn {
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth color/scale change */
+}
+
+/* Active/Hold states */
+#prevBtn.holding {
+  background-color: #ffcccb; /* Light red for Previous */
+  transform: scale(0.98);    /* Slight "pressed" effect */
+}
+
+#nextBtn.holding {
+  background-color: #cbe4cb; /* Light green for Next */
+  transform: scale(0.98);
+}
