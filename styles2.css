@@ -147,12 +147,12 @@ body {
 }
 #synLabel {
       font-size: 20px !important; /* Forces uniform size */
-  color: #001a33;
+  color: #fff;
   font-weight: 600;
 }
 #antLabel {
       font-size: 20px !important; /* Forces uniform size */
-  color: #001a33;
+  color: #fff;
   font-weight: 600;
 }
 /*
