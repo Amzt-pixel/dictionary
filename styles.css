@@ -71,10 +71,10 @@ body {
     .metabutton {
           
       padding: 10px 10px;
-      display: flex;
+      display: inline-block;
       align-items: center;
       justify-content: center;
-      /*margin: 10px;*/
+      margin-top: 20px;
       font-size: 30px;
       border: 2px solid #1d4e89;
       border-radius: 4px;
@@ -95,14 +95,13 @@ body {
 .clockButton {
   background-color:#ffcc80;
   border: 2px solid #1d4e89;
-  width:100%;
-  margin-left: 10px;
+  width:90%;
+ /* margin-left: 10px;*/
   padding: 10px 10px;
-  display: flex;
+  display: inline-block;
       align-items: center;
       justify-content: center;
-      /*margin: 10px;*/
-      font-size: 30px;
+      margin-top: 20px;
       border-radius: 4px;
       height: 50px;
       cursor: pointer;
