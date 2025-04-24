@@ -57,11 +57,12 @@ body {
       cursor: not-allowed;
     }
     .metabutton {
-      padding: 10px 10px;
-      margin: 10px;
-      font-size: 36px;
+      /*padding: 10px 10px;
+      margin: 10px;*/
+      font-size: 30px;
       border: 2px solid #1d4e89;
       border-radius: 4px;
+      height: 38px;
       background-color: #7dcfb6;
       font-weight: 700;
       color: #1d4e89;
@@ -70,25 +71,16 @@ body {
     }
 
     .clock-section {
-          display: flex;
-          justify-content: center;
-    }
-
-    .header-buttons {
-          display: flex;
-          justify-content: flex-end;
-    }
-
-.search-container { 
-  margin: 0px 0;
+          margin: 0px 0;
   display: flex;
   align-items: center; /* Fixes vertical misalignment */
   gap: 5px;
-  background: #1d4e89;
   padding: 5px;
   border-radius: 4px;
-}
-
+          display: flex;
+          justify-content: center;
+          height: 38px;
+    }
 #clock{
       text-align: center;
       /*color: red;*/
@@ -100,8 +92,25 @@ body {
   background-color:#ffcc80;
   border: 2px solid #1d4e89;
   width:100%;
-  margin: 10px;
+      height: 38px;
+ /* margin: 10px;*/
 }
+
+    .header-buttons {
+          display: flex;
+          justify-content: flex-end;
+    }
+
+.search-container { 
+  margin: 0px 0;
+  display: flex;
+  align-items: center; /* Fixes vertical misalignment */
+  gap: 5px;
+  background-color: #1d4e89;
+  padding: 5px;
+  border-radius: 4px;
+}
+
 /*input[type="text"]*/
 .search-box{
   padding: 10px;
