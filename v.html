@@ -27,15 +27,8 @@
   </div>
 
   <div id="studyScreen" class="screen">
-  <!-- <div class="search-container">
-  <input type="text" id="wordSearch" placeholder="Enter at least 3 letters..." autocomplete="off">
-  <button>Look Up</button>    
-  <button id="clearSearch" class="hidden">Close</button>
-</div> -->
     <div class="search-container">
   <input type="text" id="wordSearch" class="search-box" placeholder="Search in Dictionary" autocomplete="off">
- <!--<button class="searchBar-button">Search</button>   
-      <button id="infoButton">ⓘ⌕</button> -->
   <button id="clearSearch" class="searchBar-button">⌕</button>
     </div>
 <div id="searchResults" class="hidden">
@@ -61,25 +54,13 @@
       <div>
         <button id="clock" class="clockButton">Time: </button>
       </div>
-      <!--
-      <div id="metaInfo">
-  <p id="wordOrder"></p>
-  <p id="wordTotal"></p>
-  <p id="modeDisplay"></p>
-  <p id="questionCount"></p>
-        <div id="listNameDisplay" class="info-item">List: Loading...</div>
-<div id="wordSetsDisplay" class="info-item">Word Sets: Calculating...</div>
-      </div>
-      -->
-      <div>
+      <div class="header-buttons>
       <button id="completeBtn">Complete</button>
          <button id="infoButton">ⓘ</button>
-      <button id="meta">Metainfo</button>
+      <button id="meta" class="metabutton">Metainfo</button>
       </div>
     </div>
-    <!-- Replace your existing search bar (in studyScreen div) with this: -->
-
-
+    
 <!-- Add these right before </body> -->
 <!-- Bootstrap JS -->
     <div class="rootWordBox">
@@ -87,16 +68,6 @@
       <button id="wordDisplay" class="rootWordButton"></button>
     </div>
     <div class="word-card">
-  <!--   <div class="label">Word:</div>
-      <div id="wordDisplay"></div>
-      <div class="label">Synonyms:</div>
-      <div id="synDisplay"></div>
-      <div class="label">Antonyms:</div>
-      <div id="antDisplay"></div> -->
-      
-     <!-- <div class="label" id="wordOrderDisplay"></div>
-      <button id="wordDisplay" class="rootWordButton"></button> -->
-
 <div class="label" id="synLabel"></div>
 <div id="synDisplay"></div>
 
