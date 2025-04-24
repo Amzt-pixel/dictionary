@@ -9,6 +9,10 @@ let timerInterval;
 let isSearchActive = false;
 let stepNumber = 1;
 let resultsVisible = false;
+let prevHoldTimer = null;
+let nextHoldTimer = null;
+const HOLD_DURATION = 1000; // 1 second
+
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
@@ -48,6 +52,20 @@ document.getElementById("infoButton").addEventListener("click", function() {
 );
 });
 document.getElementById("meta").addEventListener("click", showMetadata);
+
+document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
+document.getElementById("prevBtn").addEventListener("mouseup", clearPrevHold);
+document.getElementById("prevBtn").addEventListener("mouseleave", clearPrevHold);
+document.getElementById("prevBtn").addEventListener("touchstart", startPrevHold);
+document.getElementById("prevBtn").addEventListener("touchend", clearPrevHold);
+document.getElementById("prevBtn").addEventListener("touchcancel", clearPrevHold);
+
+document.getElementById("nextBtn").addEventListener("mousedown", startNextHold);
+document.getElementById("nextBtn").addEventListener("mouseup", clearNextHold);
+document.getElementById("nextBtn").addEventListener("mouseleave", clearNextHold);
+document.getElementById("nextBtn").addEventListener("touchstart", startNextHold);
+document.getElementById("nextBtn").addEventListener("touchend", clearNextHold);
+document.getElementById("nextBtn").addEventListener("touchcancel", clearNextHold);
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -766,4 +784,45 @@ function displayWord() {
 
 function showMetadata() {
   alert("Here's the metadata");
+}
+// Previous Button Hold Functions
+function startPrevHold() {
+  document.getElementById("prevBtn").classList.add("holding"); // Visual feedback
+  prevHoldTimer = setTimeout(() => {
+    const confirmFirst = confirm("Go to first question?");
+    document.getElementById("prevBtn").classList.remove("holding"); // Reset
+    if (confirmFirst) {
+      currentIndex = 0;
+      wordsSeen++;
+      displayWord();
+    }
+  }, HOLD_DURATION);
+}
+
+function clearPrevHold() {
+  document.getElementById("prevBtn").classList.remove("holding"); // Reset if released early
+  if (prevHoldTimer) {
+    clearTimeout(prevHoldTimer);
+    prevHoldTimer = null;
+  }
+}
+
+// Next Button Hold Functions
+function startNextHold() {
+  document.getElementById("nextBtn").classList.add("holding"); // Visual feedback
+  nextHoldTimer = setTimeout(() => {
+    const confirmFinish = confirm("Are you sure you want to finish?");
+    document.getElementById("nextBtn").classList.remove("holding"); // Reset
+    if (confirmFinish) {
+      completeSession();
+    }
+  }, HOLD_DURATION);
+}
+
+function clearNextHold() {
+  document.getElementById("nextBtn").classList.remove("holding"); // Reset if released early
+  if (nextHoldTimer) {
+    clearTimeout(nextHoldTimer);
+    nextHoldTimer = null;
+  }
 }
