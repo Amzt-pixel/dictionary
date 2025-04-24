@@ -68,10 +68,12 @@ body {
       cursor: pointer;
       display: inline-block;
     }
+/*
     .clock-section {
           display: flex;
           justify-content: center;
     }
+*/
     .header-buttons {
           display: flex;
           justify-content: flex-end;
