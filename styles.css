@@ -87,8 +87,8 @@ body {
     }
 
 #clock{
-      /*color: red;*/
-      color: #1d4e89;
+      color: red;
+     /* color: #1d4e89;*/
       font-weight: 800;
       font-size: 20px;
 }
