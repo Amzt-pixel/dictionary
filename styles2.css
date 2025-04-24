@@ -1,0 +1,273 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .screen {
+      display: none;
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .visible {
+      display: block;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      background-color: #ffcc80;
+      color: #001a33;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 2px solid #1d4e89;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 10px;
+      font-size: 20px;
+      border: 1px solid #1d4e89;
+      border-radius: 4px;
+      /*background-color: steelblue;*/
+      background-color: #7dcfb6;
+      font-weight: 700;
+      color: #1d4e89;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      color: #001a33;
+      cursor: not-allowed;
+    }
+
+.search-container { 
+  margin: 0px 0;
+  display: flex;
+  align-items: center; /* Fixes vertical misalignment */
+  gap: 5px;
+  background: #1d4e89;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+#clock{
+      text-align: center;
+      /*color: red;*/
+      color: #1d4e89;
+      display: inline-block;
+      font-weight: 800;
+}
+.clockButton {
+  background-color:#ffcc80;
+  border: 2px solid #1d4e89;
+}
+/*input[type="text"]*/
+.search-box{
+  padding: 10px;
+  margin-left: 10px;
+  width: 90%;
+  max-width: 90%;
+  font-size: 20px;
+  color: #001a33;
+  font-weight: 400;
+  border: 2px solid #ffcc80;
+  background-color: #fff;
+  border-radius: 4px;
+  height: 38px; /* Matches button height */
+  box-sizing: border-box;
+}
+
+.searchBar-button {
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: semi-bold;
+  border: none;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #ffcc80;
+  color: white;
+  cursor: pointer;
+  height: 38px; /* Matches input height */
+ /* box-sizing: border-box; */
+}
+.search-no-results {
+  padding: 10px;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
+/*
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+*/
+    .word-card {
+      padding: 15px 20px;
+      padding-top: 5px;
+      border: 2px solid #001a33;
+      border-radius: 4px;
+      margin: 20px 0px;
+      background-color: #fff;
+      max-height: 450px;
+      overflow-y: auto;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+#wordOrderDisplay, #synLabel, #antLabel, .word-card div {
+  font-size: 20px !important; /* Forces uniform size */
+  color: #001a33;
+  font-weight: 600;
+  line-height: 1.5; /* Prevents layout shifts */
+  word-break: break-word; /* Handles long words gracefully */
+}
+
+    @media (max-width: 600px) {
+      .top-bar, .footer-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #searchBar {
+        width: 100%;
+      }
+}
+/*.search-container { 
+  margin: 10px 0; 
+  display: flex;
+  gap: 5px;
+}*/
+#searchResults { 
+  border: 1px solid #1d4e89;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #fff;
+  max-height: 300px;
+  overflow-y: auto;
+}
+#exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
+  margin-left: 10px;
+  color: #001a33;
+}
+.search-result-item {
+  size: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.search-result-item:hover {
+  background: #f79256;
+  font-weight: 600;
+}
+.hidden { display: none; }
+
+/* Word buttons styling */
+.root-word {
+  font-size: 20px;
+  color: #ffcc80;
+  /*background-color: #92c8ed;*/
+/*  margin-top: 10px;*/
+  padding: 5px 0px;
+  
+ /* display: inline-block;*/
+}
+.rootWordBox{
+  padding: 15px 20px;
+  padding-top: 5px;
+  border: 2px solid #001a33;
+  border-radius: 4px;
+  margin: 20px 0px;
+  background-color: #80d9ff;
+  max-height: 450px;
+  overflow-y: auto;
+}
+.rootWordButton{
+  background-color:#1d4e89;
+  border-radius: 4px;
+  border: 1px solid #7dcfb6;
+  padding: 5px 10px;
+  margin: 3px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px !important;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  border: 1px solid #1d4e89;
+}
+  
+.word-button {
+  padding: 5px 10px;
+  margin: 3px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px !important;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  /*box-shadow: 0 2px 3px rgba(0,0,0,0.1);*/
+      
+}
+
+.synonym {
+  background-color: #ffcc80;
+  color: #001a33;
+  font-size: 20px;
+  border: 1px solid #1d4e89;
+}
+
+.antonym {
+  background-color: #7dcfb6;
+  color: #001a33;
+  font-size: 20px;
+  border: 1px solid #1d4e89;
+}
+
+.word-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.word-button:active {
+  transform: translateY(0);
+}
+
+.no-words {
+  color: #001a33;
+  font-size: 20px;
+  margin-left: 10px;
+  /*font-style: italic;*/
+}
+.search-button-hold {
+  background-color: #7dcfb6 !important; /* Light fade green for hold effect */
+  color: white;
+}
