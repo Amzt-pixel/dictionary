@@ -140,13 +140,30 @@ body {
       margin-top: 10px;
     }
 
-#wordOrderDisplay, #synLabel, #antLabel, .word-card div {
-  font-size: 20px !important; /* Forces uniform size */
+#wordOrderDisplay {
+      font-size: 20px !important; /* Forces uniform size */
   color: #001a33;
   font-weight: 600;
-  line-height: 1.5; /* Prevents layout shifts */
-  word-break: break-word; /* Handles long words gracefully */
 }
+#synLabel {
+      font-size: 20px !important; /* Forces uniform size */
+  color: #001a33;
+  font-weight: 600;
+}
+#antLabel {
+      font-size: 20px !important; /* Forces uniform size */
+  color: #001a33;
+  font-weight: 600;
+}
+/*
+.word-card div {
+  font-size: 20px !important; 
+  color: #001a33;
+  font-weight: 600;
+  line-height: 1.5; 
+  word-break: break-word; 
+}
+*/
 
     @media (max-width: 600px) {
       .top-bar, .footer-buttons {
