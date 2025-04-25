@@ -58,9 +58,16 @@ body {
     }
 
    .footer-buttons button {
-         width: 42%;
-         margin : 10px 0px;
+         width: 44%;
+         margin : 0px 0px;
    }
+   .footer-buttons 
+   {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+   }
+
    /* .clock-section {
           margin: 0px 0;
           margin-top: 30px;
