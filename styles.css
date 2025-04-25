@@ -73,6 +73,7 @@ body {
 .header-buttons {
           display: flex;
           justify-content:/*flex-end*/space-between;
+          margin: 20px 0px;
 }
 
    /* .clock-section {
