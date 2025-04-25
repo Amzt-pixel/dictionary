@@ -59,6 +59,7 @@ body {
 
    .footer-buttons button {
          width: 42%;
+         margin : 10px 0px;
    }
    /* .clock-section {
           margin: 0px 0;
