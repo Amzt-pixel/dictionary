@@ -206,11 +206,6 @@ body {
 }
 
     @media (max-width: 600px) {
-      .top-bar, .footer-buttons {
-        flex-direction: column;
-        gap: 10px;
-      }
-
       #searchBar {
         width: 100%;
       }
