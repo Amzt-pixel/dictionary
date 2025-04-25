@@ -214,6 +214,14 @@ body {
       #searchBar {
         width: 100%;
       }
+       .clockButton{
+                width: 75%;
+          }
+      .footer-buttons button {
+         width: 40%; 
+         margin : 0px 0px;
+      }
+      
 }
 /*.search-container { 
   margin: 10px 0; 
