@@ -58,7 +58,7 @@ body {
     }
 
    .footer-buttons button {
-         width: 44%;
+ /*        width: 44%; */
          margin : 0px 0px;
    }
    .footer-buttons 
@@ -106,7 +106,7 @@ body {
 .clockButton {
   background-color:#ffcc80;
   border: 2px solid #1d4e89;
-  width:85%;
+ /* width:85%;*/
  /* margin-left: 10px;*/
       padding: 10px 15px;
        margin: 10px;
