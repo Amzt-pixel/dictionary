@@ -58,7 +58,7 @@ body {
     }
 
    .footer-buttons button {
-         width: 45%; 
+         width: 48%; 
          margin : 0px 0px;
    }
    .footer-buttons 
@@ -170,6 +170,7 @@ body {
 .search-no-results {
   padding: 10px;
   color: #666;
+  font-size:20px;
   text-align: center;
   font-style: italic;
 }
@@ -237,13 +238,13 @@ body {
   color: #001a33;
 }
 .search-result-item {
-  size: 20px;
+  font-size: 20px;
   padding: 5px;
   padding-left: 10px;
   cursor: pointer;
 }
 .search-result-item:hover {
-  background: #f79256;
+  background: #ffcc80;
   font-weight: 600;
 }
 .hidden { display: none; }
