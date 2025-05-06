@@ -561,7 +561,7 @@ function displayWord() {
 }
 
 function showMetadata() {
-  alert('List Name: ${csvName} \nMode: ${selectedMode} \nWord Sets: ${wordSetsCount} \nTotal Words: ${studyList.length} \nWords Seen: ${wordsSeen}');
+  alert(`List Name: ${csvName} \nMode: ${selectedMode} \nWord Sets: ${wordSetsCount} \nTotal Words: ${studyList.length} \nWords Seen: ${wordsSeen}`);
 }
 // Previous Button Hold Functions
 function startPrevHold() {
