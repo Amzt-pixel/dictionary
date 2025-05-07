@@ -316,7 +316,7 @@ function nextWord() {
     const nextRootWord = rootWordList[currentRootIndex + 1];
 
     if (!nextRootWord) {
-      alert("Reached the end of root words!");
+      alert("Reached the end of rootWordList");
       return;
     }
     const nextId = nextRootWord.NumId;
