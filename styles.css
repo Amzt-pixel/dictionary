@@ -235,8 +235,8 @@ body {
       }
       .search-box{
   
-  width: 92%;
-  max-width: 92%;
+  width: 95%;
+  max-width: 100%;
   
       }
 }
