@@ -182,15 +182,20 @@ function startSession() {
 }
 
 function getRootWords(list) {
-  const seenNumIds = new Set();
   const rootWords = [];
+  const blockedNumIds = new Set(); // Tracks ALL forbidden NumIds (synonyms/antonyms)
 
   for (const word of list) {
-    const id = word.NumId;
-    if (!seenNumIds.has(id) && !seenNumIds.has(-id)) {
-      rootWords.push(word);
-      seenNumIds.add(id);
+    const currentNumId = word.NumId;
+    
+    // Skip if NumId or its opposite is already blocked
+    if (blockedNumIds.has(currentNumId) || blockedNumIds.has(-currentNumId)) {
+      continue;
     }
+
+    // Add the word to rootWords and block its NumId
+    rootWords.push(word);
+    blockedNumIds.add(currentNumId);
   }
 
   return rootWords;
@@ -223,7 +228,7 @@ function prevWord() {
   }
 }
 
-/*
+/* ORG version
 function nextWord() {
   if (currentIndex === studyList.length - 1) {
     alert("All words studied!");
@@ -243,7 +248,7 @@ function nextWord() {
   displayWord();
 }
 */
-
+/* Last version
 function nextWord() {
   if (stepNumber === 0) {
     const currentWord = studyList[currentIndex];
@@ -288,7 +293,68 @@ function nextWord() {
   wordsSeen++;
   displayWord();
 }
+*/
+function nextWord() {
+  if (stepNumber === 0) {
+    // --- Start of custom logic for stepNumber = 0 ---
+    const currentWord = studyList[currentIndex];
+    const currentId = currentWord.NumId;
 
+    // Step 3: Find the corresponding root word (synonym/antonym)
+    const currentRootWord = rootWordList.find(word => 
+      word.NumId === currentId || word.NumId === -currentId
+    );
+
+    if (!currentRootWord) {
+      alert("No matching root word found!");
+      return;
+    }
+
+    // Step 4: Get the next root word's NumId
+    const currentRootIndex = rootWordList.indexOf(currentRootWord);
+    if (currentRootIndex === rootWordList.length - 1) {
+      alert("Reached the end of root words!");
+      return;
+    }
+    const nextRootWord = rootWordList[currentRootIndex + 1];
+    const nextId = nextRootWord.NumId;
+
+    // Step 5: Find the nearest next match in studyList
+    let nextStudyIndex = -1;
+    for (let i = currentIndex + 1; i < studyList.length; i++) {
+      const word = studyList[i];
+      if (word.NumId === nextId || word.NumId === -nextId) {
+        nextStudyIndex = i;
+        break;
+      }
+    }
+
+    if (nextStudyIndex === -1) {
+      alert("No next matching word found in study list!");
+      return;
+    }
+
+    // Step 6: Update currentIndex
+    currentIndex = nextStudyIndex;
+    wordsSeen++;
+    displayWord();
+    // --- End of custom logic ---
+
+  } else {
+    // --- Original logic for stepNumber != 0 ---
+    if (currentIndex === studyList.length - 1) {
+      alert("All words studied!");
+      return;
+    } else if (currentIndex + stepNumber > studyList.length - 1) {
+      alert("Reduce step!");
+      return;
+    } else {
+      currentIndex += stepNumber;
+      wordsSeen++;
+      displayWord();
+    }
+  }
+}
 function completeSession() {
   const confirmQuit = confirm("Are you sure you want to quit?");
   if (!confirmQuit) return; // Exit if user cancels
