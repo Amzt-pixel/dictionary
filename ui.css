@@ -136,6 +136,18 @@ body {
       #searchBar {
         width: 100%;
       }
+          .search-box{
+  padding: 10px;
+  width: 90%;
+  max-width: 90%;
+  font-size: 16px;
+  color: #202060;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 4px;
+  height: 38px; /* Matches button height */
+  box-sizing: border-box;
+          }
 }
 /*.search-container { 
   margin: 10px 0; 
