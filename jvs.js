@@ -687,10 +687,21 @@ function displayWord() {
     });
   });
 }
-
+/*
 function showMetadata() {
   alert(`List Name: ${csvName} \nMode: ${selectedMode} \nWord Sets: ${wordSetsCount} \nTotal Words: ${studyList.length} \nWords Seen: ${wordsSeen}`);
 }
+*/
+function showMetadata() {
+  const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
+  alert(`List Name: ${csvName} 
+Mode: ${selectedMode} 
+Word Sets: ${wordSetsCount} 
+Total Words: ${studyList.length} 
+Words Seen: ${wordsSeen}
+Root Word List: ${rootStatus}`);
+}
+
 // Previous Button Hold Functions
 function startPrevHold() {
   document.getElementById("prevBtn").classList.add("holding"); // Visual feedback
