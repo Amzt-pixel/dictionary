@@ -205,19 +205,25 @@ function calculateWordSets() {
 }
 
 function prevWord() {
+  if (stepNumber === 0) {
+    alert("Unavailable");
+    return;
+  }
+  else{
   if (currentIndex === 0) return;
   else if(currentIndex + 1 > stepNumber) {
     currentIndex=currentIndex - stepNumber;
   }
   else {
     alert("Reduce step");
-    retun;
+    return;
   }
   wordsSeen++;
   displayWord();
+  }
 }
 
-
+/*
 function nextWord() {
   if (currentIndex === studyList.length - 1) {
     alert("All words studied!");
@@ -236,7 +242,52 @@ function nextWord() {
   wordsSeen++;
   displayWord();
 }
+*/
+function nextWord() {
+  if (stepNumber === 0) {
+    const currentWord = studyList[currentIndex];
+    const currentId = currentWord.NumId;
 
+    // Find currentRootWord in rootWordList
+    const currentRootIndex = rootWordList.findIndex(
+      word => word.NumId === currentId || word.NumId === -currentId
+    );
+
+    // If no matching root word or it's the last root word
+    if (currentRootIndex === -1 || currentRootIndex === rootWordList.length - 1) {
+      alert("All root words studied!");
+      return;
+    }
+
+    const nextRootWord = rootWordList[currentRootIndex + 1];
+    const nextId = nextRootWord.NumId;
+
+    // Find next word in studyList with matching or opposite NumId, after currentIndex
+    const nextStudyIndex = studyList.findIndex((word, i) =>
+      i > currentIndex && (word.NumId === nextId || word.NumId === -nextId)
+    );
+
+    if (nextStudyIndex === -1) {
+      alert("No more matching words found!");
+      return;
+    }
+
+    currentIndex = nextStudyIndex;
+  } else {
+    if (currentIndex === studyList.length - 1) {
+      alert("All words studied!");
+      return;
+    } else if (currentIndex + stepNumber > studyList.length - 1) {
+      alert("Reduce step!");
+      return;
+    } else {
+      currentIndex = currentIndex + stepNumber;
+    }
+  }
+
+  wordsSeen++;
+  displayWord();
+}
 
 function completeSession() {
   const confirmQuit = confirm("Are you sure you want to quit?");
