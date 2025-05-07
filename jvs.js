@@ -694,9 +694,9 @@ function showMetadata() {
 */
 function showMetadata() {
   const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
-  alert(`List Name: ${csvName} 
-Mode: ${selectedMode} 
-Word Sets: ${wordSetsCount} 
+  alert(`Word Set: ${csvName} 
+Chosen Mode: ${selectedMode} 
+Root Words: ${wordSetsCount} 
 Total Words: ${studyList.length} 
 Words Seen: ${wordsSeen}
 Root Word List: ${rootStatus}`);
