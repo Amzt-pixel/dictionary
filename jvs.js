@@ -294,32 +294,34 @@ function nextWord() {
   displayWord();
 }
 */
+
 function nextWord() {
   if (stepNumber === 0) {
-    // --- Start of custom logic for stepNumber = 0 ---
+    // --- Custom logic for stepNumber = 0 ---
     const currentWord = studyList[currentIndex];
     const currentId = currentWord.NumId;
 
-    // Step 3: Find the corresponding root word (synonym/antonym)
+    // Step 3: Find matching root word (synonym/antonym)
     const currentRootWord = rootWordList.find(word => 
       word.NumId === currentId || word.NumId === -currentId
     );
 
     if (!currentRootWord) {
-      alert("No matching root word found!");
+      alert("Current word has no root word in the list!");
       return;
     }
 
-    // Step 4: Get the next root word's NumId
+    // Step 4: Get the next root word's NumId (if exists)
     const currentRootIndex = rootWordList.indexOf(currentRootWord);
-    if (currentRootIndex === rootWordList.length - 1) {
+    const nextRootWord = rootWordList[currentRootIndex + 1];
+
+    if (!nextRootWord) {
       alert("Reached the end of root words!");
       return;
     }
-    const nextRootWord = rootWordList[currentRootIndex + 1];
     const nextId = nextRootWord.NumId;
 
-    // Step 5: Find the nearest next match in studyList
+    // Step 5: Find nearest match in studyList AFTER currentIndex
     let nextStudyIndex = -1;
     for (let i = currentIndex + 1; i < studyList.length; i++) {
       const word = studyList[i];
@@ -334,27 +336,27 @@ function nextWord() {
       return;
     }
 
-    // Step 6: Update currentIndex
+    // Step 6: Update index and display
     currentIndex = nextStudyIndex;
     wordsSeen++;
     displayWord();
-    // --- End of custom logic ---
 
   } else {
     // --- Original logic for stepNumber != 0 ---
-    if (currentIndex === studyList.length - 1) {
+    if (currentIndex >= studyList.length - 1) {
       alert("All words studied!");
       return;
-    } else if (currentIndex + stepNumber > studyList.length - 1) {
+    }
+    if (currentIndex + stepNumber > studyList.length - 1) {
       alert("Reduce step!");
       return;
-    } else {
-      currentIndex += stepNumber;
-      wordsSeen++;
-      displayWord();
     }
+    currentIndex += stepNumber;
+    wordsSeen++;
+    displayWord();
   }
 }
+
 function completeSession() {
   const confirmQuit = confirm("Are you sure you want to quit?");
   if (!confirmQuit) return; // Exit if user cancels
