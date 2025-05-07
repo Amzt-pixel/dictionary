@@ -11,6 +11,8 @@ let stepNumber = 1;
 let resultsVisible = false;
 let prevHoldTimer = null;
 let nextHoldTimer = null;
+let csvName = null;
+let wordSetsCount = 123;
 const HOLD_DURATION = 1000; // 1 second
 
 // Initialize app
@@ -164,10 +166,10 @@ function startSession() {
   // Get the selected CSV name
   const csvSelector = document.getElementById("csvSelector");
   const selectedOption = csvSelector.options[csvSelector.selectedIndex];
-  const csvName = selectedOption.dataset.name || "Current List";
+  csvName = selectedOption.dataset.name || "Current List";
 
   // Calculate word sets
-  const wordSetsCount = calculateWordSets();
+  wordSetsCount = calculateWordSets();
 /*
   // Update the display
   document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
