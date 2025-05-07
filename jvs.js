@@ -299,11 +299,11 @@ function nextWord() {
   if (stepNumber === 0) {
     // Get current word and its ID
     const currentWord = studyList[currentIndex];
-    const currentId = currentWord.NumId;
+    const currentId = currentWord.id;
 
     // Find the corresponding root word (checks both ID and -ID)
     const currentRootIndex = rootWordList.findIndex(word => 
-      Math.abs(word.NumId) === Math.abs(currentId)
+      Math.abs(word.id) === Math.abs(currentId)
     );
 
     if (currentRootIndex === -1) {
@@ -313,11 +313,11 @@ function nextWord() {
 
     // Search for the next available match
     for (let i = currentRootIndex + 1; i < rootWordList.length; i++) {
-      const targetId = rootWordList[i].NumId;
+      const targetId = rootWordList[i].id;
       
       // Find first studyList match AFTER current position
       const nextMatch = studyList.slice(currentIndex + 1).find(word =>
-        Math.abs(word.NumId) === Math.abs(targetId)
+        Math.abs(word.id) === Math.abs(targetId)
       );
 
       if (nextMatch) {
