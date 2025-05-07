@@ -2,6 +2,7 @@ let csvData = [];
 let selectedCSVUrl = "";
 let selectedMode = "alphabetic";
 let studyList = [];
+let rootWordList = [];
 let currentIndex = 0;
 let wordsSeen = 0;
 let startTime = null;
@@ -170,6 +171,7 @@ function startSession() {
 
   // Calculate word sets
   wordSetsCount = calculateWordSets();
+  rootWordList = getRootWords(studyList);
 /*
   // Update the display
   document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
@@ -177,6 +179,21 @@ function startSession() {
 */
   showScreen("study");
   displayWord();
+}
+
+function getRootWords(list) {
+  const seenNumIds = new Set();
+  const rootWords = [];
+
+  for (const word of list) {
+    const id = word.NumId;
+    if (!seenNumIds.has(id) && !seenNumIds.has(-id)) {
+      rootWords.push(word);
+      seenNumIds.add(id);
+    }
+  }
+
+  return rootWords;
 }
 
 function calculateWordSets() {
