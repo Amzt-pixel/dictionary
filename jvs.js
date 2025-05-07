@@ -297,52 +297,59 @@ function nextWord() {
 
 function nextWord() {
   if (stepNumber === 0) {
-    // --- Custom logic for stepNumber = 0 ---
+    // Get current word and its ID
     const currentWord = studyList[currentIndex];
     const currentId = currentWord.NumId;
 
-    // Step 3: Find matching root word (synonym/antonym)
-    const currentRootWord = rootWordList.find(word => 
+    // Find all possible root words (synonyms/antonyms)
+    const possibleRootWords = rootWordList.filter(word => 
       word.NumId === currentId || word.NumId === -currentId
     );
 
-    if (!currentRootWord) {
-      alert("Current word has no root word in the list!");
+    if (possibleRootWords.length === 0) {
+      alert("Current word has no associated root word!");
       return;
     }
 
-    // Step 4: Get the next root word's NumId (if exists)
-    const currentRootIndex = rootWordList.indexOf(currentRootWord);
-    const nextRootWord = rootWordList[currentRootIndex + 1];
+    // Find the next root word that has a match in studyList
+    let nextValidIndex = -1;
+    let nextRootWord = null;
 
-    if (!nextRootWord) {
-      alert("Reached the end of rootWordList");
-      return;
-    }
-    const nextId = nextRootWord.NumId;
-
-    // Step 5: Find nearest match in studyList AFTER currentIndex
-    let nextStudyIndex = -1;
-    for (let i = currentIndex + 1; i < studyList.length; i++) {
-      const word = studyList[i];
-      if (word.NumId === nextId || word.NumId === -nextId) {
-        nextStudyIndex = i;
-        break;
+    // Search through rootWordList for the next valid match
+    for (let i = 0; i < rootWordList.length; i++) {
+      const rootWord = rootWordList[i];
+      // Skip until we pass all possibleRootWords
+      if (!possibleRootWords.some(rw => rw === rootWord)) continue;
+      
+      // Check remaining root words
+      for (let j = i + 1; j < rootWordList.length; j++) {
+        const potentialNext = rootWordList[j];
+        // Check if this root word has a match in studyList after currentIndex
+        const matchIndex = studyList.findIndex((word, idx) => 
+          idx > currentIndex && 
+          (word.NumId === potentialNext.NumId || word.NumId === -potentialNext.NumId)
+        );
+        
+        if (matchIndex !== -1) {
+          nextValidIndex = matchIndex;
+          nextRootWord = potentialNext;
+          break;
+        }
       }
+      if (nextValidIndex !== -1) break;
     }
 
-    if (nextStudyIndex === -1) {
-      alert("No next matching word found in study list!");
+    if (nextValidIndex === -1) {
+      alert("No more matching words found in study list!");
       return;
     }
 
-    // Step 6: Update index and display
-    currentIndex = nextStudyIndex;
+    currentIndex = nextValidIndex;
     wordsSeen++;
     displayWord();
 
   } else {
-    // --- Original logic for stepNumber != 0 ---
+    // Original stepNumber != 0 logic
     if (currentIndex >= studyList.length - 1) {
       alert("All words studied!");
       return;
