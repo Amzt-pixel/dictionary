@@ -193,7 +193,7 @@ body {
       border-radius: 4px;
       margin: 20px 0px;
       background-color: #fff;
-      max-height: 450px;
+      max-height: 350px;
       overflow-y: auto;
     }
 
@@ -221,7 +221,12 @@ body {
          width: 45%; 
          margin : 0px 0px;
       }
-      
+      .search-box{
+  
+  width: 92%;
+  max-width: 92%;
+  
+      }
 }
 /*.search-container { 
   margin: 10px 0; 
