@@ -243,28 +243,28 @@ function nextWord() {
   displayWord();
 }
 */
+
 function nextWord() {
   if (stepNumber === 0) {
     const currentWord = studyList[currentIndex];
     const currentId = currentWord.NumId;
 
-    // Find currentRootWord in rootWordList
+    // Find the index of the root word matching currentId or -currentId
     const currentRootIndex = rootWordList.findIndex(
       word => word.NumId === currentId || word.NumId === -currentId
     );
 
-    // If no matching root word or it's the last root word
+    // If at the end of rootWordList or not found, end session
     if (currentRootIndex === -1 || currentRootIndex === rootWordList.length - 1) {
       alert("All root words studied!");
       return;
     }
 
-    const nextRootWord = rootWordList[currentRootIndex + 1];
-    const nextId = nextRootWord.NumId;
+    const nextRootId = rootWordList[currentRootIndex + 1].NumId;
 
-    // Find next word in studyList with matching or opposite NumId, after currentIndex
+    // Find next matching word in studyList by nextRootId or its opposite, after currentIndex
     const nextStudyIndex = studyList.findIndex((word, i) =>
-      i > currentIndex && (word.NumId === nextId || word.NumId === -nextId)
+      i > currentIndex && (word.NumId === nextRootId || word.NumId === -nextRootId)
     );
 
     if (nextStudyIndex === -1) {
