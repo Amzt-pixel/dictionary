@@ -14,6 +14,7 @@ let prevHoldTimer = null;
 let nextHoldTimer = null;
 let csvName = null;
 let wordSetsCount = 123;
+let currentId = 969;
 const HOLD_DURATION = 1000; // 1 second
 
 // Initialize app
@@ -299,7 +300,7 @@ function nextWord() {
   if (stepNumber === 0) {
     // Get current word and its ID
     const currentWord = studyList[currentIndex];
-    const currentId = currentWord.id;
+    currentId = currentWord.id;
 
     // Find the corresponding root word (checks both ID and -ID)
     const currentRootIndex = rootWordList.findIndex(word => 
@@ -695,11 +696,12 @@ function showMetadata() {
 function showMetadata() {
   const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
   alert(`Word Set: ${csvName} 
-Chosen Mode: ${selectedMode} 
+Mode: ${selectedMode} 
 Root Words: ${wordSetsCount} 
 Total Words: ${studyList.length} 
 Words Seen: ${wordsSeen}
-Root Word List: ${rootStatus}`);
+Root Word List: ${rootStatus}
+CurrentId : ${currentId}`);
 }
 
 // Previous Button Hold Functions
