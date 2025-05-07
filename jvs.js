@@ -301,55 +301,38 @@ function nextWord() {
     const currentWord = studyList[currentIndex];
     const currentId = currentWord.NumId;
 
-    // Find all possible root words (synonyms/antonyms)
-    const possibleRootWords = rootWordList.filter(word => 
-      word.NumId === currentId || word.NumId === -currentId
+    // Find the corresponding root word (checks both ID and -ID)
+    const currentRootIndex = rootWordList.findIndex(word => 
+      Math.abs(word.NumId) === Math.abs(currentId)
     );
 
-    if (possibleRootWords.length === 0) {
-      alert("Current word has no associated root word!");
+    if (currentRootIndex === -1) {
+      alert("Current word has no root word!");
       return;
     }
 
-    // Find the next root word that has a match in studyList
-    let nextValidIndex = -1;
-    let nextRootWord = null;
-
-    // Search through rootWordList for the next valid match
-    for (let i = 0; i < rootWordList.length; i++) {
-      const rootWord = rootWordList[i];
-      // Skip until we pass all possibleRootWords
-      if (!possibleRootWords.some(rw => rw === rootWord)) continue;
+    // Search for the next available match
+    for (let i = currentRootIndex + 1; i < rootWordList.length; i++) {
+      const targetId = rootWordList[i].NumId;
       
-      // Check remaining root words
-      for (let j = i + 1; j < rootWordList.length; j++) {
-        const potentialNext = rootWordList[j];
-        // Check if this root word has a match in studyList after currentIndex
-        const matchIndex = studyList.findIndex((word, idx) => 
-          idx > currentIndex && 
-          (word.NumId === potentialNext.NumId || word.NumId === -potentialNext.NumId)
-        );
-        
-        if (matchIndex !== -1) {
-          nextValidIndex = matchIndex;
-          nextRootWord = potentialNext;
-          break;
-        }
+      // Find first studyList match AFTER current position
+      const nextMatch = studyList.slice(currentIndex + 1).find(word =>
+        Math.abs(word.NumId) === Math.abs(targetId)
+      );
+
+      if (nextMatch) {
+        // Update currentIndex to the found match's position
+        currentIndex = studyList.indexOf(nextMatch);
+        wordsSeen++;
+        displayWord();
+        return;
       }
-      if (nextValidIndex !== -1) break;
     }
 
-    if (nextValidIndex === -1) {
-      alert("No more matching words found in study list!");
-      return;
-    }
-
-    currentIndex = nextValidIndex;
-    wordsSeen++;
-    displayWord();
-
+    // Only show this if no matches found in studyList
+    alert("No more matching words");
   } else {
-    // Original stepNumber != 0 logic
+    // Original stepNumber logic
     if (currentIndex >= studyList.length - 1) {
       alert("All words studied!");
       return;
