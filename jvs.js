@@ -256,7 +256,7 @@ function nextWord() {
 
     // If at the end of rootWordList or not found, end session
     if (currentRootIndex === -1 || currentRootIndex === rootWordList.length - 1) {
-      alert("All root words studied!");
+      alert("All R words studied!");
       return;
     }
 
@@ -268,7 +268,7 @@ function nextWord() {
     );
 
     if (nextStudyIndex === -1) {
-      alert("No more matching words found!");
+      alert("No more Y words found!");
       return;
     }
 
