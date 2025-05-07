@@ -608,11 +608,11 @@ function clearPrevHold() {
 function startNextHold() {
   document.getElementById("nextBtn").classList.add("holding"); // Visual feedback
   nextHoldTimer = setTimeout(() => {
-    const confirmFinish = confirm("Are you sure you want to finish?");
+   // const confirmFinish = confirm("Are you sure you want to finish?");
     document.getElementById("nextBtn").classList.remove("holding"); // Reset
-    if (confirmFinish) {
+  //  if (confirmFinish) {
       completeSession();
-    }
+  //  }
   }, HOLD_DURATION);
 }
 
