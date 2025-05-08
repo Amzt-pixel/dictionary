@@ -255,7 +255,7 @@ function prevWord() {
       alert("At beginning of root words!");
       return;
     }
-    const matchId = rootWordList[currentRootIndex - 1].id;
+    const matchId = rootWordList[currentRootIndex - 1].numId;
 
     // 5. Find previous matching word in studyList
     let foundIndex = -1;
@@ -737,7 +737,7 @@ function displayWord() {
 
   // Display word info
   document.getElementById("wordOrderDisplay").textContent = 
-    `Word ${currentIndex + 1} :`;
+    `Word ${currentIndex + 1}/${studyList.length} :`;
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
 
