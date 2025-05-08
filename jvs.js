@@ -233,16 +233,16 @@ function prevWord() {
     const currentWordStr = studyList[currentIndex];
 
     // 2. Find its NumId in csvData
-    const currentWordData = csvData.find(item => item.Word === currentWordStr);
+    const currentWordData = csvData.find(item => item.word === currentWordStr);
     if (!currentWordData) {
       alert("Current word not found in CSV data!");
       return;
     }
-    const currentNumId = currentWordData.NumId;
+    const currentNumId = currentWordData.id;
 
     // 3. Find matching root word (object with equal/opposite NumId)
     const currentRootIndex = rootWordList.findIndex(rootObj =>
-      Math.abs(rootObj.numId) === Math.abs(currentNumId)
+      Math.abs(rootObj.id) === Math.abs(currentNumId)
     );
 
     if (currentRootIndex === -1) {
@@ -255,16 +255,16 @@ function prevWord() {
       alert("At beginning of root words!");
       return;
     }
-    const matchId = rootWordList[currentRootIndex - 1].numId;
+    const matchId = rootWordList[currentRootIndex - 1].id;
 
     // 5. Find previous matching word in studyList
     let foundIndex = -1;
     for (let i = currentIndex - 1; i >= 0; i--) {
       const prevWordStr = studyList[i];
-      const prevWordData = csvData.find(item => item.Word === prevWordStr);
+      const prevWordData = csvData.find(item => item.word === prevWordStr);
       if (!prevWordData) continue;
 
-      if (Math.abs(prevWordData.NumId) === Math.abs(matchId)) {
+      if (Math.abs(prevWordData.id) === Math.abs(matchId)) {
         foundIndex = i;
         break;
       }
