@@ -675,7 +675,16 @@ function displayWord() {
     });
   });
   //record Root Word Visit 
-  
+  // Track root word visit
+  (function() {
+    const entry = csvData.find(e => e.word === word);
+    if (entry && typeof entry.id === "number") {
+      const absId = Math.abs(entry.id);
+      if (!seenRootWord.includes(absId)) {
+        seenRootWord.push(absId);
+      }
+    }
+  })();
 
   // Display word info
   document.getElementById("wordOrderDisplay").textContent = 
