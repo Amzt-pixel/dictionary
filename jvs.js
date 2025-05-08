@@ -183,25 +183,39 @@ function startSession() {
 }
 
 function getRootWords(list) {
-  const rootWords = [];
-  const blockedNumIds = new Set(); // Tracks ALL forbidden NumIds (synonyms/antonyms)
+  // 1. Initialize with default value (will be removed later)
+  rootWordList = [
+    { word: "January", numId: 0 }
+  ];
 
-  for (const word of list) {
-    const currentNumId = word.NumId;
-    
-    // Skip if NumId or its opposite is already blocked
-    if (blockedNumIds.has(currentNumId) || blockedNumIds.has(-currentNumId)) {
-      continue;
+  // 2. Process each word in studyList
+  list.forEach(word => {
+    // 3. Find matching word in csvData (using 'Word' and 'NumId')
+    const wordData = csvData.find(item => item.word === word);
+    if (!wordData) return; // Skip if word not found in CSV
+
+    const currentNumId = wordData.id; 
+
+    // 4. Check if equal/opposite numId exists
+    const isDuplicate = rootWordList.some(item => 
+      Math.abs(item.numId) === Math.abs(currentNumId)
+    );
+
+    // 5. Add if unique
+    if (!isDuplicate) {
+      rootWordList.push({
+        word: word,       // Preserve original studyList word
+        numId: currentNumId // From CSV's NumId
+      });
     }
+  });
 
-    // Add the word to rootWords and block its NumId
-    rootWords.push(word);
-    blockedNumIds.add(currentNumId);
-  }
+  // 6. Remove default "January" entry
+  rootWordList.shift();
 
-  return rootWords;
+  // 7. Return the filtered objects
+  return rootWordList;
 }
-
 function calculateWordSets() {
   const uniqueIds = new Set();
   csvData.forEach(item => {
