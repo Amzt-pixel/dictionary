@@ -1,6 +1,6 @@
 let csvData = [];
 let selectedCSVUrl = "";
-let selectedMode = "alphabetic";
+let selectedMode = "Alphabetic";
 let studyList = [];
 let rootWordList = [];
 let seenRootWord = [];
@@ -15,7 +15,6 @@ let prevHoldTimer = null;
 let nextHoldTimer = null;
 let csvName = null;
 let wordSetsCount = 123;
-let currentId = 969;
 const HOLD_DURATION = 1000; // 1 second
 
 // Initialize app
@@ -41,8 +40,6 @@ document.getElementById("topicSelector").addEventListener("change", (e) => {
 document.getElementById("startBtn").addEventListener("click", startSession);
 document.getElementById("nextBtn").addEventListener("click", nextWord);
 document.getElementById("prevBtn").addEventListener("click", prevWord);
-//document.getElementById("completeBtn").addEventListener("click", completeSession);//
-//document.getElementById("restartBtn").addEventListener("click", () => showScreen("study"));
 document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
 const searchInput = document.getElementById("wordSearch");
@@ -76,7 +73,7 @@ async function loadCSVList() {
   try {
     const response = await fetch("https://raw.githubusercontent.com/amzt-pixel/Vocabulary/main/csv-list.json");
     if (!response.ok) throw new Error("Failed to fetch CSV list");
-    
+
     const list = await response.json();
     const select = document.getElementById("csvSelector");
     select.innerHTML = ""; // Clear existing options
@@ -148,9 +145,9 @@ function filterAndSortWords(mode) {
   });
 
   // Sort based on selected mode
-  if (mode === "alphabetic") {
+  if (mode === "Alphabetic") {
     return validWords.sort();
-  } else if (mode === "reverse") {
+  } else if (mode === "Reverse") {
     return validWords.sort().reverse();
   } else {
     return shuffleArray(validWords);
@@ -174,11 +171,6 @@ function startSession() {
   // Calculate word sets
   wordSetsCount = calculateWordSets();
   rootWordList = getRootWords(studyList);
-/*
-  // Update the display
-  document.getElementById("listNameDisplay").textContent = `List: ${csvName}`;
-  document.getElementById("wordSetsDisplay").textContent = `Word Sets: ${wordSetsCount}`;
-*/
   showScreen("study");
   displayWord();
 }
@@ -227,9 +219,7 @@ function calculateWordSets() {
 
 function prevWord() {
   if (stepNumber === 0) {
-    /*alert("Unavailable");
-    return;*/
-        // 1. Get current word (string from studyList)
+            // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
 
     // 2. Find its NumId in csvData
@@ -293,78 +283,11 @@ function prevWord() {
   }
 }
 
-/* ORG version
-function nextWord() {
-  if (currentIndex === studyList.length - 1) {
-    alert("All words studied!");
-    //document.getElementById("nextBtn").textContent = "Restart";
-    //document.getElementById("nextBtn").onclick = () => startSession();
-    return;
-  }
-  else if(currentIndex + stepNumber > studyList.length - 1) {
-    alert("Reduce step!");
-    return;
-  }
-  else {
-    currentIndex = currentIndex + stepNumber;
-  }
-//  currentIndex++;
-  wordsSeen++;
-  displayWord();
-}
-*/
-/* Last version
-function nextWord() {
-  if (stepNumber === 0) {
-    const currentWord = studyList[currentIndex];
-    const currentId = currentWord.NumId;
-
-    // Find the index of the root word matching currentId or -currentId
-    const currentRootIndex = rootWordList.findIndex(
-      word => word.NumId === currentId || word.NumId === -currentId
-    );
-
-    // If at the end of rootWordList or not found, end session
-    if (currentRootIndex === -1 || currentRootIndex === rootWordList.length - 1) {
-      alert("All R words studied!");
-      return;
-    }
-
-    const nextRootId = rootWordList[currentRootIndex + 1].NumId;
-
-    // Find next matching word in studyList by nextRootId or its opposite, after currentIndex
-    const nextStudyIndex = studyList.findIndex((word, i) =>
-      i > currentIndex && (word.NumId === nextRootId || word.NumId === -nextRootId)
-    );
-
-    if (nextStudyIndex === -1) {
-      alert("No more Y words found!");
-      return;
-    }
-
-    currentIndex = nextStudyIndex;
-  } else {
-    if (currentIndex === studyList.length - 1) {
-      alert("All words studied!");
-      return;
-    } else if (currentIndex + stepNumber > studyList.length - 1) {
-      alert("Reduce step!");
-      return;
-    } else {
-      currentIndex = currentIndex + stepNumber;
-    }
-  }
-
-  wordsSeen++;
-  displayWord();
-}
-*/
-
 function nextWord() {
   if (stepNumber === 0) {
     // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
-    
+
     // 2. Find its NumId in csvData
     const currentWordData = csvData.find(item => item.word === currentWordStr);
     if (!currentWordData) {
@@ -553,7 +476,7 @@ function initSearch() {
     }
   });
 }
-  
+
 function handleSearch(e) {
   if (!isSearchActive && e.type !== 'manual') return;
 
@@ -590,7 +513,7 @@ function handleSearch(e) {
   exactMatchSection.classList.toggle("hidden", !exactMatch);
   closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
 
-  
+
   const idMatch = term.match(/^\{(\d+)\}$/);
   const letterMatch = term.match(/^\{([a-z])\}$/i);
   //Id Match
@@ -631,7 +554,7 @@ function handleSearch(e) {
     searchResultClick();
     return;
   }
- 
+
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
   }
@@ -674,15 +597,15 @@ function searchResultClick() {
 }
 
 function resetSearchSections() {
-  document.getElementById("wordsFoundSection").classList.add("hidden");
-  document.getElementById("wordsLocatedSection").classList.add("hidden");
-  document.getElementById("exactMatchSection").classList.add("hidden");
-  document.getElementById("closeMatchesSection").classList.add("hidden");
+  document.getElementById("wordsFoundSection").classList.add("hidden");
+  document.getElementById("wordsLocatedSection").classList.add("hidden");
+  document.getElementById("exactMatchSection").classList.add("hidden");
+  document.getElementById("closeMatchesSection").classList.add("hidden");
 
-  document.getElementById("exactMatch").innerHTML = "";
-  document.getElementById("closeMatches").innerHTML = "";
-  document.getElementById("wordsFound").innerHTML = "";
-  document.getElementById("wordsLocated").innerHTML = "";
+  document.getElementById("exactMatch").innerHTML = "";
+  document.getElementById("closeMatches").innerHTML = "";
+  document.getElementById("wordsFound").innerHTML = "";
+  document.getElementById("wordsLocated").innerHTML = "";
 }
 
 function clearSearch() {
@@ -790,20 +713,15 @@ function displayWord() {
     });
   });
 }
-/*
-function showMetadata() {
-  alert(`List Name: ${csvName} \nMode: ${selectedMode} \nWord Sets: ${wordSetsCount} \nTotal Words: ${studyList.length} \nWords Seen: ${wordsSeen}`);
-}
-*/
+
 function showMetadata() {
   const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
-  alert(`Word Set name: ${csvName} 
+  alert(`Word Set: ${csvName} 
 Mode: ${selectedMode} 
 Root Words: ${wordSetsCount} 
 Total Words: ${studyList.length} 
 Words Seen: ${wordsSeen}
 Root Word List: ${rootStatus}
-CurrentId : ${currentId}
 Rootwords Seen: ${seenRootWord.length}`);
 }
 
