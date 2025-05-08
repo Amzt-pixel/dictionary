@@ -227,8 +227,57 @@ function calculateWordSets() {
 
 function prevWord() {
   if (stepNumber === 0) {
-    alert("Unavailable");
-    return;
+    /*alert("Unavailable");
+    return;*/
+        // 1. Get current word (string from studyList)
+    const currentWordStr = studyList[currentIndex];
+
+    // 2. Find its NumId in csvData
+    const currentWordData = csvData.find(item => item.Word === currentWordStr);
+    if (!currentWordData) {
+      alert("Current word not found in CSV data!");
+      return;
+    }
+    const currentNumId = currentWordData.NumId;
+
+    // 3. Find matching root word (object with equal/opposite NumId)
+    const currentRootIndex = rootWordList.findIndex(rootObj =>
+      Math.abs(rootObj.numId) === Math.abs(currentNumId)
+    );
+
+    if (currentRootIndex === -1) {
+      alert("Current word has no root word!");
+      return;
+    }
+
+    // 4. Get the PREVIOUS root word's NumId (matchId)
+    if (currentRootIndex === 0) {
+      alert("At beginning of root words!");
+      return;
+    }
+    const matchId = rootWordList[currentRootIndex - 1].numId;
+
+    // 5. Find previous matching word in studyList
+    let foundIndex = -1;
+    for (let i = currentIndex - 1; i >= 0; i--) {
+      const prevWordStr = studyList[i];
+      const prevWordData = csvData.find(item => item.Word === prevWordStr);
+      if (!prevWordData) continue;
+
+      if (Math.abs(prevWordData.NumId) === Math.abs(matchId)) {
+        foundIndex = i;
+        break;
+      }
+    }
+
+    // 6. Handle result
+    if (foundIndex === -1) {
+      alert("No previous word in studyList matching with matchId!");
+    } else {
+      currentIndex = foundIndex;
+      wordsSeen++;
+      displayWord();
+    }
   }
   else{
   if (currentIndex === 0) return;
