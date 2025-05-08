@@ -242,7 +242,7 @@ function prevWord() {
 
     // 3. Find matching root word (object with equal/opposite NumId)
     const currentRootIndex = rootWordList.findIndex(rootObj =>
-      Math.abs(rootObj.id) === Math.abs(currentNumId)
+      Math.abs(rootObj.numId) === Math.abs(currentNumId)
     );
 
     if (currentRootIndex === -1) {
