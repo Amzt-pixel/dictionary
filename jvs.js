@@ -312,13 +312,20 @@ function nextWord() {
 
 function nextWord() {
   if (stepNumber === 0) {
-    // Get current word and its ID
-    const currentWord = studyList[currentIndex];
-    currentId = currentWord.id;
+    // 1. Get current word (string from studyList)
+    const currentWordStr = studyList[currentIndex];
+    
+    // 2. Find its NumId in csvData
+    const currentWordData = csvData.find(item => item.word === currentWordStr);
+    if (!currentWordData) {
+      alert("Current word not found in CSV data!");
+      return;
+    }
+    const currentNumId = currentWordData.id;
 
-    // Find the corresponding root word (checks both ID and -ID)
-    const currentRootIndex = rootWordList.findIndex(word => 
-      Math.abs(word.id) === Math.abs(currentId)
+    // 3. Find matching root word (object with equal/opposite NumId)
+    const currentRootIndex = rootWordList.findIndex(rootObj => 
+      Math.abs(rootObj.numId) === Math.abs(currentNumId)
     );
 
     if (currentRootIndex === -1) {
@@ -326,26 +333,35 @@ function nextWord() {
       return;
     }
 
-    // Search for the next available match
-    for (let i = currentRootIndex + 1; i < rootWordList.length; i++) {
-      const targetId = rootWordList[i].id;
-      
-      // Find first studyList match AFTER current position
-      const nextMatch = studyList.slice(currentIndex + 1).find(word =>
-        Math.abs(word.id) === Math.abs(targetId)
-      );
+    // 4. Get next root word's NumId (matchId)
+    if (currentRootIndex + 1 >= rootWordList.length) {
+      alert("Reached end of root words!");
+      return;
+    }
+    const matchId = rootWordList[currentRootIndex + 1].numId;
 
-      if (nextMatch) {
-        // Update currentIndex to the found match's position
-        currentIndex = studyList.indexOf(nextMatch);
-        wordsSeen++;
-        displayWord();
-        return;
+    // 5. Find next matching word in studyList
+    let foundIndex = -1;
+    for (let i = currentIndex + 1; i < studyList.length; i++) {
+      const nextWordStr = studyList[i];
+      const nextWordData = csvData.find(item => item.word === nextWordStr);
+      if (!nextWordData) continue;
+
+      if (Math.abs(nextWordData.id) === Math.abs(matchId)) {
+        foundIndex = i;
+        break;
       }
     }
 
-    // Only show this if no matches found in studyList
-    alert("No more matching words");
+    // 6. Handle result
+    if (foundIndex === -1) {
+      alert("No word in studyList matching with matchId!");
+    } else {
+      currentIndex = foundIndex;
+      wordsSeen++;
+      displayWord();
+    }
+
   } else {
     // Original stepNumber logic
     if (currentIndex >= studyList.length - 1) {
@@ -441,7 +457,7 @@ function initSearch() {
   "3. Search by {LETTER} to view Words starting with LETTER.\n" +
   "4. Adjust step value for Previous and Next from Step field (Default : 1).\n" +
   "5. Click on the Words to view them.\n" +
-  "6. Click the Meta button to view Session Meta info."
+  "6. Click the Meta button to view Meta info of session."
 );
         holdTimer = null;
         searchButton.classList.remove("search-button-hold");
@@ -709,9 +725,9 @@ function showMetadata() {
 */
 function showMetadata() {
   const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
-  alert(`Word Set: ${csvName} 
+  alert(`Word Set name: ${csvName} 
 Mode: ${selectedMode} 
-Root Words: ${wordSetsCount} 
+Root Words: ${wordSSet.Count} 
 Total Words: ${studyList.length} 
 Words Seen: ${wordsSeen}
 Root Word List: ${rootStatus}
