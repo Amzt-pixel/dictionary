@@ -737,7 +737,7 @@ function displayWord() {
 
   // Display word info
   document.getElementById("wordOrderDisplay").textContent = 
-    `Word ${currentIndex + 1} of ${studyList.length} :`;
+    `Word ${currentIndex + 1} :`;
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
 
