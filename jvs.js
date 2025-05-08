@@ -675,7 +675,7 @@ function displayWord() {
     });
   });
   //record Root Word Visit 
-  countRootVisit(currentIndex);
+  
 
   // Display word info
   document.getElementById("wordOrderDisplay").textContent = 
