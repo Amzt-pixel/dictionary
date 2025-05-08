@@ -3,6 +3,7 @@ let selectedCSVUrl = "";
 let selectedMode = "alphabetic";
 let studyList = [];
 let rootWordList = [];
+let seenRootWord = [];
 let currentIndex = 0;
 let wordsSeen = 0;
 let startTime = null;
@@ -649,6 +650,17 @@ function clearSearch() {
   document.getElementById("wordsLocatedSection").classList.add("hidden");
 }
 
+function countRootVisit(index) {
+    const word = studyList[index];
+    const entry = csvdata.find(e => e.word === word);
+    if (!entry) return;
+
+    const absId = Math.abs(entry.id);
+    if (!seenRootWord.includes(absId)) {
+        seenRootWord.push(absId);
+    }
+}
+
 function displayWord() {
   const word = studyList[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
@@ -662,6 +674,8 @@ function displayWord() {
       if (id1 === -id2) antonyms.add(w2);
     });
   });
+  //record Root Word Visit 
+  countRootVisit(currentIndex);
 
   // Display word info
   document.getElementById("wordOrderDisplay").textContent = 
@@ -731,7 +745,8 @@ Root Words: ${wordSetsCount}
 Total Words: ${studyList.length} 
 Words Seen: ${wordsSeen}
 Root Word List: ${rootStatus}
-CurrentId : ${currentId}`);
+CurrentId : ${currentId}
+Rootwords Seen: ${seenRootWord.length}`);
 }
 
 // Previous Button Hold Functions
