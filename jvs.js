@@ -40,7 +40,9 @@ document.getElementById("topicSelector").addEventListener("change", (e) => {
 document.getElementById("startBtn").addEventListener("click", startSession);
 document.getElementById("nextBtn").addEventListener("click", nextWord);
 document.getElementById("prevBtn").addEventListener("click", prevWord);
-document.getElementById("goHomeBtn").addEventListener("click", () => showScreen("setup"));
+document.getElementById("goHomeBtn").addEventListener("click", () => {
+  location.reload();
+});
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
 const searchInput = document.getElementById("wordSearch");
 const searchButton = document.querySelector(".searchBar-button");
