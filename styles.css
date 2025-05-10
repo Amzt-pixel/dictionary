@@ -168,6 +168,7 @@ body {
   background-color: #ffcc80;
   color: white;
   cursor: pointer;
+  width: 10%;
   height: 38px; /* Matches input height */
  /* box-sizing: border-box; */
 }
