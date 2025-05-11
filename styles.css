@@ -252,7 +252,12 @@ body {
   padding: 10px;
   margin-top: 5px;
   background-color: #fff;
-  max-height: 300px;
+}
+#searchResultHead{
+      position : fixed;
+}
+#searchResultDiv {
+      max-height: 300px;
   overflow-y: auto;
 }
 #exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
