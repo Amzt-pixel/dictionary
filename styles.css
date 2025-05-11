@@ -255,6 +255,8 @@ body {
 }
 #searchResultHead{
       position : relative;
+      z-index: +1;
+      align-items: right;
 }
 #searchResultDiv {
       max-height: 300px;
