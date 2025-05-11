@@ -254,7 +254,7 @@ body {
   background-color: #fff;
 }
 #searchResultHead{
-      position : fixed;
+      position : relative;
 }
 #searchResultDiv {
       max-height: 300px;
