@@ -10,7 +10,7 @@
 <body>
 
   <div id="setupScreen" class="screen visible">
-    <h1>Dictionary v46</h1>
+    <h1>Dictionary v47</h1>
     <p>Synonyms and Antonyms</p>
     
     <!--<h1>Setup</h1>-->
@@ -71,8 +71,24 @@
         <button id="openFormBtn">Form</button>
       </div>
     </div>
+    <!-- Meta Popup -->
+    <div id="metaOverlay"></div>
+  <div id="infoPopup">
+    <h2>Meta Info</h2>
+    <div id="metadata-display">
+  <p id="metadata-wordset"></p>
+  <p id="metadata-mode"></p>
+  <p id="metadata-root-count"></p>
+  <p id="metadata-total-words"></p>
+  <p id="metadata-words-seen"></p>
+  <p id="metadata-root-status"></p>
+  <p id="metadata-root-seen"></p>
+    </div>
+
+    <button id="closeInfo">Close</button>
+  </div>
     <!-- PopUp Form -->
-      <div id="overlay"></div>
+      <div id="formOverlay"></div>
   <div id="formPopup">
     <label for="rollInput">Roll:</label>
     <input type="number" id="rollInput" placeholder="Enter Roll">
