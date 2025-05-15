@@ -51,6 +51,7 @@ const searchButton = document.querySelector(".searchBar-button");
 document.getElementById("infoButton").addEventListener("click", showMetadata);
 document.getElemementById("viewMode").addEventListener("change", (e) => {
     viewWordsMode = parseInt(e.target.value);
+});
 
 //Popup Form
 document.getElementById("openFormBtn").addEventListener("click", () => {
