@@ -99,7 +99,7 @@ async function loadCSVList() {
     alert("Error loading CSV list. Check console for details.");
   }
 }
-
+/*
 // Load and parse CSV data
 async function loadCSV(url) {
   try {
@@ -122,7 +122,54 @@ async function loadCSV(url) {
     alert("Error loading CSV. Please try another file.");
   }
 }
+*/
+async function loadCSV(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
+    const text = await response.text();
+    const rows = text.trim().split("\n").slice(1); // Skip header row
+
+    // Parse and store in csvData
+    csvData = rows.map((row, index) => {
+      const columns = row.split(",").map(item => item.trim());
+      
+      // Validate columns
+      if (columns.length < 2) 
+        throw new Error(`Row ${index + 1}: Must have at least 2 columns (word and id)`);
+      if (columns.length > csvColumnLimit)
+        throw new Error(`Row ${index + 1}: Exceeds maximum ${csvColumnLimit} columns`);
+
+      // Parse required fields
+      const id = parseInt(columns[1]);
+      if (isNaN(id)) 
+        throw new Error(`Row ${index + 1}: "id" must be an integer`);
+
+      // Build the object
+      const rowData = {
+        word: columns[0],
+        id: id,
+      };
+
+      // Add optional columns (3rd to 5th)
+      for (let i = 2; i < columns.length; i++) {
+        if (columns[i]) {  // Only add if non-empty
+          rowData[`extra${i - 1}`] = columns[i];  // e.g., extra1, extra2, etc.
+        }
+      }
+
+      return rowData;
+    });
+
+    if (csvData.length === 0) throw new Error("CSV is empty");
+    console.log("CSV loaded successfully. Data:", csvData);
+  } catch (err) {
+    console.error("CSV load error:", err);
+    csvData = [];  // Reset on error
+    alert(`Error: ${err.message}`);
+  }
+}
 function filterAndSortWords(mode) {
   const wordMap = new Map();
 
