@@ -143,9 +143,9 @@ async function loadCSV(url) {
 
       // Parse required fields
       const id = parseInt(columns[1]);
-      if (isNaN(id)) 
-        throw new Error(`Row ${index + 1}: "id" must be an integer`);
-
+      if (id !== null && isNaN(id)) {
+        throw new Error(`Row ${index + 1}: "id" must be an integer or null`);
+      }
       // Build the object
       const rowData = {
         word: columns[0],
