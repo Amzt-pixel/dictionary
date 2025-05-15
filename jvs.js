@@ -48,20 +48,35 @@ document.getElementById("goHomeBtn").addEventListener("click", () => {
 document.getElementById("wordSearch").addEventListener("input", handleSearch);
 const searchInput = document.getElementById("wordSearch");
 const searchButton = document.querySelector(".searchBar-button");
-document.getElementById("infoButton").addEventListener("click", showMetadata);
+
+//document.getElementById("infoButton").addEventListener("click", showMetadata);//
+
 document.getElementById("viewMode").addEventListener("change", (e) => {
     viewWordsMode = parseInt(e.target.value);
+});
+
+//Popup Meta
+
+document.getElementById("infoButton").addEventListener("click", () => {
+  document.getElementById("infoPopup").style.display = "block";
+  document.getElementById("metaOverlay").style.display = "block";
+  showMetadata();
+});
+
+document.getElementById("closeInfo").addEventListener("click", () => {
+  document.getElementById("infoPopup").style.display = "none";
+  document.getElementById("metaOverlay").style.display = "none";
 });
 
 //Popup Form
 document.getElementById("openFormBtn").addEventListener("click", () => {
   document.getElementById("formPopup").style.display = "block";
-  document.getElementById("overlay").style.display = "block";
+  document.getElementById("formOverlay").style.display = "block";
 });
 
 document.getElementById("closeFormBtn").addEventListener("click", () => {
   document.getElementById("formPopup").style.display = "none";
-  document.getElementById("overlay").style.display = "none";
+  document.getElementById("formOverlay").style.display = "none";
 });
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
@@ -778,7 +793,7 @@ function displayWord() {
     });
   });
 }
-
+/*
 function showMetadata() {
   const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
   alert(`Word Set: ${csvName} 
@@ -788,6 +803,19 @@ Total Words: ${studyList.length}
 Words Seen: ${wordsSeen}
 Root Word List: ${rootStatus}
 Rootwords Seen: ${seenRootWord.length}`);
+}
+*/
+function showMetadata() {
+  const rootStatus = rootWordList.length === 0 ? "Empty" : "Loaded";
+  
+  // Update each metric in its corresponding <p> element
+  document.getElementById('metadata-wordset').textContent = `Word Set: ${csvName}`;
+  document.getElementById('metadata-mode').textContent = `Mode: ${selectedMode}`;
+  document.getElementById('metadata-root-count').textContent = `Root Words: ${wordSetsCount}`;
+  document.getElementById('metadata-total-words').textContent = `Total Words: ${studyList.length}`;
+  document.getElementById('metadata-words-seen').textContent = `Words Seen: ${wordsSeen}`;
+  document.getElementById('metadata-root-status').textContent = `Root Word List: ${rootStatus}`;
+  document.getElementById('metadata-root-seen').textContent = `Rootwords Seen: ${seenRootWord.length}`;
 }
 
 // Previous Button Hold Functions
