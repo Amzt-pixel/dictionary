@@ -135,17 +135,17 @@ async function loadCSV(url) {
     csvData = rows.map((row, index) => {
       const columns = row.split(",").map(item => item.trim());
       
-      // Validate columns
+    /*  // Validate columns
       if (columns.length < 2) 
         throw new Error(`Row ${index + 1}: Must have at least 2 columns (word and id)`);
       if (columns.length > csvColumnLimit)
         throw new Error(`Row ${index + 1}: Exceeds maximum ${csvColumnLimit} columns`);
-
+    */
       // Parse required fields
       const id = parseInt(columns[1]);
-      if (id !== null && isNaN(id)) {
+    /*  if (id !== null && isNaN(id)) {
         throw new Error(`Row ${index + 1}: "id" must be an integer or null`);
-      }
+      }*/
       // Build the object
       const rowData = {
         word: columns[0],
