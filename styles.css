@@ -16,6 +16,7 @@ body {
     }
     .topDiv{
          margin : -20px;
+          margin-bottom: 20px;
   display: flex;
   align-items: center; /* Fixes vertical misalignment */
   gap: 5px;
@@ -96,6 +97,10 @@ body {
       color: #001a33;
       cursor: not-allowed;
     }
+
+   #closeInfo, #closeFormBtn {
+         width: 100%;
+   }
 
    .footer-buttons button {
          width: 48%; 
