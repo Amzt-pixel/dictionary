@@ -15,7 +15,7 @@ body {
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .topDiv{
-         /* margin : -20px;*/
+         margin : -20px;
     }
 
     .visible {
@@ -162,7 +162,6 @@ body {
 
 .search-container { 
   margin: 0px 0;
-      width: 100%;
   display: flex;
   align-items: center; /* Fixes vertical misalignment */
   gap: 5px;
