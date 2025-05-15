@@ -49,6 +49,15 @@ document.getElementById("wordSearch").addEventListener("input", handleSearch);
 const searchInput = document.getElementById("wordSearch");
 const searchButton = document.querySelector(".searchBar-button");
 document.getElementById("infoButton").addEventListener("click", showMetadata);
+//Popup Form
+openFormBtn.onclick = () => {
+  formPopup.style.display = 'block';
+  overlay.style.display = 'block';
+};
+
+closeBtn.onclick = () => {
+  formPopup.style.display = 'none';
+  overlay.style.display = 'none';
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
 document.getElementById("prevBtn").addEventListener("mouseup", clearPrevHold);
