@@ -293,7 +293,6 @@ body {
   padding: 10px;
   margin-top: 5px;
   background-color: #fff;
-  z-index: 1000;
 }
 #searchResultHead{
       position : relative;
@@ -301,8 +300,10 @@ body {
       align-items: right;
 }
 #searchResultDiv {
-      max-height: 300px;
+      max-height: 1200px;
   overflow-y: auto;
+      position: absolute;
+      z-index: 1000;
 }
 #exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
   margin-left: 10px;
