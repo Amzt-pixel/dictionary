@@ -113,6 +113,7 @@ body {
   border: 1px solid #aaa;
   cursor: pointer;
   margin: 10px 0px;
+  border-radius: 0px;
   background-color: #001a33;
   color: white;
 }
@@ -311,6 +312,7 @@ body {
   border-radius: 4px;
   padding: 10px;
   margin-top: 5px;
+      width: 100%;
   background-color: #fff;
       position: absolute;
       z-index: 1000;
@@ -323,6 +325,8 @@ body {
 #searchResultDiv {
       max-height: 800px;
   overflow-y: auto;
+  margin-bottom: 20px;
+  width: 100%;
 }
 #exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
   margin-left: 10px;
