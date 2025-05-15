@@ -112,10 +112,9 @@ body {
   padding: 10px;
   border: 1px solid #aaa;
   cursor: pointer;
-  margin: 10px 5px;
-  background-color: #007BFF;
+  margin: 10px 0px;
+  background-color: #001a33;
   color: white;
-  border-radius: 6px;
 }
 
 .tabBtn.active {
