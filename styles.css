@@ -315,7 +315,6 @@ body {
       width: 100%;
   background-color: #fff;
       position: relative;
-      z-index: 1000;
 }
 #searchResultHead{
       position : relative;
@@ -327,6 +326,8 @@ body {
   overflow-y: auto;
   margin-bottom: 20px;
   width: 100%;
+      position: absolute;
+      z-index: 1000;
 }
 #exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
   margin-left: 10px;
