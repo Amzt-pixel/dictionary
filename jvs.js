@@ -55,6 +55,18 @@ document.getElementById("viewMode").addEventListener("change", (e) => {
     viewWordsMode = parseInt(e.target.value);
 });
 
+//Menu Visibility
+document.getElementById("showMenuBtn").addEventListener("click", function () {
+  document.getElementById("mainScreen").style.display = "none";
+  document.getElementById("menuScreen").style.display = "block";
+});
+
+document.getElementById("closeMenuBtn").addEventListener("click", function () {
+  document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("mainScreen").style.display = "block";
+});
+
+
 //Popup Meta
 
 document.getElementById("infoButton").addEventListener("click", () => {
