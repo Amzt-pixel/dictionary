@@ -16,6 +16,11 @@ body {
     }
     .topDiv{
          margin : -20px;
+  display: flex;
+  align-items: center; /* Fixes vertical misalignment */
+  gap: 5px;
+  background-color: #1d4e89;
+  padding: 5px;
     }
 
     .visible {
@@ -210,15 +215,15 @@ body {
   text-align: center;
   font-style: italic;
 }
-#infoButton {
+#infoButton, #openFormBtn{
    /* padding: 10px 15px; */
       font-size: 22px;
       border: 1px solid #1d4e89;
       border-radius: 4px;
       /*background-color: steelblue;*/
-      color: #ffcc80;
+      color: #1d4e89;
       font-weight: 700;
-      background-color: #1d4e89;
+      background-color: #ffcc80;
       cursor: pointer;
       display: inline-block;
 }
