@@ -55,9 +55,10 @@ openFormBtn.onclick = () => {
   overlay.style.display = 'block';
 };
 
-closeBtn.onclick = () => {
+closeFormBtn.onclick = () => {
   formPopup.style.display = 'none';
   overlay.style.display = 'none';
+};
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
 document.getElementById("prevBtn").addEventListener("mouseup", clearPrevHold);
