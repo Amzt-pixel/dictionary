@@ -15,6 +15,7 @@ let prevHoldTimer = null;
 let nextHoldTimer = null;
 let csvName = null;
 let wordSetsCount = 123;
+const csvColumnLimit = 5; //CSV column limit
 const HOLD_DURATION = 1000; // 1 second
 
 // Initialize app
@@ -97,7 +98,7 @@ async function loadCSVList() {
     alert("Error loading CSV list. Check console for details.");
   }
 }
-
+/*
 // Load and parse CSV data
 async function loadCSV(url) {
   try {
@@ -120,6 +121,63 @@ async function loadCSV(url) {
     alert("Error loading CSV. Please try another file.");
   }
 }
+*/
+async function loadCSV(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+    const text = await response.text();
+    const lines = text.trim().split("\n");
+
+    // Header row
+    const headers = lines[0].split(",").map(h => h.trim()).slice(0, csvColumnLimit);
+    const rows = lines.slice(1);
+
+    const csvData = rows.map((row, index) => {
+      const columns = row.split(",").map(c => c.trim()).slice(0, csvColumnLimit);
+
+      // Ensure minimum 2 columns
+      if (columns.length < 2) {
+        console.warn(`Row ${index + 2} skipped: fewer than 2 columns`);
+        return null;
+      }
+
+      const word = columns[0];
+      const id = parseInt(columns[1], 10);
+
+      if (!word || isNaN(id)) {
+        console.warn(`Row ${index + 2} skipped: missing or invalid 'word' or 'NumId'`);
+        return null;
+      }
+
+      // Start building object with hardcoded keys
+      const obj = {
+        word,
+        id
+      };
+
+      // Dynamically add remaining columns based on headers
+      for (let i = 2; i < headers.length; i++) {
+        if (columns[i]) {
+          obj[headers[i]] = columns[i]; //columns have same name as in CSV
+        }
+      }
+
+      return obj;
+    }).filter(Boolean);
+
+    if (csvData.length === 0) throw new Error("CSV is empty or has no valid rows");
+
+    console.log("CSV loaded successfully:", csvData.length, "valid rows");
+    return csvData;
+  } catch (err) {
+    console.error("CSV load error:", err);
+    alert("Error loading CSV. Please try another file.");
+    return [];
+  }
+}
+
 
 function filterAndSortWords(mode) {
   const wordMap = new Map();
