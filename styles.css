@@ -314,7 +314,7 @@ body {
   margin-top: 5px;
       width: 100%;
   background-color: #fff;
-      position: absolute;
+      position: relative;
       z-index: 1000;
 }
 #searchResultHead{
