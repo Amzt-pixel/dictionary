@@ -6,6 +6,7 @@ let rootWordList = [];
 let seenRootWord = [];
 let currentIndex = 0;
 let wordsSeen = 0;
+let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
 let isSearchActive = false;
@@ -278,7 +279,7 @@ function calculateWordSets() {
 }
 
 function prevWord() {
-  if (stepNumber === 0) {
+  if (viewWordsMode === 0) {
             // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
 
@@ -344,7 +345,7 @@ function prevWord() {
 }
 
 function nextWord() {
-  if (stepNumber === 0) {
+  if (viewWordsMode === 0) {
     // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
 
