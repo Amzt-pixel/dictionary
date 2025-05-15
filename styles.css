@@ -313,7 +313,6 @@ body {
   padding: 10px;
   margin-top: 5px;
   background-color: #fff;
-      position: relative;
 }
 #searchResultHead{
       position : relative;
@@ -324,9 +323,6 @@ body {
       max-height: 500px;
   overflow-y: auto;
   margin-bottom: 20px;
-  width: 100%;
-      position: absolute;
-      z-index: 1000;
 }
 #exactMatch, #closeMatches, #wordsLocatedSection, #wordsFoundSection {
   margin-left: 10px;
