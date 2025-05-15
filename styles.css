@@ -101,7 +101,24 @@ body {
    #closeInfo, #closeFormBtn {
          width: 100%;
    }
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.tabBtn {
+  flex: 1;
+  padding: 10px;
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  cursor: pointer;
+}
+
+.tabBtn.active {
+  background-color: #007BFF;
+  color: white;
+}
    .footer-buttons button {
          width: 48%; 
          margin : 0px 0px;
