@@ -50,15 +50,15 @@ const searchInput = document.getElementById("wordSearch");
 const searchButton = document.querySelector(".searchBar-button");
 document.getElementById("infoButton").addEventListener("click", showMetadata);
 //Popup Form
-openFormBtn.onclick = () => {
-  formPopup.style.display = 'block';
-  overlay.style.display = 'block';
-};
+document.getElementById("openFormBtn").addEventListener("click", () => {
+  document.getElementById("formPopup").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+});
 
-closeFormBtn.onclick = () => {
-  formPopup.style.display = 'none';
-  overlay.style.display = 'none';
-};
+document.getElementById("closeFormBtn").addEventListener("click", () => {
+  document.getElementById("formPopup").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+});
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
 document.getElementById("prevBtn").addEventListener("mouseup", clearPrevHold);
