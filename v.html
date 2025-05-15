@@ -10,7 +10,7 @@
 <body>
 
   <div id="setupScreen" class="screen visible">
-    <h1>Dictionary v47</h1>
+    <h1>Dictionary v48</h1>
     <p>Synonyms and Antonyms</p>
     
     <!--<h1>Setup</h1>-->
@@ -27,16 +27,15 @@
   </div>
 
   <div id="studyScreen" class="screen">
-    <div class="topDiv">
+    <div id="menuScreen">
+      <div class="topDiv">
       <button id="infoButton">ⓘ</button>
-        <button id="openFormBtn">Form</button>
+        <button id="betaBtn">demo</button>
     </div>
     <div class="search-container">
   <input type="text" id="wordSearch" class="search-box" placeholder="Search in Dictionary" autocomplete="off">
   <button id="clearSearch" class="searchBar-button">⌕</button>
     </div>
-    
-
 <div id="searchResults" class="hidden">
  <!-- <div id="searchResultHead">
     <button>MINU</button>
@@ -59,8 +58,43 @@
   <h4>Words Found</h4>
   <div id="wordsFound"></div>
   </div>
+  </div>
 </div>
     </div>
+    <div id="mainScreen">
+    <div class="topDiv">
+      <button id="infoButton">ⓘ</button>
+        <button id="openFormBtn">Form</button>
+    </div>
+    <!--
+    <div class="search-container">
+  <input type="text" id="wordSearch" class="search-box" placeholder="Search in Dictionary" autocomplete="off">
+  <button id="clearSearch" class="searchBar-button">⌕</button>
+    </div>
+<div id="searchResults" class="hidden">
+ 
+  <div id="searchResultDiv">
+  <div id="noResultsMessage" class="search-no-results hidden">No word found...</div>
+  <div id="exactMatchSection" class="hidden">
+    <h4>Exact Match</h4>
+    <div id="exactMatch"></div>
+  </div>
+  <div id="closeMatchesSection" class="hidden">
+    <h4>Close Matches</h4>
+    <div id="closeMatches"></div>
+  </div>
+  <div id="wordsLocatedSection" class="hidden">
+  <h4>Words Located</h4>
+  <div id="wordsLocated"></div>
+  </div>
+  <div id="wordsFoundSection" class="hidden">
+  <h4>Words Found</h4>
+  <div id="wordsFound"></div>
+  </div>
+</div>
+
+    </div>
+    -->
     <div class="top-bar">
       <h1>Dictionary</h1>
    <!--   <div class="clock-section">
@@ -137,6 +171,7 @@
     <div class="footer-buttons">
       <button id="prevBtn">Previous</button>
       <button id="nextBtn">Next</button>
+    </div>
     </div>
   </div>
 
