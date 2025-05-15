@@ -39,6 +39,14 @@ body {
   border-radius: 10px;
   z-index: 1000;
 }
+#formPopup input,
+#formPopup select {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
     h1 {
       text-align: center;
       margin-bottom: 20px;
