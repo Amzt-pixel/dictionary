@@ -10,7 +10,7 @@
 <body>
 
   <div id="setupScreen" class="screen visible">
-    <h1>Dictionary v44</h1>
+    <h1>Dictionary v45</h1>
     <p>Synonyms and Antonyms</p>
     
     <!--<h1>Setup</h1>-->
@@ -68,9 +68,32 @@
       <input type="checkbox" id="viewToggle" /> Toggle Dark Mode
     </label>
         <button id="infoButton">ⓘ</button>
+        <button id="openFormBtn>Form</button>
       </div>
     </div>
-    
+    <!-- PopUp Form -->
+      <div id="overlay"></div>
+  <div id="formPopup">
+    <label for="rollInput">Roll:</label>
+    <input type="number" id="rollInput" placeholder="Enter Roll">
+
+    <label for="marksInput">Marks:</label>
+    <input type="number" id="marksInput" placeholder="Enter Marks">
+
+    <label for="ageSelect">Age:</label>
+    <select id="ageSelect">
+      <option value="">--Select Age--</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+    </select>
+
+    <button id="closeFormBtn">Close</button>
+  </div>
 <!-- Add these right before </body> -->
 <!-- Bootstrap JS -->
     <div class="rootWordBox">
