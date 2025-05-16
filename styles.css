@@ -114,8 +114,8 @@ body {
   cursor: pointer;
   margin: 10px 0px;
   border-radius: 0px;
-  background-color: #001a33;
-  color: white;
+  background-color: #339933;
+  color: #003d66;
 }
 
 .tabBtn.active {
@@ -354,7 +354,7 @@ body {
   position: absolute;
   top: 100%; /* appears just below the trigger element */
   left: 10px;
-  right: 10px; /* creates spacing from both sides */
+  right: 20px; /* creates spacing from both sides */
   border: 1px solid #1d4e89;
   border-radius: 4px;
   padding: 10px;
