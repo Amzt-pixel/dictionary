@@ -307,9 +307,13 @@ body {
   display: flex;
   gap: 5px;
 }*/
-#contentArea, #content{
+#contentArea{
       position: relative;
       z-index: 999;
+}
+#content{
+      position: absolute;
+      z-index: 550;
 }
 #searchResults { 
   border: 1px solid #1d4e89;
