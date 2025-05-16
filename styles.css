@@ -1,4 +1,4 @@
-body {
+lbody {
       font-family: Arial, sans-serif;
       margin: 0;
    /*   padding: 20px;*/
@@ -312,7 +312,7 @@ body {
       z-index: 999;
 }
 #content{
-      position: absolute;
+      position: relative;
       z-index: 550;
 }
 #searchResults { 
