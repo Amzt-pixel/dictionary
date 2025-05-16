@@ -211,7 +211,23 @@ Viscosity: Semen should become more liquid after ejaculation. The viscosity of s
       <option value="500">Step 500 and -500</option>
     </select>
     </div>  
+<!-- Add this to your HTML (preferably near other controls) -->
+<div id="savedWordsPanel">
+  <button id="viewSavedBtn" onclick="toggleSavedWords()">View Saved Words</button>
+  <button id="authBtn" onclick="handleAuth()">Login</button>
+  
+  <div id="savedWordsDiv" style="display: none;">
+    <button id="clearSavedBtn" onclick="clearSavedWords()">Clear All</button>
+    <button id="closeSavedBtn" onclick="toggleSavedWords()">Close</button>
+    <div id="savedWordsList"></div>
+  </div>
+</div>
 
+<!-- Add save/delete button in your word display section -->
+<div id="wordControls">
+  <button id="saveWordBtn" onclick="saveWord()">Save Word</button>
+  <button id="deleteWordBtn" onclick="deleteWord()" style="display: none;">Delete Word</button>
+</div>
     <div class="footer-buttons">
       <button id="prevBtn">Previous</button>
       <button id="nextBtn">Next</button>
