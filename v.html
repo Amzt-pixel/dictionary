@@ -71,7 +71,21 @@
   </div>
 </div>
         <div id="content">
-        <p>Content Here</p>
+        <p>
+          I want to make these changes :
+
+1. Take a global constant name csvColumnLimit with integer values, which specifies how many columns the csv can have at max. For now, csvColumnLimit = 5.
+2. Update the csv to allow maximum Columns according csvColumnLimit.
+3. Every row must have 2 minimum columns : word and NumId (int).
+4. Rows do not necessarily need to have all columns except for the first two.
+   Eg :
+   Rows with all 5 columns are accepted.
+   Rows with 4th and 5th but no 3rd column are accepted.
+   Rows with 3rd but not 4th Or 5th are accepted.
+   Rows without 3rd, 4th, 5th are accepted.
+   Rows without either the 1st Or 2nd aren't accepted.
+
+        </p>
         </div>
 </div>
     </div>
