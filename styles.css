@@ -307,12 +307,18 @@ body {
   display: flex;
   gap: 5px;
 }*/
+#contentArea, #content{
+      position: relative;
+      z-index: 999;
+}
 #searchResults { 
   border: 1px solid #1d4e89;
   border-radius: 4px;
   padding: 10px;
   margin-top: 5px;
   background-color: #fff;
+      position: absolute;
+      z-index: 1000;
 }
 #searchResultHead{
       position : relative;
