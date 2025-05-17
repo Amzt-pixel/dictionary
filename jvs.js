@@ -18,6 +18,12 @@ let csvName = null;
 let wordSetsCount = 123;
 const csvColumnLimit = 5; //CSV column limit
 const HOLD_DURATION = 1000; // 1 second
+// Add this near your other constants (around line 11)
+const STEP_OPTIONS = {
+  '0': [1, 3, 10, 25],
+  '1': [1, 3, 10, 25, 100, 500]
+};
+
 
 // Initialize app
 window.onload = async () => {
@@ -54,6 +60,7 @@ const searchButton = document.querySelector(".searchBar-button");
 document.getElementById("viewMode").addEventListener("change", (e) => {
     viewWordsMode = parseInt(e.target.value);
 });
+
 
 //Menu Visibility
 document.getElementById("showMenuBtn").addEventListener("click", function () {
@@ -500,9 +507,22 @@ function shuffleArray(array) {
 
 function initStepSelector() {
   const stepSelector = document.getElementById("stepSelector");
+  const viewModeSelect = document.getElementById("viewMode");
+  
+  function updateStepOptions() {
+    const options = STEP_OPTIONS[viewModeSelect.value];
+    stepSelector.innerHTML = options.map(value => 
+      `<option value="${value}">${value}</option>`
+    ).join('');
+    stepNumber = parseInt(stepSelector.value); // Set initial stepNumber
+  }
+
+  // Initialize and set up event listeners
+  updateStepOptions();
+  viewModeSelect.addEventListener("change", updateStepOptions);
+  
   stepSelector.addEventListener("change", (e) => {
     stepNumber = parseInt(e.target.value);
-    console.log("Step size changed to:", stepNumber); // For debugging
   });
 }
 
