@@ -105,6 +105,26 @@ document.getElementById("nextBtn").addEventListener("touchstart", startNextHold)
 document.getElementById("nextBtn").addEventListener("touchend", clearNextHold);
 document.getElementById("nextBtn").addEventListener("touchcancel", clearNextHold);
 
+// Tab button logic
+document.getElementById('tab1').addEventListener('click', () => {
+  document.querySelectorAll('.tabBtn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('tab1').classList.add('active');
+  viewRootWords();
+});
+
+document.getElementById('tab2').addEventListener('click', () => {
+  document.querySelectorAll('.tabBtn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('tab2').classList.add('active');
+  viewWordMeanings();
+});
+
+document.getElementById('tab3').addEventListener('click', () => {
+  document.querySelectorAll('.tabBtn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('tab3').classList.add('active');
+  viewNotedWords();
+});
+
+
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
   const mode = document.getElementById("topicSelector").value;
@@ -870,4 +890,51 @@ function clearNextHold() {
     clearTimeout(nextHoldTimer);
     nextHoldTimer = null;
   }
+}
+// Tab content functions
+function viewRootWords() {
+  const contentArea = document.getElementById('contentArea');
+  contentArea.innerHTML = rootWordList.map(word => `<p>${word}</p>`).join('');
+}
+
+function viewWordMeanings() {
+  const contentArea = document.getElementById('contentArea');
+  contentArea.innerHTML = `
+    <p><strong>Word Meanings Section:</strong></p>
+    <p>I want to make these changes :
+
+1. Take a global constant name csvColumnLimit with integer values, which specifies how many columns the csv can have at max. For now, csvColumnLimit = 5.
+2. Update the csv to allow maximum Columns according csvColumnLimit.
+3. Every row must have 2 minimum columns : word and NumId (int).
+4. Rows do not necessarily need to have all columns except for the first two.
+   Eg :
+   Rows with all 5 columns are accepted.
+   Rows with 4th and 5th but no 3rd column are accepted.
+   Rows with 3rd but not 4th Or 5th are accepted.
+   Rows without 3rd, 4th, 5th are accepted.
+   Rows without either the 1st Or 2nd aren't accepted.
+</p>
+  `;
+}
+
+function viewNotedWords() {
+  const contentArea = document.getElementById('contentArea');
+  contentArea.innerHTML = `
+    <p><strong>What are the various semen parameters? 
+
+At AFIC, we strictly follow the universal guidelines provided by WHO, in deciding what values should be considered normal when conducting semen analysis for the sake of statistical accuracy. 
+
+Volume: For a healthy male, the total volume of the ejaculated semen has to be over 1.5 mL. Low discharge volume(hypospermia) is a common cause of male infertility. 
+pH: Normal semen samples are mildly alkaline with a pH over 7.2. Abnormal pH can affect the motility and wellbeing of sperms inside the female reproductive system. 
+Total sperm number: Total sperm count is a very important sperm parameter for deciding fertility. A normal semen sample should contain 39 million sperm per ejaculate or more. 
+Morphology: Proper morphology of sperms is a very important requirement for successful fertilization. More than 4% sperms should be normal in the semen. 
+Vitality: Vitality defines what percentage of sperms in the sample are alive and moving. More than 58% sperms should be alive for a healthy fertile man. 
+Progressive motility: Progressive motility determines whether sperms have the capacity to propel themselves forward in a straight line. Progressive motility should be more than 32%.
+Total Motility: Percentage of sperms with motile behavior (motion) should be more than 40%. This includes both progressive and non-progressive motility. 
+No sperm agglutination : Sperm Agglutination is clumping of motile sperms. When motile sperms stick together forming clusters, their movement is seriously hindered. 
+Viscosity: Semen should become more liquid after ejaculation. The viscosity of semen is measured by the length of threads formed after liquefaction. Less than 2 cm is considered the normal length. 
+
+
+</strong></p>
+  `;
 }
