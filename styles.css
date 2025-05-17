@@ -99,7 +99,7 @@ body {
     }
 
    #closeInfo, #closeFormBtn {
-         width: 100%;
+         width: 40%;
    }
 .tab-buttons {
   display: flex;
