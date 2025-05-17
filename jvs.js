@@ -19,10 +19,13 @@ let wordSetsCount = 123;
 const csvColumnLimit = 5; //CSV column limit
 const HOLD_DURATION = 1000; // 1 second
 // Add this near your other constants (around line 11)
+// Add these with your other variables
 const STEP_OPTIONS = {
-  '0': [1, 3, 10, 25],
-  '1': [1, 3, 10, 25, 100, 500]
+  '1': [1, 3, 10, 25],
+  '0': [1, 3, 10, 25, 100, 500]
 };
+let pendingViewMode = null;  // Temporary storage until saved
+let pendingStepNumber = null;
 
 
 // Initialize app
@@ -131,6 +134,29 @@ document.getElementById('tab3').addEventListener('click', () => {
   viewNotedWords();
 });
 
+document.getElementById("savePopup").addEventListener("click", () => {
+  // Only save if there are pending changes
+  if (pendingViewMode !== null) {
+    viewWordsMode = pendingViewMode;
+    pendingViewMode = null;
+  }
+  
+  if (pendingStepNumber !== null) {
+    stepNumber = pendingStepNumber;
+    pendingStepNumber = null;
+  }
+
+  console.log("Saved values:", {
+    viewMode: viewWordsMode,
+    stepSelector: stepNumber
+  });
+
+  // Optional: Save to localStorage
+  // localStorage.setItem('appSettings', JSON.stringify({
+  //   viewMode: viewWordsMode,
+  //   stepNumber: stepNumber
+  // }));
+});
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -508,21 +534,27 @@ function shuffleArray(array) {
 function initStepSelector() {
   const stepSelector = document.getElementById("stepSelector");
   const viewModeSelect = document.getElementById("viewMode");
-  
-  function updateStepOptions() {
-    const options = STEP_OPTIONS[viewModeSelect.value];
+
+  function updateStepOptions(viewMode) {
+    const options = STEP_OPTIONS[viewMode];
     stepSelector.innerHTML = options.map(value => 
       `<option value="${value}">${value}</option>`
     ).join('');
-    stepNumber = parseInt(stepSelector.value); // Set initial stepNumber
   }
 
-  // Initialize and set up event listeners
-  updateStepOptions();
-  viewModeSelect.addEventListener("change", updateStepOptions);
-  
+  // Initialize with current viewWordsMode (1 by default)
+  updateStepOptions(viewWordsMode.toString());
+  stepSelector.value = stepNumber; // Set to current stepNumber
+
+  // Handle viewMode changes
+  viewModeSelect.addEventListener("change", (e) => {
+    pendingViewMode = parseInt(e.target.value);
+    updateStepOptions(e.target.value);
+  });
+
+  // Handle step changes
   stepSelector.addEventListener("change", (e) => {
-    stepNumber = parseInt(e.target.value);
+    pendingStepNumber = parseInt(e.target.value);
   });
 }
 
