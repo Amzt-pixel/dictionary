@@ -110,17 +110,14 @@ body {
 .tabBtn {
   flex: 1;
   padding: 10px;
-  border: 1px solid #aaa;
   cursor: pointer;
   margin: 10px 0px;
   border-radius: 0px;
-  background-color: #339933;
-  color: #003d66;
 }
 
 .tabBtn.active {
-  background-color: #007BFF;
-  color: white;
+  background-color: #1d4e89;
+  color: #7dcfb6;
 }
    .footer-buttons button {
          width: 48%; 
