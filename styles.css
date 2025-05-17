@@ -497,11 +497,10 @@ body {
   padding: 15px;
   background-color: #f5f7fa;
   border-radius: 8px;
-  counter-reset: root-counter; /* Reset counter for root words */
 }
 
 .root-word-result {
-  padding: 10px 15px 10px 2em; /* Added left padding for numbers */
+  padding: 10px 15px;
   margin: 5px 0;
   background-color: white;
   border-left: 4px solid #4a6baf;
@@ -511,15 +510,7 @@ body {
   font-size: 1rem;
   color: #2c3e50;
   position: relative;
-}
-
-.root-word-result::before {
-  content: counter(root-counter) ".";
-  counter-increment: root-counter;
-  position: absolute;
-  left: 10px;
-  color: #4a6baf;
-  font-weight: bold;
+  padding-left: 2.5em; /* Space for numbers */
 }
 
 .root-word-result:hover {
@@ -539,11 +530,10 @@ body {
   padding: 15px;
   background-color: #f9f5ff;
   border-radius: 8px;
-  counter-reset: meaning-counter; /* Reset counter for meanings */
 }
 
 .meaning-result {
-  padding: 10px 15px 10px 2em; /* Added left padding for numbers */
+  padding: 10px 15px;
   margin: 8px 0;
   background-color: white;
   border-left: 4px solid #8a4fff;
@@ -551,15 +541,7 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
-}
-
-.meaning-result::before {
-  content: counter(meaning-counter) ".";
-  counter-increment: meaning-counter;
-  position: absolute;
-  left: 10px;
-  color: #8a4fff;
-  font-weight: bold;
+  padding-left: 2.5em; /* Space for numbers */
 }
 
 .meaning-result:hover {
@@ -587,4 +569,20 @@ body {
   margin-bottom: 15px;
   font-size: 1.2em;
   font-weight: 600;
+}
+
+/* Remove all ::before pseudo-elements - we'll use JS numbering instead */
+.root-word-result::before, .meaning-result::before {
+  content: none !important;
+}
+/* Style for the JS-generated numbers */
+.item-number {
+  color: #4a6baf; /* Blue for root words */
+  font-weight: bold;
+  position: absolute;
+  left: 15px;
+}
+
+.meaning-result .item-number {
+  color: #8a4fff; /* Purple for meanings */
 }
