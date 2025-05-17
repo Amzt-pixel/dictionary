@@ -998,7 +998,7 @@ function viewRootWords() {
   <div class="root-word-result" data-word="${item.word}">
     <span class="result-number">${index + 1}.</span>
     <span class="result-word">${item.word}</span>
-   // <span class="root-id">– ${item.numId}</span>
+   <span class="root-id">– ${item.numId}</span>
   </div>
 `).join('');
     document.querySelectorAll('.root-word-result').forEach(item => {
