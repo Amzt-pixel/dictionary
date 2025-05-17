@@ -654,9 +654,18 @@ function handleSearch(e) {
       .sort((a, b) => a.localeCompare(b));
 
     if (matchingWords.length > 0) {
-      document.getElementById("wordsFound").innerHTML = matchingWords
+     /* document.getElementById("wordsFound").innerHTML = matchingWords
         .map(word => `<div class="search-result-item">${word}</div>`)
-        .join("");
+        .join("");*/
+      const wordsFoundHeader = document.querySelector("#wordsFoundSection h4");
+  wordsFoundHeader.textContent = `Words Found (${matchingWords.length})`;
+  
+  document.getElementById("wordsFound").innerHTML = matchingWords.map((word, index) => `
+    <div class="search-result-item">
+      <span class="result-number">${index + 1}.</span>
+      <span class="result-word">${word}</span>
+    </div>
+  `).join('');
       document.getElementById("wordsFoundSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
@@ -673,9 +682,18 @@ function handleSearch(e) {
   }
 
   if (closeMatches.length > 0) {
-    closeMatchesDiv.innerHTML = closeMatches
+    /*closeMatchesDiv.innerHTML = closeMatches
       .map(word => `<div class="search-result-item">${word}</div>`)
-      .join("");
+      .join("");*/
+    const closeMatchesHeader = document.querySelector("#closeMatchesSection h4");
+  closeMatchesHeader.textContent = `Close Matches (${closeMatches.length})`;
+  
+  closeMatchesDiv.innerHTML = closeMatches.map((word, index) => `
+    <div class="search-result-item">
+      <span class="result-number">${index + 1}.</span>
+      <span class="result-word">${word}</span>
+    </div>
+  `).join('');
   } else if (!exactMatch && !idMatch && !letterMatch) {
     noResultsMessage.classList.remove("hidden");
   }
