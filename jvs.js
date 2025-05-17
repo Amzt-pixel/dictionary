@@ -995,10 +995,10 @@ function viewRootWords() {
   
   if (rootWordList.length > 0) {
     rootWordsList.innerHTML = rootWordList.map((item, index) =>
-      `<div class="root-word-result" data-word="${item.word}">
-        ${index + 1}. <strong>${item.word}</strong> <span class="root-id">– ${item.numId}</span>
-      </div>`
-    ).join('');
+  `<div class="root-word-result" data-word="${item.word}">
+    <span class="item-number">${index + 1}.</span> <strong>${item.word}</strong> <span class="root-id">– ${item.numId}</span>
+  </div>`
+).join('');
 
     document.querySelectorAll('.root-word-result').forEach(item => {
       item.addEventListener('click', function() {
@@ -1034,10 +1034,10 @@ function viewWordMeanings() {
 
   if (wordsWithMeanings.length > 0) {
     meaningsList.innerHTML = wordsWithMeanings.map((item, index) =>
-      `<div class="meaning-result" data-word="${item.word}">
-        ${index + 1}. <strong>${item.word}</strong>: ${item.extra1}
-      </div>`
-    ).join('');
+  `<div class="meaning-result" data-word="${item.word}">
+    <span class="item-number">${index + 1}.</span> <strong>${item.word}</strong>: ${item.extra1}
+  </div>`
+).join('');
 
     document.querySelectorAll('.meaning-result').forEach(item => {
       item.addEventListener('click', function() {
