@@ -933,22 +933,52 @@ function viewRootWords() {
 }
 function viewWordMeanings() {
   const contentArea = document.getElementById('contentArea');
-  contentArea.innerHTML = `
-    <p><strong>Word Meanings Section:</strong></p>
-    <p>I want to make these changes :
+  
+  // Filter words that have a 3rd column (extra1)
+  const wordsWithMeanings = csvData.filter(item => item.extra1);
 
-1. Take a global constant name csvColumnLimit with integer values, which specifies how many columns the csv can have at max. For now, csvColumnLimit = 5.
-2. Update the csv to allow maximum Columns according csvColumnLimit.
-3. Every row must have 2 minimum columns : word and NumId (int).
-4. Rows do not necessarily need to have all columns except for the first two.
-   Eg :
-   Rows with all 5 columns are accepted.
-   Rows with 4th and 5th but no 3rd column are accepted.
-   Rows with 3rd but not 4th Or 5th are accepted.
-   Rows without 3rd, 4th, 5th are accepted.
-   Rows without either the 1st Or 2nd aren't accepted.
-</p>
+  // Create container with matching structure
+  contentArea.innerHTML = `
+    <div id="wordMeaningsSection" class="meanings-section">
+      <h3>Words with Definitions</h3>
+      <div id="wordMeaningsList"></div>
+    </div>
   `;
+
+  const meaningsList = document.getElementById('wordMeaningsList');
+
+  if (wordsWithMeanings.length > 0) {
+    // Populate meanings list if words found
+    meaningsList.innerHTML = wordsWithMeanings.map(item =>
+      `<div class="meaning-result" data-word="${item.word}">
+        <strong>${item.word}</strong>: ${item.extra1}
+      </div>`
+    ).join('');
+
+    // Add click handlers
+    document.querySelectorAll('.meaning-result').forEach(item => {
+      item.addEventListener('click', function() {
+        const selectedWord = this.dataset.word;
+        const index = studyList.indexOf(selectedWord);
+        
+        if (index !== -1) {
+          currentIndex = index;
+          wordsSeen++;
+          displayWord();
+          showScreen("study");
+        } else {
+          alert("Word not found in current study list");
+        }
+      });
+    });
+  } else {
+    // Display message when no words with definitions found
+    meaningsList.innerHTML = `
+      <div class="no-meanings-message">
+        No Words with Definitions
+      </div>
+    `;
+  }
 }
 
 function viewNotedWords() {
