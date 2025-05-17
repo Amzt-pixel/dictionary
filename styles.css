@@ -343,7 +343,6 @@ body {
 #contentArea {
  max-height: 600px;
  overflow-y: auto;
- background-color: #ccffff;
 }
 
 #content {
@@ -493,7 +492,7 @@ body {
 
 /* Root Words Section */
 #rootWordsSection {
-  margin-top: 20px;
+ /* margin-top: 20px;*/
   padding: 15px;
   background-color: #f5f7fa;
   border-radius: 8px;
@@ -526,7 +525,7 @@ body {
 
 /* Word Meanings Section */
 .meanings-section {
-  margin-top: 20px;
+ /* margin-top: 20px;*/
   padding: 15px;
   background-color: #f9f5ff;
   border-radius: 8px;
@@ -588,7 +587,7 @@ body {
 }
 /* Noted Words Section */
 .noted-section {
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   padding: 15px;
   background-color: #fff8e1; /* Light orange background */
   border-radius: 8px;
