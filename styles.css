@@ -521,3 +521,37 @@ body {
   font-size: 0.9rem;
   font-style: italic;
 }
+.no-meanings-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+.meanings-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f5ff;
+  border-radius: 8px;
+}
+
+.meaning-result {
+  padding: 10px 15px;
+  margin: 8px 0;
+  background-color: white;
+  border-left: 4px solid #8a4fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.meaning-result:hover {
+  background-color: #f3ebff;
+  transform: translateX(3px);
+}
+
+.meaning-result strong {
+  color: #5e35b1;
+}
