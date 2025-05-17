@@ -116,6 +116,7 @@ body {
   background-color: #ffcc80;
       font-weight: 700;
       color: #1d4e89;
+      border: none;
 }
 
 .tabBtn.active {
