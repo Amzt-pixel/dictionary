@@ -139,6 +139,11 @@ document.getElementById("savePopup").addEventListener("click", () => {
   if (pendingViewMode !== null) {
     viewWordsMode = pendingViewMode;
     pendingViewMode = null;
+
+    if (pendingStepNumber === null) {
+      stepNumber = 1; // Force default to 1
+      document.getElementById("stepSelector").value = 1; // Update UI
+    }
   }
   
   if (pendingStepNumber !== null) {
