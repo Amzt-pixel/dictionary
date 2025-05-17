@@ -489,3 +489,34 @@ body {
   color: #1d4e89;
   transform: scale(0.98);
 }
+
+/* Root Words Section - Distinct from search results */
+#rootWordsSection {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+}
+
+.root-word-result {
+  padding: 10px 15px;
+  margin: 5px 0;
+  background-color: white;
+  border-left: 4px solid #4a6baf;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.root-word-result:hover {
+  background-color: #e8f0fe;
+  transform: translateX(5px);
+}
+
+.root-id {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  font-style: italic;
+}
