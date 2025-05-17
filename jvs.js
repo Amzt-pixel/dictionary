@@ -894,34 +894,41 @@ function clearNextHold() {
 }
 // Tab content functions
 
+// Updated viewRootWords function (mirroring search results structure)
 function viewRootWords() {
   const contentArea = document.getElementById('contentArea');
-  contentArea.innerHTML = rootWordList.map(item =>
-    `<div class="root-word-item" data-word="${item.word}">
-      <strong>${item.word}</strong> – ${item.numId}
+  
+  // Clear previous content
+  contentArea.innerHTML = `
+    <div id="rootWordsSection" class="root-section">
+      <div id="rootWordsList"></div>
+    </div>
+  `;
+
+  // Populate root words list
+  const rootWordsList = document.getElementById('rootWordsList');
+  rootWordsList.innerHTML = rootWordList.map(item =>
+    `<div class="root-word-result" data-word="${item.word}">
+      ${item.word} <span class="root-id">– ${item.numId}</span>
     </div>`
   ).join('');
 
-  // Add click handlers to each root word item
-  document.querySelectorAll('.root-word-item').forEach(item => {
-    item.addEventListener('click', () => visitRootWord(item.dataset.word));
+  // Add click handlers (same pattern as search results)
+  document.querySelectorAll('.root-word-result').forEach(item => {
+    item.addEventListener('click', function() {
+      const selectedWord = this.dataset.word;
+      const index = studyList.indexOf(selectedWord);
+      
+      if (index !== -1) {
+        currentIndex = index;
+        wordsSeen++;
+        displayWord();
+        showScreen("study");
+      } else {
+        alert("Word not found in current study list");
+      }
+    });
   });
-}
-
-function visitRootWord(clickedWord) {
-  // Find the word in studyList (case-sensitive exact match)
-  const index = studyList.findIndex(word => word === clickedWord);
-  
-  if (index !== -1) {
-    currentIndex = index;
-    wordsSeen++;
-    displayWord();
-    
-    // Switch to the study screen if not already there
-    showScreen("study");
-  } else {
-    alert(`"${clickedWord}" not found in current study list`);
-  }
 }
 function viewWordMeanings() {
   const contentArea = document.getElementById('contentArea');
