@@ -21,8 +21,8 @@ const HOLD_DURATION = 1000; // 1 second
 // Add this near your other constants (around line 11)
 // Add these with your other variables
 const STEP_OPTIONS = {
-  '0': [1, 3, 10, 25],
-  '1': [1, 3, 10, 25, 100, 500]
+  '1': [1, 3, 10, 25, 100, 500],
+  '0': [1, 3, 10, 25]
 };
 let pendingViewMode = null;  // Temporary storage until saved
 let pendingStepNumber = null;
