@@ -491,16 +491,17 @@ body {
   transform: scale(0.98);
 }
 
-/* Root Words Section - Distinct from search results */
+/* Root Words Section */
 #rootWordsSection {
   margin-top: 20px;
   padding: 15px;
   background-color: #f5f7fa;
   border-radius: 8px;
+  counter-reset: root-counter; /* Reset counter for root words */
 }
 
 .root-word-result {
-  padding: 10px 15px;
+  padding: 10px 15px 10px 2em; /* Added left padding for numbers */
   margin: 5px 0;
   background-color: white;
   border-left: 4px solid #4a6baf;
@@ -509,6 +510,16 @@ body {
   transition: all 0.2s ease;
   font-size: 1rem;
   color: #2c3e50;
+  position: relative;
+}
+
+.root-word-result::before {
+  content: counter(root-counter) ".";
+  counter-increment: root-counter;
+  position: absolute;
+  left: 10px;
+  color: #4a6baf;
+  font-weight: bold;
 }
 
 .root-word-result:hover {
@@ -521,30 +532,34 @@ body {
   font-size: 0.9rem;
   font-style: italic;
 }
-.no-meanings-message {
-  padding: 20px;
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-  margin: 10px 0;
-}
+
+/* Word Meanings Section */
 .meanings-section {
   margin-top: 20px;
   padding: 15px;
   background-color: #f9f5ff;
   border-radius: 8px;
+  counter-reset: meaning-counter; /* Reset counter for meanings */
 }
 
 .meaning-result {
-  padding: 10px 15px;
+  padding: 10px 15px 10px 2em; /* Added left padding for numbers */
   margin: 8px 0;
   background-color: white;
   border-left: 4px solid #8a4fff;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
+}
+
+.meaning-result::before {
+  content: counter(meaning-counter) ".";
+  counter-increment: meaning-counter;
+  position: absolute;
+  left: 10px;
+  color: #8a4fff;
+  font-weight: bold;
 }
 
 .meaning-result:hover {
@@ -554,4 +569,22 @@ body {
 
 .meaning-result strong {
   color: #5e35b1;
+}
+
+/* Common Styles */
+.no-results-message, .no-meanings-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.section-title {
+  color: #444;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: 600;
 }
