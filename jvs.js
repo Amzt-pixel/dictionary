@@ -923,7 +923,8 @@ function viewRootWords() {
         currentIndex = index;
         wordsSeen++;
         displayWord();
-        showScreen("study");
+        document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("mainScreen").style.display = "block";
       } else {
         alert("Word not found in current study list");
       }
