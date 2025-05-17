@@ -586,3 +586,36 @@ body {
 .meaning-result .item-number {
   color: #8a4fff; /* Purple for meanings */
 }
+/* Noted Words Section */
+.noted-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff8e1; /* Light orange background */
+  border-radius: 8px;
+}
+
+.noted-result {
+  padding: 10px 15px;
+  margin: 8px 0;
+  background-color: white;
+  border-left: 4px solid #ffb74d; /* Orange accent */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.noted-result:hover {
+  background-color: #ffe0b2;
+  transform: translateX(3px);
+}
+
+.noted-result .result-number {
+  color: #ff9800; /* Orange numbers */
+  min-width: 2em;
+}
+
+.noted-result .result-word {
+  color: #5d4037; /* Dark brown text */
+}
