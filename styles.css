@@ -353,8 +353,8 @@ body {
 
 #searchResults { 
   position: absolute;
-  left: 10px;
-  right: 10px; /* creates spacing from both sides */
+  left: 5px;
+  right: 5px; /* creates spacing from both sides */
   border: 1px solid #1d4e89;
   border-radius: 4px;
   padding: 10px;
