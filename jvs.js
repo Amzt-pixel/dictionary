@@ -25,6 +25,7 @@ window.onload = async () => {
   checkInputs();// Enable Start button if defaults are valid
   initSearch ();
   initStepSelector();
+  viewRootWords();
 };
 
 // Event Listeners
@@ -892,9 +893,12 @@ function clearNextHold() {
   }
 }
 // Tab content functions
+
 function viewRootWords() {
   const contentArea = document.getElementById('contentArea');
-  contentArea.innerHTML = rootWordList.map(word => `<p>${word}</p>`).join('');
+  contentArea.innerHTML = rootWordList.map(item =>
+    `<p><strong>${item.word}</strong> – ${item.numId}</p>`
+  ).join('');
 }
 
 function viewWordMeanings() {
