@@ -1080,22 +1080,47 @@ function viewWordMeanings() {
 }
 function viewNotedWords() {
   const contentArea = document.getElementById('contentArea');
+  
+  // Filter words with value = 1 in 5th column (extra3)
+  const notedWords = csvData.filter(item => item.extra3 === "1");
+
   contentArea.innerHTML = `
-    <p><strong>What are the various semen parameters? 
-
-At AFIC, we strictly follow the universal guidelines provided by WHO, in deciding what values should be considered normal when conducting semen analysis for the sake of statistical accuracy. 
-
-Volume: For a healthy male, the total volume of the ejaculated semen has to be over 1.5 mL. Low discharge volume(hypospermia) is a common cause of male infertility. 
-pH: Normal semen samples are mildly alkaline with a pH over 7.2. Abnormal pH can affect the motility and wellbeing of sperms inside the female reproductive system. 
-Total sperm number: Total sperm count is a very important sperm parameter for deciding fertility. A normal semen sample should contain 39 million sperm per ejaculate or more. 
-Morphology: Proper morphology of sperms is a very important requirement for successful fertilization. More than 4% sperms should be normal in the semen. 
-Vitality: Vitality defines what percentage of sperms in the sample are alive and moving. More than 58% sperms should be alive for a healthy fertile man. 
-Progressive motility: Progressive motility determines whether sperms have the capacity to propel themselves forward in a straight line. Progressive motility should be more than 32%.
-Total Motility: Percentage of sperms with motile behavior (motion) should be more than 40%. This includes both progressive and non-progressive motility. 
-No sperm agglutination : Sperm Agglutination is clumping of motile sperms. When motile sperms stick together forming clusters, their movement is seriously hindered. 
-Viscosity: Semen should become more liquid after ejaculation. The viscosity of semen is measured by the length of threads formed after liquefaction. Less than 2 cm is considered the normal length. 
-
-
-</strong></p>
+    <div id="notedWordsSection" class="noted-section">
+      <h3>Noted Words (${notedWords.length})</h3>
+      <div id="notedWordsList"></div>
+    </div>
   `;
+
+  const notedList = document.getElementById('notedWordsList');
+
+  if (notedWords.length > 0) {
+    notedList.innerHTML = notedWords.map((item, index) => {
+      // Use extra1 (3rd column) if available, otherwise show word only
+      const noteContent = item.extra1 ? `${item.word}: ${item.extra1}` : item.word;
+      return `
+        <div class="noted-result" data-word="${item.word}">
+          <span class="result-number">${index + 1}.</span>
+          <span class="result-word">${noteContent}</span>
+        </div>`;
+    }).join('');
+
+    // Add click handlers (same as other views)
+    document.querySelectorAll('.noted-result').forEach(item => {
+      item.addEventListener('click', function() {
+        const selectedWord = this.dataset.word;
+        const index = studyList.indexOf(selectedWord);
+        
+        if (index !== -1) {
+          currentIndex = index;
+          wordsSeen++;
+          displayWord();
+          showScreen("study");
+        } else {
+          alert("Word not found in current study list");
+        }
+      });
+    });
+  } else {
+    notedList.innerHTML = '<div class="no-results-message">No Noted Words Found</div>';
+  }
 }
