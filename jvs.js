@@ -897,10 +897,32 @@ function clearNextHold() {
 function viewRootWords() {
   const contentArea = document.getElementById('contentArea');
   contentArea.innerHTML = rootWordList.map(item =>
-    `<p><strong>${item.word}</strong> – ${item.numId}</p>`
+    `<div class="root-word-item" data-word="${item.word}">
+      <strong>${item.word}</strong> – ${item.numId}
+    </div>`
   ).join('');
+
+  // Add click handlers to each root word item
+  document.querySelectorAll('.root-word-item').forEach(item => {
+    item.addEventListener('click', () => visitRootWord(item.dataset.word));
+  });
 }
 
+function visitRootWord(clickedWord) {
+  // Find the word in studyList (case-sensitive exact match)
+  const index = studyList.findIndex(word => word === clickedWord);
+  
+  if (index !== -1) {
+    currentIndex = index;
+    wordsSeen++;
+    displayWord();
+    
+    // Switch to the study screen if not already there
+    showScreen("study");
+  } else {
+    alert(`"${clickedWord}" not found in current study list`);
+  }
+}
 function viewWordMeanings() {
   const contentArea = document.getElementById('contentArea');
   contentArea.innerHTML = `
