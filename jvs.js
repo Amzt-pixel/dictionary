@@ -25,7 +25,6 @@ window.onload = async () => {
   checkInputs();// Enable Start button if defaults are valid
   initSearch ();
   initStepSelector();
-  viewRootWords();
 };
 
 // Event Listeners
@@ -285,6 +284,7 @@ function startSession() {
   wordSetsCount = calculateWordSets();
   rootWordList = getRootWords(studyList);
   showScreen("study");
+  viewRootWords();
   displayWord();
 }
 
