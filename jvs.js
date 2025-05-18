@@ -31,7 +31,9 @@ let pendingStepNumber = null;
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
-  checkInputs();// Enable Start button if defaults are valid
+  checkInputs();
+  initSearch ();
+  initStepSelector();// Enable Start button if defaults are valid
 };
 
 // Event Listeners
@@ -322,8 +324,6 @@ function startSession() {
   showScreen("study");
   viewRootWords();
   displayWord();
-  initSearch ();
-  initStepSelector();
 }
 
 function getRootWords(list) {
@@ -775,7 +775,7 @@ function searchResultClick() {
   // use selectedWord
 } else {
   alert("data-val not found on element:", item);
-  return();
+  return;
 }
 
       if (!studyList.includes(selectedWord)) {
