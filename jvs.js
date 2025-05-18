@@ -487,7 +487,6 @@ function nextWord() {
       wordsSeen++;
       displayWord();
     }
-  }
   } else {
     // Original stepNumber logic
     if (currentIndex >= studyList.length - 1) {
