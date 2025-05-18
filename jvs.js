@@ -770,11 +770,11 @@ function searchResultClick() {
     item.addEventListener("click", () => {
       // const selectedWord = item.textContent.replace(/\(#\d+\)/g, "").trim();
      // const selectedWord = this.dataset.val;
-      if (this.dataset.val !== undefined) {
-  const selectedWord = this.dataset.val;
+      if (item.dataset.val !== undefined) {
+  const selectedWord = item.dataset.val;
   // use selectedWord
 } else {
-  alert("data-val not found on element:", this);
+  alert("data-val not found on element:", item);
   return();
 }
 
