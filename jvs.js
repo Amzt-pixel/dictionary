@@ -719,7 +719,7 @@ function handleSearch(e) {
   wordsFoundHeader.textContent = `Words Found (${matchingWords.length})`;
   
   document.getElementById("wordsFound").innerHTML = matchingWords.map((word, index) => `
-    <div class="search-result-item" data-word="${word}">
+    <div class="search-result-item" data-val="${word}">
       <span class="result-number">${index + 1}.</span>
       <span class="result-word">${word}</span>
     </div>
@@ -736,7 +736,7 @@ function handleSearch(e) {
   }
 
   if (exactMatch) {
-    exactMatchDiv.innerHTML = `<div class="search-result-item" data-word="${exactMatch}">${exactMatch}</div>`;
+    exactMatchDiv.innerHTML = `<div class="search-result-item" data-val="${exactMatch}">${exactMatch}</div>`;
   }
 
   if (closeMatches.length > 0) {
@@ -747,7 +747,7 @@ function handleSearch(e) {
   closeMatchesHeader.textContent = `Close Matches (${closeMatches.length})`;
   
   closeMatchesDiv.innerHTML = closeMatches.map((word, index) => `
-    <div class="search-result-item" data-word="${word}">
+    <div class="search-result-item" data-val="${word}">
       <span class="result-number">${index + 1}.</span>
       <span class="result-word">${word}</span>
     </div>
