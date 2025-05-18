@@ -457,14 +457,16 @@ function nextWord() {
       return;
     }
 
-    // 4. Get next root word's NumId (matchId)
-    if (currentRootIndex + 1 >= rootWordList.length) {
-      alert("Reached end of root words!");
+    // 4. Get root word's NumId that is 'stepNumber' ahead
+    const targetRootIndex = currentRootIndex + stepNumber;
+    
+    if (targetRootIndex < 0 || targetRootIndex >= rootWordList.length) {
+      alert(`Cannot step ${stepNumber} root words - out of bounds!`);
       return;
     }
-    const matchId = rootWordList[currentRootIndex + 1].numId;
+    const matchId = rootWordList[targetRootIndex].numId;
 
-    // 5. Find next matching word in studyList
+    // 5. Find matching word in studyList
     let foundIndex = -1;
     for (let i = currentIndex + 1; i < studyList.length; i++) {
       const nextWordStr = studyList[i];
@@ -485,7 +487,7 @@ function nextWord() {
       wordsSeen++;
       displayWord();
     }
-
+  }
   } else {
     // Original stepNumber logic
     if (currentIndex >= studyList.length - 1) {
