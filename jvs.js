@@ -769,15 +769,8 @@ function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
       // const selectedWord = item.textContent.replace(/\(#\d+\)/g, "").trim();
-     // const selectedWord = this.dataset.val;
-      if (item.dataset.val !== undefined) {
-  const selectedWord = item.dataset.val;
-  // use selectedWord
-} else {
-  alert("data-val not found on element:", item);
-  return;
-}
-
+     const selectedWord = item.dataset.val;
+      
       if (!studyList.includes(selectedWord)) {
         alert("Word not available in current session.");
         return;
