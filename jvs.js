@@ -693,7 +693,7 @@ function handleSearch(e) {
     if (idNum > 0 && idNum <= studyList.length) {
       const word = studyList[idNum - 1];
       document.getElementById("wordsLocated").innerHTML =
-        `<div class="search-result-item">${word}(#${idNum})</div>`;
+        `<div class="search-result-item" data-word="${word}">${word}(#${idNum})</div>`;
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
@@ -719,7 +719,7 @@ function handleSearch(e) {
   wordsFoundHeader.textContent = `Words Found (${matchingWords.length})`;
   
   document.getElementById("wordsFound").innerHTML = matchingWords.map((word, index) => `
-    <div class="search-result-item">
+    <div class="search-result-item" data-word="${word}">
       <span class="result-number">${index + 1}.</span>
       <span class="result-word">${word}</span>
     </div>
@@ -736,7 +736,7 @@ function handleSearch(e) {
   }
 
   if (exactMatch) {
-    exactMatchDiv.innerHTML = `<div class="search-result-item">${exactMatch}</div>`;
+    exactMatchDiv.innerHTML = `<div class="search-result-item" data-word="${exactMatch}">${exactMatch}</div>`;
   }
 
   if (closeMatches.length > 0) {
@@ -747,7 +747,7 @@ function handleSearch(e) {
   closeMatchesHeader.textContent = `Close Matches (${closeMatches.length})`;
   
   closeMatchesDiv.innerHTML = closeMatches.map((word, index) => `
-    <div class="search-result-item">
+    <div class="search-result-item" data-word="${word}">
       <span class="result-number">${index + 1}.</span>
       <span class="result-word">${word}</span>
     </div>
@@ -768,7 +768,8 @@ function handleSearch(e) {
 function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
-       const selectedWord = item.textContent.replace(/\(#\d+\)/g, "").trim();// trim helps prevent whitespace bugs
+      // const selectedWord = item.textContent.replace(/\(#\d+\)/g, "").trim();
+      const selectedWord = this.dataset.word;
       if (!studyList.includes(selectedWord)) {
         alert("Word not available in current session.");
         return;
