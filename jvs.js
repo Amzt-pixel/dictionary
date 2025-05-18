@@ -9,6 +9,7 @@ let wordsSeen = 0;
 let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
+let loopMode = 0;
 let isSearchActive = false;
 let stepNumber = 1;
 let resultsVisible = false;
