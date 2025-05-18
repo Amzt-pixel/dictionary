@@ -458,11 +458,11 @@ function nextWord() {
     }
 
     // 4. Get next root word's NumId (matchId)
-    if (currentRootIndex + stepNumber >= rootWordList.length) {
+    if (currentRootIndex + 1 >= rootWordList.length) {
       alert("No more Root words found! Reduce step!");
       return;
     } else{
-      const matchId = rootWordList[currentRootIndex + stepNumber].numId;
+      const matchId = rootWordList[currentRootIndex + 1].numId;
     }
 
     // 5. Find next matching word in studyList
