@@ -32,8 +32,6 @@ let pendingStepNumber = null;
 window.onload = async () => {
   await loadCSVList();
   checkInputs();// Enable Start button if defaults are valid
-  initSearch ();
-  initStepSelector();
 };
 
 // Event Listeners
@@ -324,6 +322,8 @@ function startSession() {
   showScreen("study");
   viewRootWords();
   displayWord();
+  initSearch ();
+  initStepSelector();
 }
 
 function getRootWords(list) {
