@@ -149,11 +149,13 @@
     <label for="marksInput">Marks:</label>
     <input type="number" id="marksInput" placeholder="Enter Marks">
 
-    <label for="viewMode">Age:</label>
-    <select id="viewMode">
-      <option value="1">All Words</option>
-      <option value="0">Root Words</option>
-    </select>
+    <div class="toggle-row">
+  <label for="viewMode" class="toggle-label">Root Word</label>
+  <label class="switch">
+    <input type="checkbox" id="viewMode">
+    <span class="slider"></span>
+  </label>
+    </div>
     <select id="stepSelector">
     </select>
 
