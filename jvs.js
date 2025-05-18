@@ -370,7 +370,7 @@ function calculateWordSets() {
 
 function prevWord() {
   if (viewWordsMode === 0) {
-            // 1. Get current word (string from studyList)
+    // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
 
     // 2. Find its NumId in csvData
@@ -391,12 +391,14 @@ function prevWord() {
       return;
     }
 
-    // 4. Get the PREVIOUS root word's NumId (matchId)
-    if (currentRootIndex === 0) {
-      alert("At beginning of root words!");
+    // 4. Get the root word's NumId that is 'stepNumber' BEFORE current
+    const targetRootIndex = currentRootIndex - stepNumber;
+    
+    if (targetRootIndex < 0) {
+      alert(`Cannot step back ${stepNumber} root words - reached beginning!`);
       return;
     }
-    const matchId = rootWordList[currentRootIndex - 1].numId;
+    const matchId = rootWordList[targetRootIndex].numId;
 
     // 5. Find previous matching word in studyList
     let foundIndex = -1;
@@ -420,17 +422,18 @@ function prevWord() {
       displayWord();
     }
   }
-  else{
-  if (currentIndex === 0) return;
-  else if(currentIndex + 1 > stepNumber) {
-    currentIndex=currentIndex - stepNumber;
-  }
   else {
-    alert("Reduce step");
-    return;
-  }
-  wordsSeen++;
-  displayWord();
+    // Handle non-root-word mode navigation
+    if (currentIndex === 0) return;
+    else if (currentIndex - stepNumber >= 0) {
+      currentIndex = currentIndex - stepNumber;
+    }
+    else {
+      alert("Reduce step");
+      return;
+    }
+    wordsSeen++;
+    displayWord();
   }
 }
 
