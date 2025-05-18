@@ -557,10 +557,16 @@ function initStepSelector() {
   stepSelector.value = stepNumber; // Set to current stepNumber
 
   // Handle viewMode changes
-  viewModeSelect.addEventListener("change", (e) => {
-    pendingViewMode = parseInt(e.target.value);
-    updateStepOptions(e.target.value);
-  });
+  const viewModeToggle = document.getElementById("viewMode");
+
+// Set initial state: unchecked = 1, checked = 0
+viewModeToggle.checked = (viewWordsMode === 0);
+
+// Update on toggle
+viewModeToggle.addEventListener("change", (e) => {
+  pendingViewMode = e.target.checked ? 0 : 1;
+  updateStepOptions(pendingViewMode.toString());
+});
 
   // Handle step changes
   stepSelector.addEventListener("change", (e) => {
