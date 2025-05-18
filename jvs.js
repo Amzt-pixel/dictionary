@@ -27,6 +27,15 @@ const STEP_OPTIONS = {
 };
 let pendingViewMode = null;  // Temporary storage until saved
 let pendingStepNumber = null;
+let pendingLoopMode = null;
+  let wordMeaningMode = 0;
+let pendingWordMeaningMode = null;
+
+let clickOnWord = 0;
+let pendingClickOnWord = null;
+
+let searchByMeaning = 0;
+let pendingSearchByMeaning = null;
 
 
 // Initialize app
@@ -151,18 +160,28 @@ document.getElementById("savePopup").addEventListener("click", () => {
     stepNumber = pendingStepNumber;
     pendingStepNumber = null;
   }
+  if (pendingLoopMode !== null) {
+    loopMode = pendingLoopMode;
+    pendingLoopMode = null;
+  }
 
-  console.log("Saved values:", {
-    viewMode: viewWordsMode,
-    stepSelector: stepNumber
-  });
+  if (pendingWordMeaningMode !== null) {
+    wordMeaningMode = pendingWordMeaningMode;
+    pendingWordMeaningMode = null;
+  }
 
-  // Optional: Save to localStorage
-  // localStorage.setItem('appSettings', JSON.stringify({
-  //   viewMode: viewWordsMode,
-  //   stepNumber: stepNumber
-  // }));
+  if (pendingClickOnWord !== null) {
+    clickOnWord = pendingClickOnWord;
+    pendingClickOnWord = null;
+  }
+
+  if (pendingSearchByMeaning !== null) {
+    searchByMeaning = pendingSearchByMeaning;
+    pendingSearchByMeaning = null;
+  }
+
 });
+
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
@@ -572,6 +591,29 @@ viewModeToggle.addEventListener("change", (e) => {
   stepSelector.addEventListener("change", (e) => {
     pendingStepNumber = parseInt(e.target.value);
   });
+
+const loopModeToggle = document.getElementById("loopMode");
+loopModeToggle.checked = (loopMode === 1);
+
+loopModeToggle.addEventListener("change", (e) => {
+  pendingLoopMode = e.target.checked ? 1 : 0;
+});
+
+// Set initial toggle states
+document.getElementById("wordMeaningMode").checked = (wordMeaningMode === 1);
+document.getElementById("clickOnWord").checked = (clickOnWord === 1);
+document.getElementById("searchByMeaning").checked = (searchByMeaning === 1);
+
+// Event listeners to store pending changes
+document.getElementById("wordMeaningMode").addEventListener("change", (e) => {
+  pendingWordMeaningMode = e.target.checked ? 1 : 0;
+});
+document.getElementById("clickOnWord").addEventListener("change", (e) => {
+  pendingClickOnWord = e.target.checked ? 1 : 0;
+});
+document.getElementById("searchByMeaning").addEventListener("change", (e) => {
+  pendingSearchByMeaning = e.target.checked ? 1 : 0;
+});
 }
 
 function initSearch() {
