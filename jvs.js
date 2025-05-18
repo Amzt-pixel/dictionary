@@ -693,7 +693,7 @@ function handleSearch(e) {
     if (idNum > 0 && idNum <= studyList.length) {
       const word = studyList[idNum - 1];
       document.getElementById("wordsLocated").innerHTML =
-        `<div class="search-result-item" data-word="${word}">${word}(#${idNum})</div>`;
+        `<div class="search-result-item" data-val="${word}">${word}(#${idNum})</div>`;
       document.getElementById("wordsLocatedSection").classList.remove("hidden");
       searchResults.classList.remove("hidden");
       document.getElementById("clearSearch").classList.remove("hidden");
@@ -769,7 +769,7 @@ function searchResultClick() {
   document.querySelectorAll(".search-result-item").forEach(item => {
     item.addEventListener("click", () => {
       // const selectedWord = item.textContent.replace(/\(#\d+\)/g, "").trim();
-      const selectedWord = this.dataset.word;
+      const selectedWord = this.dataset.val;
       if (!studyList.includes(selectedWord)) {
         alert("Word not available in current session.");
         return;
