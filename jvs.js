@@ -452,7 +452,7 @@ function prevWord() {
   displayWord(); // Single call at the end
 }
 
-   function nextWord() {
+function nextWord() {
   if (viewWordsMode === 0) {
     const currentWordStr = studyList[currentIndex];
     const currentWordData = csvData.find(item => item.word === currentWordStr);
@@ -605,7 +605,7 @@ document.getElementById("searchByMeaning").addEventListener("change", (e) => {
   pendingSearchByMeaning = e.target.checked ? 1 : 0;
 });
 }
-
+/*
 function initSearch() {
   let holdTimer = null;
   const holdDuration = 1000; // 1 second
@@ -690,6 +690,104 @@ function initSearch() {
     }
   });
 }
+*/
+function initSearch() {
+  let holdTimer = null;
+  const holdDuration = 1000; // 1 second
+
+  const searchButton = document.getElementById("clearSearch");
+  const searchInput = document.getElementById("wordSearch");
+  const searchIcon = searchButton.querySelector("svg");
+
+  const setIcon = (mode) => {
+    searchIcon.innerHTML = mode === "close"
+      ? `<line x1="18" y1="6" x2="6" y2="18"/>
+         <line x1="6" y1="6" x2="18" y2="18"/>`
+      : `<circle cx="11" cy="11" r="8"/>
+         <line x1="21" y1="21" x2="16.65" y2="16.65"/>`;
+  };
+
+  const toggleSearch = () => {
+    if (!resultsVisible) {
+      const term = searchInput.value.trim();
+      if (term.length < 3) {
+        alert("Search Inactive!\n" +
+          "Press and Hold to see Search Guide\n\n" +
+          `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`);
+        return;
+      }
+
+      isSearchActive = true;
+      handleSearch({ target: { value: term }, type: "manual" });
+
+      searchInput.addEventListener("input", handleSearch);
+      setIcon("close");
+      resultsVisible = true;
+    } else {
+      clearSearch();
+      searchInput.removeEventListener("input", handleSearch);
+      setIcon("search");
+      resultsVisible = false;
+    }
+  };
+
+  const startHold = () => {
+    if (holdTimer === null) {
+      searchButton.classList.add("search-button-hold");
+      holdTimer = setTimeout(() => {
+        alert(
+          "1. You must enter minimum 3 characters to initiate search.\n" +
+          "2. Search by {ID} to view Word at ID-th position.\n" +
+          "3. Search by {LETTER} to view Words starting with LETTER.\n" +
+          "4. Adjust step value for Previous and Next from Step field (Default : 1).\n" +
+          "5. Click on the Words to view them.\n" +
+          "6. Click the Meta button to view Meta info of session."
+        );
+        holdTimer = null;
+        searchButton.classList.remove("search-button-hold");
+      }, holdDuration);
+    }
+  };
+
+  const cancelHold = () => {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+    searchButton.classList.remove("search-button-hold");
+  };
+
+  // Mouse events
+  searchButton.addEventListener('mousedown', startHold);
+  searchButton.addEventListener('mouseup', cancelHold);
+  searchButton.addEventListener('mouseleave', cancelHold);
+
+  // Touch events
+  searchButton.addEventListener('touchstart', startHold);
+  searchButton.addEventListener('touchend', cancelHold);
+  searchButton.addEventListener('touchcancel', cancelHold);
+
+  // Click handler
+  searchButton.addEventListener("click", toggleSearch);
+
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      toggleSearch();
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      resultsVisible &&
+      searchInput.value.trim() === "" &&
+      e.target !== searchInput &&
+      !searchInput.contains(e.target)
+    ) {
+      toggleSearch();
+    }
+  });
+}
+
 
 function handleSearch(e) {
   if (!isSearchActive && e.type !== 'manual') return;
