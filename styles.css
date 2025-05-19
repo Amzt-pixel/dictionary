@@ -463,7 +463,38 @@ body {
   font-size: 20px;
   border: 1px solid #1d4e89;
 }
+.meaningDiv {
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 10px;
+}
 
+.meaning-row, 
+.example-row {
+  display: flex;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.meaning-label, 
+.example-label {
+  font-weight: 600;
+  color: #2c3e50;
+  min-width: 70px;
+  display: inline-block;
+}
+
+.example-row {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.example-text {
+  font-style: italic;
+  color: #555;
+}
 .word-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 3px 5px rgba(0,0,0,0.2);
