@@ -146,6 +146,7 @@
     <button id="closeInfo">Close</button>
   </div>
     <!-- PopUp Form -->
+      <!--
       <div id="formOverlay"></div>
   <div id="formPopup">
     <div class="toggle-row">
@@ -192,6 +193,60 @@
     <button id="savePopup">Save</button>
     <button id="closeFormBtn">Close</button>
   </div>
+      -->
+<div id="formOverlay"></div>
+<div id="formPopup">
+  <h3 style="text-align:center; margin-top: 0;">Settings</h3>
+
+  <div class="form-section">
+    <div class="toggle-row">
+      <label for="loopMode" class="toggle-label">Loop Mode</label>
+      <label class="switch">
+        <input type="checkbox" id="loopMode">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <label for="wordMeaningMode" class="toggle-label">Word Meaning Mode</label>
+      <label class="switch">
+        <input type="checkbox" id="wordMeaningMode">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <label for="clickOnWord" class="toggle-label">Activate Click on-word</label>
+      <label class="switch">
+        <input type="checkbox" id="clickOnWord">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <label for="searchByMeaning" class="toggle-label">Search by Meaning</label>
+      <label class="switch">
+        <input type="checkbox" id="searchByMeaning">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <label for="viewMode" class="toggle-label">Root Word</label>
+      <label class="switch">
+        <input type="checkbox" id="viewMode">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <select id="stepSelector"></select>
+
+  <div class="footer-buttons">
+    <button id="savePopup">Save</button>
+    <button id="closeFormBtn">Close</button>
+  </div>
+</div>
 <!-- Add these right before </body> -->
 <!-- Bootstrap JS -->
     <div class="rootWordBox">
