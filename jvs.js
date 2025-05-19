@@ -708,6 +708,10 @@ function handleSearch(e) {
   if (term.length < 3) {
         return;
   }
+  const exactMatch = studyList.find(word => word.toLowerCase() === term);
+  const closeMatches = studyList
+    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
+    .sort();
 
   const exactMatchSection = document.getElementById("exactMatchSection");
   const closeMatchesSection = document.getElementById("closeMatchesSection");
@@ -799,11 +803,7 @@ if (searchByMeaning === 1) {
     noResultsMessage.classList.remove("hidden");
   }
 } else{
-  const exactMatch = studyList.find(word => word.toLowerCase() === term);
-  const closeMatches = studyList
-    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
-    .sort();
-
+  
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item" data-val="${exactMatch}">${exactMatch}</div>`;
   }
