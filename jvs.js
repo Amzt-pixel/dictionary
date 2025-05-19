@@ -916,36 +916,48 @@ function displayWord() {
         `<button class="word-button antonym">${ant}</button>`
       ).join(" ") 
     : '<span class="no-words">None</span>';
-const meaningDiv = document.getElementById("meaningWord");
-  const wordCard = document.querySelector(".word-card .meaningDiv")?.parentNode;
-  
-  // Use pendingWordMeaningMode if available, otherwise use current wordMeaningMode
-  const currentMode = pendingWordMeaningMode !== null ? pendingWordMeaningMode : wordMeaningMode;
 
-  if (currentMode === 1) {
-    const wordEntries = csvData.filter(item => item.word === word);
-    const displayEntry = wordEntries.find(item => item.extra1 || item.extra2);
+
+  //Meaning part
+const meaningDiv = document.getElementById("meaningWord");
+const wordCard = document.querySelector(".word-card .meaningDiv")?.parentNode;
+
+// Use pendingWordMeaningMode if available, otherwise use current wordMeaningMode
+const currentMode = pendingWordMeaningMode !== null ? pendingWordMeaningMode : wordMeaningMode;
+
+if (currentMode === 1) {
+  const wordEntries = csvData.filter(item => item.word === word);
+  const displayEntry = wordEntries.find(item => item.extra1 || item.extra2);
+  
+  if (displayEntry && (displayEntry.extra1 || displayEntry.extra2)) {
+    let meaningHTML = '<div class="meaning-content">';
     
-    if (displayEntry && (displayEntry.extra1 || displayEntry.extra2)) {
-      let meaningHTML = '';
-      
-      if (displayEntry.extra1) {
-        meaningHTML += `<div class="meaning-row"><span class="meaning-label">Meaning:</span> ${displayEntry.extra1}</div>`;
-      }
-      if (displayEntry.extra2) {
-        meaningHTML += `<div class="example-row"><span class="example-label">Example:</span> ${displayEntry.extra2}</div>`;
-      }
-      
-      meaningDiv.innerHTML = meaningHTML;
-      wordCard?.classList.remove("hidden");
-    } else {
-      meaningDiv.innerHTML = '';
-      wordCard?.classList.add("hidden");
+    if (displayEntry.extra1) {
+      meaningHTML += `
+        <div class="meaning-section">
+          <span class="meaning-header">Meaning (1):</span>
+          <span class="meaning-text">${displayEntry.extra1}</span>
+        </div>`;
     }
+    if (displayEntry.extra2) {
+      meaningHTML += `
+        <div class="example-section">
+          <span class="example-header">Example (1):</span>
+          <span class="example-text">${displayEntry.extra2}</span>
+        </div>`;
+    }
+    
+    meaningHTML += '</div>';
+    meaningDiv.innerHTML = meaningHTML;
+    wordCard?.classList.remove("hidden");
   } else {
-    meaningDiv.innerHTML = '';
-    wordCard?.classList.add("hidden");
+    meaningDiv.innerHTML = '<span class="no-words">None</span>';
+    wordCard?.classList.remove("hidden");
   }
+} else {
+  meaningDiv.innerHTML = '';
+  wordCard?.classList.add("hidden");
+}
   // Remove click handlers and add touch-and-hold (long-press) detection
   document.querySelectorAll('.word-button').forEach(button => {
     let pressTimer;
