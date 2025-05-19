@@ -615,7 +615,7 @@ function initSearch() {
       const term = searchInput.value.trim();
       if (term.length < 3) {
         alert("Search Inactive!\n" +
-      "Press and Hold for Search Guide\n\n" +
+      "Press and Hold to see Search Guide\n\n" +
       `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`);
         return;
       }
@@ -723,9 +723,6 @@ function handleSearch(e) {
   noResultsMessage.classList.add("hidden");
   resetSearchSections();
 
-  exactMatchSection.classList.toggle("hidden", !exactMatch);
-  closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
-
 
   const idMatch = term.match(/^\{(\d+)\}$/);
   const letterMatch = term.match(/^\{([a-z])\}$/i);
@@ -804,6 +801,9 @@ if (searchByMeaning === 1) {
     noResultsMessage.classList.remove("hidden");
   }
 } else{
+
+  exactMatchSection.classList.toggle("hidden", !exactMatch);
+  closeMatchesSection.classList.toggle("hidden", closeMatches.length === 0);
   
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item" data-val="${exactMatch}">${exactMatch}</div>`;
