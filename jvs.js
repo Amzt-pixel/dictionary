@@ -615,7 +615,7 @@ function initSearch() {
       const term = searchInput.value.trim();
       if (term.length < 3) {
         alert("Search Inactive!\n" +
-      "Press and Hold for Help\n\n" +
+      "Press and Hold for Search Guide\n\n" +
       `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`);
         return;
       }
