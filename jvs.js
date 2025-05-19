@@ -615,7 +615,8 @@ function initSearch() {
       const term = searchInput.value.trim();
       if (term.length < 3) {
         alert("Search Inactive!\n" +
-          "Press and Hold for Help");
+      "Press and Hold for Help\n\n" +
+      `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`);
         return;
       }
 
@@ -708,11 +709,6 @@ function handleSearch(e) {
         return;
   }
 
-  const exactMatch = studyList.find(word => word.toLowerCase() === term);
-  const closeMatches = studyList
-    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
-    .sort();
-
   const exactMatchSection = document.getElementById("exactMatchSection");
   const closeMatchesSection = document.getElementById("closeMatchesSection");
   const exactMatchDiv = document.getElementById("exactMatch");
@@ -803,6 +799,10 @@ if (searchByMeaning === 1) {
     noResultsMessage.classList.remove("hidden");
   }
 } else{
+  const exactMatch = studyList.find(word => word.toLowerCase() === term);
+  const closeMatches = studyList
+    .filter(word => word.toLowerCase().includes(term) && word.toLowerCase() !== term)
+    .sort();
 
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item" data-val="${exactMatch}">${exactMatch}</div>`;
