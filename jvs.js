@@ -958,34 +958,21 @@ if (currentMode === 1) {
   meaningDiv.innerHTML = '';
   wordCard?.classList.add("hidden");
 }
-  // Remove click handlers and add touch-and-hold (long-press) detection
+  //Optional Click on Word function
   document.querySelectorAll('.word-button').forEach(button => {
-    let pressTimer;
-
-    // Start timer on touchstart
-    button.addEventListener('touchstart', (e) => {
+  if (clickOnWord === 1) {
+    button.addEventListener('click', (e) => {
       const clickedWord = e.target.textContent;
-      pressTimer = setTimeout(() => {
-        if (studyList.includes(clickedWord)) {
-          currentIndex = studyList.indexOf(clickedWord);
-          wordsSeen++;
-          displayWord();
-        } else {
-          alert("No word was found!");
-        }
-      }, 1000); // 1000ms = 1 second hold
+      if (studyList.includes(clickedWord)) {
+        currentIndex = studyList.indexOf(clickedWord);
+        wordsSeen++;
+        displayWord();
+      } else {
+        alert("No word was found!");
+      }
     });
-
-    // Cancel timer if touch ends early
-    button.addEventListener('touchend', () => {
-      clearTimeout(pressTimer);
-    });
-
-    // Also cancel if touch moves away (optional)
-    button.addEventListener('touchmove', () => {
-      clearTimeout(pressTimer);
-    });
-  });
+  }
+});
 }
 /*
 function showMetadata() {
