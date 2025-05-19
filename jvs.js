@@ -390,141 +390,131 @@ function calculateWordSets() {
 
 function prevWord() {
   if (viewWordsMode === 0) {
-    // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
-
-    // 2. Find its NumId in csvData
     const currentWordData = csvData.find(item => item.word === currentWordStr);
     if (!currentWordData) {
       alert("Current word not found in CSV data!");
       return;
     }
-    const currentNumId = currentWordData.id;
 
-    // 3. Find matching root word (object with equal/opposite NumId)
     const currentRootIndex = rootWordList.findIndex(rootObj =>
-      Math.abs(rootObj.numId) === Math.abs(currentNumId)
+      Math.abs(rootObj.numId) === Math.abs(currentWordData.id)
     );
-
     if (currentRootIndex === -1) {
       alert("Current word has no root word!");
       return;
     }
 
-    // 4. Get the root word's NumId that is 'stepNumber' BEFORE current
-    const targetRootIndex = currentRootIndex - stepNumber;
+    let targetRootIndex = currentRootIndex - stepNumber;
     
+    // Handle wrap-around or error
     if (targetRootIndex < 0) {
-      alert(`Cannot step back ${stepNumber} root words - reached beginning!`);
-      return;
+      if (loopMode === 0) {
+        alert(`Cannot step back ${stepNumber} root words - reached beginning!`);
+        return;
+      }
+      targetRootIndex = rootWordList.length + (targetRootIndex % rootWordList.length);
     }
+
     const matchId = rootWordList[targetRootIndex].numId;
-
-    // 5. Find previous matching word in studyList
     let foundIndex = -1;
-    for (let i = currentIndex - 1; i >= 0; i--) {
-      const prevWordStr = studyList[i];
-      const prevWordData = csvData.find(item => item.word === prevWordStr);
-      if (!prevWordData) continue;
 
-      if (Math.abs(prevWordData.id) === Math.abs(matchId)) {
+    // Search backward from current position (or from end if wrapped)
+    const startIndex = targetRootIndex > currentRootIndex ? studyList.length - 1 : currentIndex - 1;
+    for (let i = startIndex; i >= 0; i--) {
+      const wordData = csvData.find(item => item.word === studyList[i]);
+      if (wordData && Math.abs(wordData.id) === Math.abs(matchId)) {
         foundIndex = i;
         break;
       }
     }
 
-    // 6. Handle result
     if (foundIndex === -1) {
-      alert("No previous word in studyList matching with matchId!");
-    } else {
-      currentIndex = foundIndex;
-      wordsSeen++;
-      displayWord();
-    }
-  }
-  else {
-    // Handle non-root-word mode navigation
-    if (currentIndex === 0) return;
-    else if (currentIndex - stepNumber >= 0) {
-      currentIndex = currentIndex - stepNumber;
-    }
-    else {
-      alert("Reduce step");
+      alert("No matching word found!");
       return;
     }
-    wordsSeen++;
-    displayWord();
+    currentIndex = foundIndex;
+  } 
+  else {
+    // Simple list navigation
+    if (currentIndex - stepNumber < 0) {
+      if (loopMode === 0) {
+        alert("Reduce step");
+        return;
+      }
+      currentIndex = studyList.length + (currentIndex - stepNumber) % studyList.length;
+    } else {
+      currentIndex -= stepNumber;
+    }
   }
+
+  wordsSeen++;
+  displayWord(); // Single call at the end
 }
 
-function nextWord() {
+   function nextWord() {
   if (viewWordsMode === 0) {
-    // 1. Get current word (string from studyList)
     const currentWordStr = studyList[currentIndex];
-
-    // 2. Find its NumId in csvData
     const currentWordData = csvData.find(item => item.word === currentWordStr);
     if (!currentWordData) {
       alert("Current word not found in CSV data!");
       return;
     }
-    const currentNumId = currentWordData.id;
 
-    // 3. Find matching root word (object with equal/opposite NumId)
     const currentRootIndex = rootWordList.findIndex(rootObj => 
-      Math.abs(rootObj.numId) === Math.abs(currentNumId)
+      Math.abs(rootObj.numId) === Math.abs(currentWordData.id)
     );
-
     if (currentRootIndex === -1) {
       alert("Current word has no root word!");
       return;
     }
 
-    // 4. Get root word's NumId that is 'stepNumber' ahead
     const targetRootIndex = currentRootIndex + stepNumber;
     
-    if (targetRootIndex < 0 || targetRootIndex >= rootWordList.length) {
-      alert(`Cannot step ${stepNumber} root words - out of bounds!`);
-      return;
+    // Handle wrap-around or error
+    if (targetRootIndex >= rootWordList.length) {
+      if (loopMode === 0) {
+        alert(`Cannot step ${stepNumber} root words - reached end!`);
+        return;
+      }
+      targetRootIndex %= rootWordList.length; // Wrap around
     }
+
     const matchId = rootWordList[targetRootIndex].numId;
-
-    // 5. Find matching word in studyList
     let foundIndex = -1;
-    for (let i = currentIndex + 1; i < studyList.length; i++) {
-      const nextWordStr = studyList[i];
-      const nextWordData = csvData.find(item => item.word === nextWordStr);
-      if (!nextWordData) continue;
 
-      if (Math.abs(nextWordData.id) === Math.abs(matchId)) {
+    // Search forward from current position (or from start if wrapped)
+    const startIndex = targetRootIndex < currentRootIndex ? 0 : currentIndex + 1;
+    for (let i = startIndex; i < studyList.length; i++) {
+      const wordData = csvData.find(item => item.word === studyList[i]);
+      if (wordData && Math.abs(wordData.id) === Math.abs(matchId)) {
         foundIndex = i;
         break;
       }
     }
 
-    // 6. Handle result
     if (foundIndex === -1) {
-      alert("No word in studyList matching with matchId!");
+      alert("No matching word found!");
+      return;
+    }
+    currentIndex = foundIndex;
+  } 
+  else {
+    // Simple list navigation
+    if (currentIndex + stepNumber >= studyList.length) {
+      if (loopMode === 0) {
+        alert("Reduce step");
+        return;
+      }
+      currentIndex = (currentIndex + stepNumber) % studyList.length;
     } else {
-      currentIndex = foundIndex;
-      wordsSeen++;
-      displayWord();
+      currentIndex += stepNumber;
     }
-  } else {
-    // Original stepNumber logic
-    if (currentIndex >= studyList.length - 1) {
-      alert("All words studied!");
-      return;
-    }
-    if (currentIndex + stepNumber > studyList.length - 1) {
-      alert("Reduce step!");
-      return;
-    }
-    currentIndex += stepNumber;
-    wordsSeen++;
-    displayWord();
   }
-}
+
+  wordsSeen++;
+  displayWord(); // Single call at the end
+   } 
 
 function completeSession() {
   const confirmQuit = confirm("Are you sure you want to quit?");
