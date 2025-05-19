@@ -799,7 +799,8 @@ if (searchByMeaning === 1) {
     document.getElementById("clearSearch").classList.remove("hidden");
 
     searchResultClick();
-  } else if (!exactMatch && closeMatches.length === 0 && !idMatch && !letterMatch) {
+    return;
+  } else {
     noResultsMessage.classList.remove("hidden");
   }
 } else{
@@ -1023,7 +1024,7 @@ function showMetadata() {
   
   // Update each metric in its corresponding <p> element
   document.getElementById('metadata-wordset').textContent = `Word Set: ${csvName}`;
-  document.getElementById('metadata-mode').textContent = `Mode: ${selectedMode}`;
+  document.getElementById('metadata-mode').textContent = `View Order: ${selectedMode}`;
   document.getElementById('metadata-root-count').textContent = `Root Words: ${wordSetsCount}`;
   document.getElementById('metadata-total-words').textContent = `Total Words: ${studyList.length}`;
   document.getElementById('metadata-words-seen').textContent = `Words Seen: ${wordsSeen}`;
