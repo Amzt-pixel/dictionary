@@ -776,6 +776,33 @@ function handleSearch(e) {
     searchResultClick();
     return;
   }
+  //Search by Meaning
+// NEW MEANING MATCH BLOCK GOES HERE — after id/letter checks
+if (searchByMeaning === 1) {
+  const matchedByMeaning = csvData.filter(item =>
+    item.extra1 && item.extra1.toLowerCase().includes(term)
+  );
+
+  if (matchedByMeaning.length > 0) {
+    const meaningHeader = document.querySelector("#meaningMatchSection h4");
+    meaningHeader.textContent = `Meaning Matches (${matchedByMeaning.length})`;
+
+    document.getElementById("meaningMatches").innerHTML = matchedByMeaning.map((item, index) => `
+      <div class="search-result-item" data-val="${item.word}">
+        <span class="result-number">${index + 1}.</span>
+        <span class="result-word">${item.word}</span>: ${item.extra1}
+      </div>
+    `).join('');
+
+    document.getElementById("meaningMatchSection").classList.remove("hidden");
+    document.getElementById("searchResults").classList.remove("hidden");
+    document.getElementById("clearSearch").classList.remove("hidden");
+
+    searchResultClick();
+  } else if (!exactMatch && closeMatches.length === 0 && !idMatch && !letterMatch) {
+    noResultsMessage.classList.remove("hidden");
+  }
+} else{
 
   if (exactMatch) {
     exactMatchDiv.innerHTML = `<div class="search-result-item" data-val="${exactMatch}">${exactMatch}</div>`;
@@ -797,6 +824,7 @@ function handleSearch(e) {
   } else if (!exactMatch && !idMatch && !letterMatch) {
     noResultsMessage.classList.remove("hidden");
   }
+}
  //PREVENTS OLD CLOSE BUTTON FROM POPPING UP. 
    searchResults.classList.remove("hidden");
    document.getElementById("clearSearch").classList.remove("hidden");
@@ -834,7 +862,9 @@ function resetSearchSections() {
   document.getElementById("wordsLocatedSection").classList.add("hidden");
   document.getElementById("exactMatchSection").classList.add("hidden");
   document.getElementById("closeMatchesSection").classList.add("hidden");
+  document.getElementById("meaningMatchSection").classList.add("hidden");
 
+  document.getElementById("meaningMatches").innerHTML = "";
   document.getElementById("exactMatch").innerHTML = "";
   document.getElementById("closeMatches").innerHTML = "";
   document.getElementById("wordsFound").innerHTML = "";
@@ -853,6 +883,8 @@ function clearSearch() {
   document.getElementById("closeMatchesSection").classList.add("hidden");
   document.getElementById("wordsFoundSection").classList.add("hidden");
   document.getElementById("wordsLocatedSection").classList.add("hidden");
+  document.getElementById("meaningMatchSection").classList.add("hidden");
+document.getElementById("meaningMatches").innerHTML = "";
 }
 
 function countRootVisit(index) {
