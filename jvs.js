@@ -1027,7 +1027,7 @@ function displayWord() {
     `Word ${currentIndex + 1}:`;
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
-
+/*
   // Create styled synonym buttons
   document.getElementById("synLabel").textContent = 
     `Synonyms (${synonyms.size}) :`;
@@ -1047,8 +1047,33 @@ function displayWord() {
         `<button class="word-button antonym">${ant}</button>`
       ).join(" ") 
     : '<span class="no-words">None</span>';
+*/
+  const synDisplay = document.getElementById("synDisplay");
+const synCard = synDisplay.closest(".word-card");
 
+if (synonyms.size > 0) {
+  document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
+  synDisplay.innerHTML = [...synonyms].map(syn =>
+    `<button class="word-button synonym">${syn}</button>`
+  ).join(" ");
+  synCard?.classList.remove("hidden");
+} else {
+  synDisplay.innerHTML = '';
+  synCard?.classList.add("hidden");
+}
+const antDisplay = document.getElementById("antDisplay");
+const antCard = antDisplay.closest(".word-card");
 
+if (antonyms.size > 0) {
+  document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
+  antDisplay.innerHTML = [...antonyms].map(ant =>
+    `<button class="word-button antonym">${ant}</button>`
+  ).join(" ");
+  antCard?.classList.remove("hidden");
+} else {
+  antDisplay.innerHTML = '';
+  antCard?.classList.add("hidden");
+}
   //Meaning part
 const meaningDiv = document.getElementById("meaningWord");
 const wordCard = document.querySelector(".word-card .meaningDiv")?.parentNode;
@@ -1081,9 +1106,10 @@ if (currentMode === 1) {
     meaningHTML += '</div>';
     meaningDiv.innerHTML = meaningHTML;
     wordCard?.classList.remove("hidden");
-  } else {
-    meaningDiv.innerHTML = '<span class="no-words">None</span>';
-    wordCard?.classList.remove("hidden");
+    } else {
+  meaningDiv.innerHTML = '';
+  wordCard?.classList.add("hidden");
+}
   }
 } else {
   meaningDiv.innerHTML = '';
