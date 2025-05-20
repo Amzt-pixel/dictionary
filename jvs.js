@@ -711,9 +711,11 @@ function initSearch() {
     if (!resultsVisible) {
       const term = searchInput.value.trim();
       if (term.length < 3) {
-        alert("Search Inactive!\n" +
+     /*   alert("Search Inactive!\n" +
           "Press and Hold to see Search Guide\n\n" +
-          `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`);
+          `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`); */
+        document.getElementById("infoPopup").style.display = "block";
+  document.getElementById("metaOverlay").style.display = "block";
         return;
       }
 
