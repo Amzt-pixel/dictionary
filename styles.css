@@ -199,7 +199,7 @@ body {
       cursor: pointer;
       display: inline-block;
 }
-/*
+
 .search-container { 
   margin: 0px 0;
   display: flex;
@@ -241,7 +241,7 @@ body {
   height: 38px; 
   box-sizing: border-box; 
 }
-*/
+/*
 .search-container {
   display: flex;
   align-items: center;
@@ -275,7 +275,7 @@ body {
   border-radius: 50%;
   transition: background 0.2s ease-in-out;
 }
-
+*/
 .searchBar-button:hover {
   background-color: #f0f0f0;
 }
