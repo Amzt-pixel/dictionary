@@ -3,7 +3,7 @@ body {
       margin: 0;
    /*   padding: 20px;*/
       background-color: #f5f5f5;
-    }
+    
 
     .screen {
       display: none;
@@ -530,7 +530,7 @@ body {
 
 .meaning-text,
 .example-text {
-  color: #555;
+  color: #90d5ff;
   line-height: 1.4;
 }
 
