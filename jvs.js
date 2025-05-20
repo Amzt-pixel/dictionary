@@ -1110,7 +1110,6 @@ if (currentMode === 1) {
   meaningDiv.innerHTML = '';
   wordCard?.classList.add("hidden");
 }
-  }
 } else {
   meaningDiv.innerHTML = '';
   wordCard?.classList.add("hidden");
