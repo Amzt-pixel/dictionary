@@ -727,6 +727,7 @@ function initSearch() {
           `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`); */
         document.getElementById("infoPopup").style.display = "block";
   document.getElementById("metaOverlay").style.display = "block";
+        showMetaData();
         return;
       }
 
