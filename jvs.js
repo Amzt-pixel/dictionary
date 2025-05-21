@@ -94,7 +94,11 @@ document.getElementById("infoButton").addEventListener("click", () => {
   document.getElementById("metaOverlay").style.display = "block";
   showMetadata();
 });
-
+document.getElementById("infoButtonAlt").addEventListener("click", () => {
+  document.getElementById("infoPopup").style.display = "block";
+  document.getElementById("metaOverlay").style.display = "block";
+  showMetadata();
+});
 document.getElementById("closeInfo").addEventListener("click", () => {
   document.getElementById("infoPopup").style.display = "none";
   document.getElementById("metaOverlay").style.display = "none";
