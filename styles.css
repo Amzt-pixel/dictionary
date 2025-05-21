@@ -531,7 +531,9 @@ body {
 .meaning-text,
 .example-text {
   color: #1d4e89;
-  line-height: 1.4;
+  background-color: #a3d5ff;
+        padding: 10px;
+  /*line-height: 1.4;*/
 }
 
 .example-text {
