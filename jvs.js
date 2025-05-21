@@ -128,6 +128,14 @@ document.getElementById("closeFormBtn").addEventListener("click", () => {
   document.getElementById("formOverlay").style.display = "none";
 });
 
+document.getElementById("actionsBtn").addEventListener("click", () => {
+  const menu = document.getElementById("actionsMenu");
+  const btn = document.getElementById("actionsBtn");
+  const show = menu.style.display !== "block";
+  menu.style.display = show ? "block" : "none";
+  btn.textContent = show ? "Close" : "Actions";
+});
+
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
 document.getElementById("prevBtn").addEventListener("mouseup", clearPrevHold);
 document.getElementById("prevBtn").addEventListener("mouseleave", clearPrevHold);
