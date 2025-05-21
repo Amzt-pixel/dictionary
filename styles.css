@@ -199,6 +199,17 @@ body {
       cursor: pointer;
       display: inline-block;
 }
+#actionsMenu {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 150px;
+}
 
 .search-container { 
   margin: 0px 0;
