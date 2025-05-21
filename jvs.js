@@ -81,6 +81,12 @@ document.getElementById("showMenuBtn").addEventListener("click", function () {
   document.getElementById("menuScreen").style.display = "block";
 });
 
+document.getElementById("displayInfo").addEventListener("click", () => {
+  document.getElementById("infoPopup").style.display = "block";
+  document.getElementById("metaOverlay").style.display = "block";
+  showMetadata();
+});
+
 document.getElementById("closeMenuBtn").addEventListener("click", function () {
   document.getElementById("menuScreen").style.display = "none";
   document.getElementById("mainScreen").style.display = "block";
