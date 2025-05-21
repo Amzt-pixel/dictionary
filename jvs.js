@@ -87,11 +87,15 @@ document.getElementById("displayInfo").addEventListener("click", () => {
   showMetadata();
 });
 */
+/*
 document.querySelector(".menuInfoBtn").addEventListener("click", () => {
   document.getElementById("infoPopup").style.display = "block";
   document.getElementById("metaOverlay").style.display = "block";
   showMetadata();
 });
+*/
+document.querySelector(".menuInfoBtn").addEventListener("click", () => viewInfo(1));
+
 document.getElementById("closeMenuBtn").addEventListener("click", function () {
   document.getElementById("menuScreen").style.display = "none";
   document.getElementById("mainScreen").style.display = "block";
@@ -109,7 +113,9 @@ document.getElementById("closeInfo").addEventListener("click", () => {
   document.getElementById("infoPopup").style.display = "none";
   document.getElementById("metaOverlay").style.display = "none";
 });
-document.getElementById("infoButton").addEventListener("click", showInfo); 
+document.getElementById("infoButton").addEventListener("click", () => viewInfo(1)); 
+document.getElementById("infoTab").addEventListener("click", () => viewInfo(1));
+document.getElementById("helpTab").addEventListener("click", () => viewInfo(0));
   
 //Popup Form
 document.getElementById("openFormBtn").addEventListener("click", () => {
@@ -748,7 +754,7 @@ function initSearch() {
   const startHold = () => {
     if (holdTimer === null) {
       searchButton.classList.add("search-button-hold");
-      holdTimer = setTimeout(() => {
+    /*  holdTimer = setTimeout(() => {
         alert(
           "1. You must enter minimum 3 characters to initiate search.\n" +
           "2. Search by {ID} to view Word at ID-th position.\n" +
@@ -759,7 +765,12 @@ function initSearch() {
         );
         holdTimer = null;
         searchButton.classList.remove("search-button-hold");
-      }, holdDuration);
+      }, holdDuration);*/
+      holdTimer = setTimeout(() => {
+  viewInfo(0); // Show the Help section inside infoPopup
+  holdTimer = null;
+  searchButton.classList.remove("search-button-hold");
+}, holdDuration);
     }
   };
 
@@ -1427,4 +1438,26 @@ function showInfo() {
   document.getElementById("infoPopup").style.display = "block";
   document.getElementById("metaOverlay").style.display = "block";
   showMetadata();
+}
+function viewInfo(mode) {
+  document.getElementById("infoPopup").style.display = "block";
+  document.getElementById("metaOverlay").style.display = "block";
+
+  const infoTab = document.getElementById("infoTab");
+  const helpTab = document.getElementById("helpTab");
+  const metadataDisplay = document.getElementById("metadata-display");
+  const helpDisplay = document.getElementById("help-display");
+
+  if (mode === 1) {
+    metadataDisplay.style.display = "block";
+    helpDisplay.style.display = "none";
+    infoTab.classList.add("active");
+    helpTab.classList.remove("active");
+    showMetadata();
+  } else {
+    metadataDisplay.style.display = "none";
+    helpDisplay.style.display = "block";
+    infoTab.classList.remove("active");
+    helpTab.classList.add("active");
+  }
 }
