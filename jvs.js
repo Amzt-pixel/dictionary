@@ -133,7 +133,7 @@ document.getElementById("actionsBtn").addEventListener("click", () => {
   const btn = document.getElementById("actionsBtn");
   const show = menu.style.display !== "block";
   menu.style.display = show ? "block" : "none";
-  btn.textContent = show ? "Close" : "Actions";
+  btn.textContent = show ? "Π" : "∆";
 });
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
