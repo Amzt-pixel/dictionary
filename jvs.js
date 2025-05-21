@@ -98,12 +98,8 @@ document.getElementById("closeInfo").addEventListener("click", () => {
   document.getElementById("infoPopup").style.display = "none";
   document.getElementById("metaOverlay").style.display = "none";
 });
-document.getElementById("infoButtonAlt").addEventListener("click", () => {
-  document.getElementById("infoPopup").style.display = "block";
-  document.getElementById("metaOverlay").style.display = "block";
-  showMetadata();
-});
-
+document.getElementById("infoButtonAlt").addEventListener("click", showInfo); 
+  
 
 //Popup Form
 document.getElementById("openFormBtn").addEventListener("click", () => {
@@ -1415,4 +1411,9 @@ function viewNotedWords() {
   } else {
     notedList.innerHTML = '<div class="no-results-message">No Noted Words Found</div>';
   }
+}
+function showInfo() {
+  document.getElementById("infoPopup").style.display = "block";
+  document.getElementById("metaOverlay").style.display = "block";
+  showMetadata();
 }
