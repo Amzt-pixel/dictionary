@@ -573,6 +573,7 @@ left: 0;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-block;
+      border: 1px solid #1d4e89;
 }
   
 .word-button {
@@ -593,18 +594,21 @@ left: 0;
   background-color: #ffcc80;
   color: #001a33;
   font-size: 20px;
+  border: 3px solid #1d4e89;
+
 }
 
 .antonym {
   background-color: #7dcfb6;
   color: #001a33;
   font-size: 20px;
+      border: 1px solid #1d4e89;
 }
 .wordHighlight {
   border: 3px solid #1d4e89 !important;
 }
 .wordBtnHighlight {
-  border: 3px solid #1d4e89 !important;
+  border-width: 3px !important;
 }
 .meaningDiv {
   padding: 12px;
