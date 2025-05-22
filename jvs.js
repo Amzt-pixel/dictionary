@@ -1095,7 +1095,7 @@ function displayWord() {
   
   const synDisplay = document.getElementById("synDisplay");
 const synCard = synDisplay.closest(".word-card");
-/*
+
 if (synonyms.size > 0) {
   document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
   synDisplay.innerHTML = [...synonyms].map(syn =>
@@ -1119,34 +1119,7 @@ if (antonyms.size > 0) {
   antDisplay.innerHTML = '';
   antCard?.classList.add("hidden");
 }
-*/
-  // For Synonyms
-if (synonyms.size > 0) {
-  document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
-  synDisplay.innerHTML = [...synonyms].map(syn => {
-    const synData = csvData.find(item => item.word === syn);
-    const highlightClass = (wordHighlight === 1 && synData?.extra3 === "1") ? "wordBtnHighlight" : "";
-    return `<button class="word-button synonym ${highlightClass}">${syn}</button>`;
-  }).join(" ");
-  synCard?.classList.remove("hidden");
-} else {
-  synDisplay.innerHTML = '';
-  synCard?.classList.add("hidden");
-}
 
-// For Antonyms
-if (antonyms.size > 0) {
-  document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
-  antDisplay.innerHTML = [...antonyms].map(ant => {
-    const antData = csvData.find(item => item.word === ant);
-    const highlightClass = (wordHighlight === 1 && antData?.extra3 === "1") ? "wordBtnHighlight" : "";
-    return `<button class="word-button antonym ${highlightClass}">${ant}</button>`;
-  }).join(" ");
-  antCard?.classList.remove("hidden");
-} else {
-  antDisplay.innerHTML = '';
-  antCard?.classList.add("hidden");
-}
   //Meaning part
 const meaningDiv = document.getElementById("meaningWord");
 const wordCard = document.querySelector(".word-card .meaningDiv")?.parentNode;
