@@ -40,6 +40,12 @@ let pendingSearchByMeaning = null;
 let wordHighlight = 0; // Default: off
 let pendingWordHighlight = null; // Temporary storage until saved
 
+let darkMode = 0; // Default: off
+let pendingDarkMode = null;
+
+let bigTexts = 1; // Default: on
+let pendingBigTexts = null;
+
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
@@ -205,6 +211,17 @@ document.getElementById("savePopup").addEventListener("click", () => {
   wordHighlight = pendingWordHighlight;
   pendingWordHighlight = null;
   }
+  if (pendingDarkMode !== null) {
+  darkMode = pendingDarkMode;
+  pendingDarkMode = null;
+  applyDarkMode(); // We'll create this function
+}
+
+if (pendingBigTexts !== null) {
+  bigTexts = pendingBigTexts;
+  pendingBigTexts = null;
+  applyTextSize(); // We'll create this function
+}
 displayWord();
 });
 
@@ -617,6 +634,8 @@ loopModeToggle.addEventListener("change", (e) => {
 
 // Set initial toggle state
 document.getElementById("wordHighlight").checked = (wordHighlight === 1);
+  document.getElementById("darkMode").checked = (darkMode === 1);
+document.getElementById("bigTexts").checked = (bigTexts === 1);
 
 // Event listener to store pending changes
 document.getElementById("wordHighlight").addEventListener("change", (e) => {
@@ -638,6 +657,14 @@ document.getElementById("clickOnWord").addEventListener("change", (e) => {
 });
 document.getElementById("searchByMeaning").addEventListener("change", (e) => {
   pendingSearchByMeaning = e.target.checked ? 1 : 0;
+});
+  
+document.getElementById("darkMode").addEventListener("change", (e) => {
+  pendingDarkMode = e.target.checked ? 1 : 0;
+});
+
+document.getElementById("bigTexts").addEventListener("change", (e) => {
+  pendingBigTexts = e.target.checked ? 1 : 0;
 });
 }
 /*
