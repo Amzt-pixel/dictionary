@@ -1130,7 +1130,7 @@ if (synonyms.size > 0) {
   document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
   synDisplay.innerHTML = [...synonyms].map(syn => {
     const entry = csvData.find(item => item.word === syn);
-    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? ' wordHighlight' : '';
+    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? ' wordBtnHighlight' : '';
     return `<button class="word-button synonym${highlightClass}">${syn}</button>`;
   }).join(" ");
   synCard?.classList.remove("hidden");
