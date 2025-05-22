@@ -991,7 +991,7 @@ function searchResultClick() {
       wordsSeen++;
       clearSearch();
      // searchButton.textContent = "⌕";
-      alert(“Good Morning.");
+      alert("Good Morning. Good Evening");
       resultsVisible = false;
       isSearchActive = false;
       document.getElementById("menuScreen").style.display = "none";
