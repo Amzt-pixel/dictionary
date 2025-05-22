@@ -1069,7 +1069,10 @@ function displayWord() {
   document.getElementById("wordOrderDisplay").textContent = 
     `Word ${currentIndex + 1}:`;
   const wordDisplay = document.getElementById("wordDisplay");
-  wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;
+ // wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;//No highlight
+const rootEntry = csvData.find(item => item.word === word);
+const rootHighlightClass = (wordHighlight === 1 && rootEntry?.extra3 === 1) ? ' wordHighlight' : '';
+wordDisplay.innerHTML = `<span class="root-word${rootHighlightClass}">${word}</span>`;
 /*
   // Create styled synonym buttons
   document.getElementById("synLabel").textContent = 
@@ -1093,7 +1096,7 @@ function displayWord() {
 */
   //OG synonyms and antonyms without highlight
   
-  const synDisplay = document.getElementById("synDisplay");
+/*  const synDisplay = document.getElementById("synDisplay");
 const synCard = synDisplay.closest(".word-card");
 
 if (synonyms.size > 0) {
@@ -1119,7 +1122,38 @@ if (antonyms.size > 0) {
   antDisplay.innerHTML = '';
   antCard?.classList.add("hidden");
 }
+*/
+const synDisplay = document.getElementById("synDisplay");
+const synCard = synDisplay.closest(".word-card");
 
+if (synonyms.size > 0) {
+  document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
+  synDisplay.innerHTML = [...synonyms].map(syn => {
+    const entry = csvData.find(item => item.word === syn);
+    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? ' wordHighlight' : '';
+    return `<button class="word-button synonym${highlightClass}">${syn}</button>`;
+  }).join(" ");
+  synCard?.classList.remove("hidden");
+} else {
+  synDisplay.innerHTML = '';
+  synCard?.classList.add("hidden");
+}
+
+const antDisplay = document.getElementById("antDisplay");
+const antCard = antDisplay.closest(".word-card");
+
+if (antonyms.size > 0) {
+  document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
+  antDisplay.innerHTML = [...antonyms].map(ant => {
+    const entry = csvData.find(item => item.word === ant);
+    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? ' wordHighlight' : '';
+    return `<button class="word-button antonym${highlightClass}">${ant}</button>`;
+  }).join(" ");
+  antCard?.classList.remove("hidden");
+} else {
+  antDisplay.innerHTML = '';
+  antCard?.classList.add("hidden");
+}
   //Meaning part
 const meaningDiv = document.getElementById("meaningWord");
 const wordCard = document.querySelector(".word-card .meaningDiv")?.parentNode;
