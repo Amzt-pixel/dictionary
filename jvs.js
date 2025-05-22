@@ -37,6 +37,8 @@ let pendingClickOnWord = null;
 let searchByMeaning = 0;
 let pendingSearchByMeaning = null;
 
+let wordHighlight = 0; // Default: off
+let pendingWordHighlight = null; // Temporary storage until saved
 
 // Initialize app
 window.onload = async () => {
@@ -174,13 +176,11 @@ document.getElementById("savePopup").addEventListener("click", () => {
   if (pendingViewMode !== null) {
     viewWordsMode = pendingViewMode;
     pendingViewMode = null;
-
     if (pendingStepNumber === null) {
       stepNumber = 1; // Force default to 1
       document.getElementById("stepSelector").value = 1; // Update UI
     }
   }
-  
   if (pendingStepNumber !== null) {
     stepNumber = pendingStepNumber;
     pendingStepNumber = null;
@@ -189,20 +189,21 @@ document.getElementById("savePopup").addEventListener("click", () => {
     loopMode = pendingLoopMode;
     pendingLoopMode = null;
   }
-
   if (pendingWordMeaningMode !== null) {
     wordMeaningMode = pendingWordMeaningMode;
     pendingWordMeaningMode = null;
   }
-
   if (pendingClickOnWord !== null) {
     clickOnWord = pendingClickOnWord;
     pendingClickOnWord = null;
   }
-
   if (pendingSearchByMeaning !== null) {
     searchByMeaning = pendingSearchByMeaning;
     pendingSearchByMeaning = null;
+  }
+  if (pendingWordHighlight !== null) {
+  wordHighlight = pendingWordHighlight;
+  pendingWordHighlight = null;
   }
 displayWord();
 });
@@ -614,10 +615,19 @@ loopModeToggle.addEventListener("change", (e) => {
   pendingLoopMode = e.target.checked ? 1 : 0;
 });
 
+// Set initial toggle state
+document.getElementById("wordHighlight").checked = (wordHighlight === 1);
+
+// Event listener to store pending changes
+document.getElementById("wordHighlight").addEventListener("change", (e) => {
+  pendingWordHighlight = e.target.checked ? 1 : 0;
+});
+  
 // Set initial toggle states
 document.getElementById("wordMeaningMode").checked = (wordMeaningMode === 1);
 document.getElementById("clickOnWord").checked = (clickOnWord === 1);
 document.getElementById("searchByMeaning").checked = (searchByMeaning === 1);
+  document.getElementById("wordHighlight").checked = (wordHighlight === 1);
 
 // Event listeners to store pending changes
 document.getElementById("wordMeaningMode").addEventListener("change", (e) => {
@@ -1081,9 +1091,11 @@ function displayWord() {
       ).join(" ") 
     : '<span class="no-words">None</span>';
 */
+  //OG synonyms and antonyms without highlight
+  
   const synDisplay = document.getElementById("synDisplay");
 const synCard = synDisplay.closest(".word-card");
-
+/*
 if (synonyms.size > 0) {
   document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
   synDisplay.innerHTML = [...synonyms].map(syn =>
@@ -1102,6 +1114,34 @@ if (antonyms.size > 0) {
   antDisplay.innerHTML = [...antonyms].map(ant =>
     `<button class="word-button antonym">${ant}</button>`
   ).join(" ");
+  antCard?.classList.remove("hidden");
+} else {
+  antDisplay.innerHTML = '';
+  antCard?.classList.add("hidden");
+}
+*/
+  // For Synonyms
+if (synonyms.size > 0) {
+  document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
+  synDisplay.innerHTML = [...synonyms].map(syn => {
+    const synData = csvData.find(item => item.word === syn);
+    const highlightClass = (wordHighlight === 1 && synData?.extra3 === "1") ? "wordBtnHighlight" : "";
+    return `<button class="word-button synonym ${highlightClass}">${syn}</button>`;
+  }).join(" ");
+  synCard?.classList.remove("hidden");
+} else {
+  synDisplay.innerHTML = '';
+  synCard?.classList.add("hidden");
+}
+
+// For Antonyms
+if (antonyms.size > 0) {
+  document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
+  antDisplay.innerHTML = [...antonyms].map(ant => {
+    const antData = csvData.find(item => item.word === ant);
+    const highlightClass = (wordHighlight === 1 && antData?.extra3 === "1") ? "wordBtnHighlight" : "";
+    return `<button class="word-button antonym ${highlightClass}">${ant}</button>`;
+  }).join(" ");
   antCard?.classList.remove("hidden");
 } else {
   antDisplay.innerHTML = '';
