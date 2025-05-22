@@ -990,7 +990,11 @@ function searchResultClick() {
       currentIndex = studyList.indexOf(selectedWord);
       wordsSeen++;
       clearSearch();
-      searchButton.textContent = "⌕";
+      searchButton.innerHTML = `
+  <svg>
+    <circle cx="11" cy="11" r="8"/>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>`;
       alert("Good Morning. Good Evening");
       resultsVisible = false;
       isSearchActive = false;
