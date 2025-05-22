@@ -988,12 +988,13 @@ function searchResultClick() {
         return;
       }
       currentIndex = studyList.indexOf(selectedWord);
-      alert("Opened Searched Word!!");
       wordsSeen++;
       clearSearch();
-      searchButton.textContent = "⌕";
+     // searchButton.textContent = "⌕";
       resultsVisible = false;
       isSearchActive = false;
+      document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("mainScreen").style.display = "block";
       displayWord();
     });
   });
