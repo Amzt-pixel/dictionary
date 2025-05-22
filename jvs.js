@@ -1071,7 +1071,7 @@ function displayWord() {
   const wordDisplay = document.getElementById("wordDisplay");
  // wordDisplay.innerHTML = `<span class="root-word">${word}</span>`;//No highlight
 const rootEntry = csvData.find(item => item.word === word);
-const rootHighlightClass = (wordHighlight === 1 && rootEntry?.extra3 === 1) ? ' wordHighlight' : '';
+const rootHighlightClass = (wordHighlight === 1 && rootEntry?.extra3 === 1) ? 'wordHighlight' : '';
 wordDisplay.innerHTML = `<span class="root-word${rootHighlightClass}">${word}</span>`;
 /*
   // Create styled synonym buttons
@@ -1130,7 +1130,7 @@ if (synonyms.size > 0) {
   document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
   synDisplay.innerHTML = [...synonyms].map(syn => {
     const entry = csvData.find(item => item.word === syn);
-    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? ' wordBtnHighlight' : '';
+    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? 'wordBtnHighlight' : '';
     return `<button class="word-button synonym${highlightClass}">${syn}</button>`;
   }).join(" ");
   synCard?.classList.remove("hidden");
@@ -1146,7 +1146,7 @@ if (antonyms.size > 0) {
   document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
   antDisplay.innerHTML = [...antonyms].map(ant => {
     const entry = csvData.find(item => item.word === ant);
-    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? ' wordHighlight' : '';
+    const highlightClass = (wordHighlight === 1 && entry?.extra3 === 1) ? 'wordHighlight' : '';
     return `<button class="word-button antonym${highlightClass}">${ant}</button>`;
   }).join(" ");
   antCard?.classList.remove("hidden");
