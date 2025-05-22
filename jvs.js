@@ -1131,6 +1131,9 @@ if (antonyms.size > 0) {
       }
     }).join(" ");
     synCard?.classList.remove("hidden");
+  } else {
+  synDisplay.innerHTML = '';
+  synCard?.classList.add("hidden");
   }
 
   // =============================================
@@ -1147,7 +1150,10 @@ if (antonyms.size > 0) {
       }
     }).join(" ");
     antCard?.classList.remove("hidden");
-  }
+  } else {
+  antDisplay.innerHTML = '';
+  antCard?.classList.add("hidden");
+}
 
   //Meaning part
 const meaningDiv = document.getElementById("meaningWord");
@@ -1387,8 +1393,10 @@ function viewRootWords() {
         if (index !== -1) {
           currentIndex = index;
           wordsSeen++;
+          document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("mainScreen").style.display = "block";
           displayWord();
-          showScreen("study");
+        //  showScreen("study");
         } else {
           alert("Word not found in current study list");
         }
@@ -1427,8 +1435,10 @@ function viewWordMeanings() {
         if (index !== -1) {
           currentIndex = index;
           wordsSeen++;
+          document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("mainScreen").style.display = "block";
           displayWord();
-          showScreen("study");
+         // showScreen("study");
         } else {
           alert("Word not found in current study list");
         }
@@ -1473,8 +1483,10 @@ function viewNotedWords() {
         if (index !== -1) {
           currentIndex = index;
           wordsSeen++;
+          document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("mainScreen").style.display = "block";
           displayWord();
-          showScreen("study");
+         // showScreen("study");
         } else {
           alert("Word not found in current study list");
         }
