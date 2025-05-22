@@ -594,7 +594,7 @@ left: 0;
   background-color: #ffcc80;
   color: #001a33;
   font-size: 20px;
-  border: 3px solid #1d4e89;
+  border: 1px solid #1d4e89;
 
 }
 
@@ -608,7 +608,7 @@ left: 0;
   border: 3px solid #1d4e89 !important;
 }
 .wordBtnHighlight {
-  border-width: 3px !important;
+  font-weight: 700 !important;
 }
 .meaningDiv {
   padding: 12px;
