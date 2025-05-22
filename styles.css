@@ -570,11 +570,10 @@ left: 0;
 .rootWordBox{
   padding: 15px 20px;
   padding-top: 5px;
-  border: 2px solid #001a33;
   border-radius: 4px;
   margin: 20px 0px;
   /*background-color: #80d9ff;*/
-  max-height: 450px;
+  max-height: 150px;
   overflow-y: auto;
 }
 .rootWordButton{
@@ -593,7 +592,12 @@ left: 0;
   display: inline-block;
       border: 1px solid #1d4e89;
 }
-  
+.rootWordBox .light {
+    border: 2px solid #001a33;  
+  }
+.rootWordBox .dark {
+    border: 2px solid #e6faff;
+}
 .word-button {
   padding: 5px 10px;
   margin: 3px;
