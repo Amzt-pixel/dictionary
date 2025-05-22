@@ -604,6 +604,9 @@ left: 0;
   font-size: 20px;
   border: 1px solid #1d4e89;
 }
+.wordBtnHighlight {
+  border-width: 3px !important;
+}
 .meaningDiv {
   padding: 12px;
  /* background-color: #fff;*/
