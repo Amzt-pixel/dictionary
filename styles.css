@@ -603,6 +603,9 @@ left: 0;
 .wordHighlight {
   border: 3px solid #1d4e89 !important;
 }
+.wordBtnHighlight {
+  border: 3px solid #1d4e89 !important;
+}
 .meaningDiv {
   padding: 12px;
  /* background-color: #fff;*/
