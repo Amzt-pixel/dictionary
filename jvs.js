@@ -757,15 +757,13 @@ function initSearch() {
 
   const searchButton = document.getElementById("clearSearch");
   const searchInput = document.getElementById("wordSearch");
-  const searchIcon = searchButton.querySelector("svg");
+  
 
   const setIcon = (mode) => {
-    searchIcon.innerHTML = mode === "close"
-      ? `<line x1="18" y1="6" x2="6" y2="18"/>
-         <line x1="6" y1="6" x2="18" y2="18"/>`
-      : `<circle cx="11" cy="11" r="8"/>
-         <line x1="21" y1="21" x2="16.65" y2="16.65"/>`;
-  };
+  searchButton.innerHTML = mode === "close"
+    ? `<i class="material-icons">close</i>`
+    : `<i class="material-icons">pageview</i>`;
+};
 
   const toggleSearch = () => {
     if (!resultsVisible) {
@@ -1009,18 +1007,13 @@ function searchResultClick() {
      const selectedWord = item.dataset.val;
       
       if (!studyList.includes(selectedWord)) {
-        alert("Word not available in current session.");
         return;
       }
       currentIndex = studyList.indexOf(selectedWord);
       wordsSeen++;
       clearSearch();
-      searchButton.innerHTML = `
-  <svg>
-    <circle cx="11" cy="11" r="8"/>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-  </svg>`;
-      //alert("Good Morning. Good Evening");
+      searchButton.innerHTML = `<i class="material-icons">pageview</i>`;
+      alert("Good Morning. Good Evening");
       resultsVisible = false;
       isSearchActive = false;
       document.getElementById("menuScreen").style.display = "none";
