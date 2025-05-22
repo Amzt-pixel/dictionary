@@ -141,7 +141,9 @@ document.getElementById("actionsBtn").addEventListener("click", () => {
   const btn = document.getElementById("actionsBtn");
   const show = menu.style.display !== "block";
   menu.style.display = show ? "block" : "none";
-  btn.textContent = show ? "Π" : "∆";
+  btn.innerHTML = show
+    ? `<i class="material-icons">task</i><`
+    : `<i class="material-icons">cancel</i><`;
 });
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
@@ -761,8 +763,8 @@ function initSearch() {
 
   const setIcon = (mode) => {
   searchButton.innerHTML = mode === "close"
-    ? `<i class="material-icons">close</i>`
-    : `<i class="material-icons">pageview</i>`;
+    ? `<i class="material-icons">cancel</i>`
+    : `<i class="material-icons">search</i>`;
 };
 
   const toggleSearch = () => {
@@ -1012,7 +1014,7 @@ function searchResultClick() {
       currentIndex = studyList.indexOf(selectedWord);
       wordsSeen++;
       clearSearch();
-      searchButton.innerHTML = `<i class="material-icons">pageview</i>`;
+      searchButton.innerHTML = `<i class="material-icons">search</i>`;
       alert("Good Morning. Good Evening");
       resultsVisible = false;
       isSearchActive = false;
