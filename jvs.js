@@ -214,13 +214,11 @@ document.getElementById("savePopup").addEventListener("click", () => {
   if (pendingDarkMode !== null) {
   darkMode = pendingDarkMode;
   pendingDarkMode = null;
-  applyDarkMode(); // We'll create this function
 }
 
 if (pendingBigTexts !== null) {
   bigTexts = pendingBigTexts;
   pendingBigTexts = null;
-  applyTextSize(); // We'll create this function
 }
 displayWord();
 });
