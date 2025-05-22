@@ -1140,7 +1140,7 @@ if (antonyms.size > 0) {
   synCard?.classList.remove("hidden");
 } else {
   synDisplay.innerHTML = '';
-  const synCard = synDisplay.closest(".word-card");
+    const synCard = synDisplay.closest(".word-card");
   synCard?.classList.add("hidden");
 }
 
@@ -1161,6 +1161,7 @@ if (antonyms.size > 0) {
     antCard?.classList.remove("hidden");
   } else {
   antDisplay.innerHTML = '';
+    const antCard = antDisplay.closest(".word-card");
   antCard?.classList.add("hidden");
 }
 
