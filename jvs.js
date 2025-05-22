@@ -990,7 +990,7 @@ function searchResultClick() {
       currentIndex = studyList.indexOf(selectedWord);
       wordsSeen++;
       clearSearch();
-     // searchButton.textContent = "⌕";
+      searchButton.textContent = "⌕";
       alert("Good Morning. Good Evening");
       resultsVisible = false;
       isSearchActive = false;
@@ -1081,7 +1081,7 @@ function shouldHighlight(word) {
   //OG synonyms and antonyms without highlight
   
 /*  const synDisplay = document.getElementById("synDisplay");
-const synCard = synDisplay.closest(".word-card");
+
 
 if (synonyms.size > 0) {
   document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
@@ -1094,7 +1094,7 @@ if (synonyms.size > 0) {
   synCard?.classList.add("hidden");
 }
 const antDisplay = document.getElementById("antDisplay");
-const antCard = antDisplay.closest(".word-card");
+
 
 if (antonyms.size > 0) {
   document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
@@ -1119,29 +1119,33 @@ if (antonyms.size > 0) {
   }
 
   // =============================================
-  // SYNONYMS (Same logic applied to buttons)
+  // SYNONYMS (Same logic applied to buttons) (Changed)
   // =============================================
   if (synonyms.size > 0) {
-    document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
-    synDisplay.innerHTML = [...synonyms].map(syn => {
-      // Check highlight condition for each synonym
-      if (wordHighlight === 1 && shouldHighlight(syn)) {
-        return `<button class="word-button synonym wordBtnHighlight">${syn}</button>`;
-      } else {
-        return `<button class="word-button synonym">${syn}</button>`;
-      }
-    }).join(" ");
-    synCard?.classList.remove("hidden");
-  } else {
+  document.getElementById("synLabel").textContent = `Synonyms (${synonyms.size}) :`;
+  const synCard = synDisplay.closest(".word-card");
+
+  synDisplay.innerHTML = [...synonyms]
+    .map(syn => 
+      wordHighlight === 1 && shouldHighlight(syn)
+        ? `<button class="word-button synonym wordBtnHighlight">${syn}</button>`
+        : `<button class="word-button synonym">${syn}</button>`
+    )
+    .join(" ");
+
+  synCard?.classList.remove("hidden");
+} else {
   synDisplay.innerHTML = '';
+  const synCard = synDisplay.closest(".word-card");
   synCard?.classList.add("hidden");
-  }
+}
 
   // =============================================
   // ANTONYMS (Same logic applied to buttons)
   // =============================================
   if (antonyms.size > 0) {
     document.getElementById("antLabel").textContent = `Antonyms (${antonyms.size}) :`;
+    const antCard = antDisplay.closest(".word-card");
     antDisplay.innerHTML = [...antonyms].map(ant => {
       // Check highlight condition for each antonym
       if (wordHighlight === 1 && shouldHighlight(ant)) {
