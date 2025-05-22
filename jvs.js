@@ -1074,6 +1074,20 @@ function countRootVisit(index) {
 }
 
 function displayWord() {
+  // Add this at the beginning or end of your displayWord() function
+if (darkMode === 1) {
+    // Convert all light elements to dark
+    document.querySelectorAll('.light').forEach(element => {
+        element.classList.remove('light');
+        element.classList.add('dark');
+    });
+} else {
+    // Convert back to light mode if needed
+    document.querySelectorAll('.dark').forEach(element => {
+        element.classList.remove('dark');
+        element.classList.add('light');
+    });
+}
   const word = studyList[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
 
