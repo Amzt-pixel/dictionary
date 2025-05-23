@@ -555,10 +555,15 @@ font-size: 20px;
 }
 .search-result-item {
   color: #1d4e89;
-  font-size: 20px;
   padding: 5px;
   padding-left: 10px;
   cursor: pointer;
+}
+.search-result-item.big {
+      font-size: 20px;
+}
+.search-result-item.small {
+      font-size: 16px;
 }
 .search-result-item:hover {
   background: #ffcc80;
@@ -568,14 +573,18 @@ font-size: 20px;
 
 /* Word buttons styling */
 .root-word {
-  font-size: 20px;
   color: #001a33;
   /*background-color: #92c8ed;*/
 /*  margin-top: 10px;*/
   padding: 5px 0px;
-  
  /* display: inline-block;*/
 }
+.root-word {
+      font-size: 20px;
+}
+.root-word {
+      font-size: 16px;
+} 
 .rootWordBox{
   padding: 15px 20px;
   padding-top: 5px;
@@ -584,6 +593,12 @@ font-size: 20px;
   /*background-color: #80d9ff;*/
   max-height: 150px;
   overflow-y: auto;
+}
+.rootWordBox.light {
+    border: 2px solid #001a33;  
+  }
+.rootWordBox.dark {
+    border: 2px solid #e6faff;
 }
 .rootWordButton{
   background-color: #a3d5ff;
@@ -594,41 +609,46 @@ font-size: 20px;
   margin: 3px;
   border: none;
   border-radius: 4px;
-  font-size: 20px !important;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-block;
       border: 1px solid #1d4e89;
 }
-.rootWordBox.light {
-    border: 2px solid #001a33;  
-  }
-.rootWordBox.dark {
-    border: 2px solid #e6faff;
+.rootWordButton.big{
+      font-size: 20px;
+}
+.rootWordButton.small{
+      font-size: 16px;
 }
 .word-button {
   padding: 5px 10px;
   margin: 3px;
   border: none;
   border-radius: 4px;
-  font-size: 20px !important;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-block;
-  /*box-shadow: 0 2px 3px rgba(0,0,0,0.1);*/
-      
+  /*box-shadow: 0 2px 3px rgba(0,0,0,0.1);*/   
 }
-
+.word-button.big {
+      font-size: 20px;
+}
+.word-button.small{
+      font-size: 16px;
+}
 .synonym {
   background-color: #ffcc80;
   color: #001a33;
-  font-size: 20px;
   border: 1px solid #1d4e89;
-
 }
-
+.synonym.big {
+      font-size: 20px;
+}
+.synonym.small {
+      font-size: 16px;
+}
 .antonym {
   background-color: #7dcfb6;
   color: #001a33;
