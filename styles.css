@@ -601,10 +601,10 @@ font-size: 20px;
   display: inline-block;
       border: 1px solid #1d4e89;
 }
-.rootWordBox .light {
+.rootWordBox.light {
     border: 2px solid #001a33;  
   }
-.rootWordBox .dark {
+.rootWordBox.dark {
     border: 2px solid #e6faff;
 }
 .word-button {
