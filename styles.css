@@ -4,10 +4,10 @@ body {
    /*   padding: 20px;*/
       
 }
-body .light {
+body.light {
       background-color: #fff;/*#f5f5f5;*/
 }
-body .dark {
+body.dark {
       background-color: #001a33;/*#f5f5f5;*/
 }
     .screen {
@@ -18,10 +18,10 @@ body .dark {
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-.screen .light{
+.screen.light{
       background-color: #f5f5f5;
 }
-.screen .dark{
+.screen.dark{
       background-color: #082d51;/*#f5f5f5;*/
 }
     .topDiv{
@@ -33,10 +33,10 @@ body .dark {
   padding: 5px;
     }
 
-.topDiv .light{
+.topDiv.light{
       background-color: #1d4e89;
 }
-.topDiv .dark{
+.topDiv.dark{
       background-color: #7dcfb6;
 }
     .visible {
@@ -433,10 +433,10 @@ left: 0;
       max-height: 150px;
       overflow-y: auto;
     }
-   .word-card .light {
+   .word-card.light {
       border: 2px solid #001a33;
    }
-   .word-card .dark {
+   .word-card.dark {
       border: 2px solid #e6faff;
    }
     .label {
@@ -444,14 +444,23 @@ left: 0;
       margin-top: 10px;
     }
 
-#wordOrderDisplay, #synLabel, #antLabel, .word-card div {
-  font-size: 20px !important; /* Forces uniform size */
-  color: #001a33;
+#wordOrderDisplay, #synLabel, #antLabel {
   font-weight: 600;
   line-height: 1.5; /* Prevents layout shifts */
   word-break: break-word; /* Handles long words gracefully */
 }
-
+#wordOrderDisplay.light, #synLabel.light, #antLabel.light {
+  color: #001a33;
+}
+#wordOrderDisplay.dark, #synLabel.dark, #antLabel.dark {
+  color: #e6faff;
+}
+#wordOrderDisplay.small, #synLabel.small, #antLabel.small {
+ font-size: 16px;
+}
+#wordOrderDisplay.big, #synLabel.big, #antLabel.big {
+font-size: 20px;
+}
     @media (max-width: 600px) {
       #searchBar {
         width: 100%;
