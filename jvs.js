@@ -142,8 +142,8 @@ document.getElementById("actionsBtn").addEventListener("click", () => {
   const show = menu.style.display !== "block";
   menu.style.display = show ? "block" : "none";
   btn.innerHTML = show
-    ? `<i class="material-icons">task</i><`
-    : `<i class="material-icons">cancel</i><`;
+    ? `<i class="material-icons">cancel</i>`
+    : `<i class="material-icons">task</i>`;
 });
 
 document.getElementById("prevBtn").addEventListener("mousedown", startPrevHold);
