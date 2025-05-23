@@ -1081,6 +1081,19 @@ if (darkMode === 1) {
         element.classList.add('light');
     });
 }
+  if (bigText === 0) {
+    // Convert all big text elements to small
+    document.querySelectorAll('.big').forEach(element => {
+        element.classList.remove('big');
+        element.classList.add('small');
+    });
+} else {
+    // Convert all small text elements to big
+    document.querySelectorAll('.small').forEach(element => {
+        element.classList.remove('small');
+        element.classList.add('big');
+    });
+  }
   const word = studyList[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
 
