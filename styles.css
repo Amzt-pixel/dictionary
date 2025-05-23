@@ -579,10 +579,10 @@ font-size: 20px;
   padding: 5px 0px;
  /* display: inline-block;*/
 }
-.root-word {
+.root-word.big {
       font-size: 20px;
 }
-.root-word {
+.root-word.small {
       font-size: 16px;
 } 
 .rootWordBox{
