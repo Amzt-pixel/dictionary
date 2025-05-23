@@ -1081,7 +1081,7 @@ if (darkMode === 1) {
         element.classList.add('light');
     });
 }
-if (bigText === 0) {
+if (bigTexts === 0) {
     // Convert all big text elements to small
     document.querySelectorAll('.big').forEach(element => {
         element.classList.remove('big');
