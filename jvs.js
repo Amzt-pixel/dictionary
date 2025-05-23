@@ -1081,7 +1081,7 @@ if (darkMode === 1) {
         element.classList.add('light');
     });
 }
-/*  if (bigText === 0) {
+if (bigText === 0) {
     // Convert all big text elements to small
     document.querySelectorAll('.big').forEach(element => {
         element.classList.remove('big');
@@ -1094,7 +1094,7 @@ if (darkMode === 1) {
         element.classList.add('big');
     });
   }
-  */
+  
   const word = studyList[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
 
