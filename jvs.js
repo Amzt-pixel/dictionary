@@ -6,7 +6,7 @@ let rootWordList = [];
 let seenRootWord = [];
 let currentIndex = 0;
 let wordsSeen = 0;
-let viewWordsMode = 1; //Default All words
+let viewWordsMode = 2; //Default All words
 let startTime = null;
 let timerInterval;
 let loopMode = 0;
@@ -541,7 +541,28 @@ function nextWord() {
       return;
     }
     currentIndex = foundIndex;
-  } 
+  } else if (viewWordsMode === 2) {
+    // Find next word with extra3 === '1' at least stepNumber away
+    let stepsRemaining = stepNumber;
+    let newIndex = currentIndex;
+    
+    while (stepsRemaining > 0) {
+      newIndex = (newIndex + 1) % studyList.length;
+      
+      // Check if we've looped completely without finding
+      if (newIndex === currentIndex && loopMode === 0) {
+        alert("No matching word found with extra3 === '1'!");
+        return;
+      }
+      
+      const wordData = csvData.find(item => item.word === studyList[newIndex]);
+      if (wordData && wordData.extra3 === '1') {
+        stepsRemaining--;
+      }
+    }
+    
+    currentIndex = newIndex;
+      }
   else {
     // Simple list navigation
     if (currentIndex + stepNumber >= studyList.length) {
