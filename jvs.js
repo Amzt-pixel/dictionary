@@ -6,7 +6,7 @@ let rootWordList = [];
 let seenRootWord = [];
 let currentIndex = 0;
 let wordsSeen = 0;
-let viewWordsMode = 2; //Default All words
+let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
 let loopMode = 0;
