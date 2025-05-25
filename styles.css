@@ -176,7 +176,7 @@ body.dark {
       border: 2px solid #1d4e89;
       border-radius: 4px;
     }
-  select .category {
+  select.category {
         width: 50% !important;
   }
 
