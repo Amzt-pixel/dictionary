@@ -176,6 +176,9 @@ body.dark {
       border: 2px solid #1d4e89;
       border-radius: 4px;
     }
+  select .category {
+        width: 50%;
+  }
 
     button {
       padding: 10px 15px;
