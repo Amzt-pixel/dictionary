@@ -177,7 +177,7 @@ body.dark {
       border-radius: 4px;
     }
   select .category {
-        width: 50%;
+        width: 50% !important;
   }
 
     button {
