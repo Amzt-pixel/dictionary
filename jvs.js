@@ -1357,13 +1357,13 @@ cardSynonym?.classList.add("hidden");
 cardAntonym?.classList.add("hidden");
 
 // Remove active class from all buttons
-document.querySelectorAll(".wordBtn").forEach(btn => btn.classList.remove("activeBtn"));
+document.querySelectorAll(".wordBtns").forEach(btn => btn.classList.remove("activeBtn")); 
 
 // Define click behavior
 function activateSection(button, card) {
   document.querySelectorAll(".word-card").forEach(c => c.classList.add("hidden"));
   card?.classList.remove("hidden");
-  document.querySelectorAll(".wordBtn").forEach(btn => btn.classList.remove("activeBtn"));
+  document.querySelectorAll(".wordBtns").forEach(btn => btn.classList.remove("activeBtn"));
   button.classList.add("activeBtn");
 }
 
