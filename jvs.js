@@ -224,7 +224,7 @@ if (pendingBigTexts !== null) {
 }
 displayWord();
 });
-
+/*
 //Buttons for viewing Synonyms/Antonyms/Definition
 document.getElementById('red').addEventListener('click', function () {
   document.querySelectorAll('.wordBtns').forEach(function (btn) {
@@ -261,7 +261,7 @@ document.getElementById('green').addEventListener('click', function () {
   });
   document.getElementById('antonym').classList.remove('hidden');
 });
-
+*/
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
   const mode = document.getElementById("topicSelector").value;
@@ -1325,6 +1325,67 @@ if (currentMode === 1) {
     });
   }
 });
+  // ===========================
+// Section Toggle via Buttons
+// ===========================
+const btnMeaning = document.getElementById("btnMeaning");
+const btnSynonym = document.getElementById("btnSynonym");
+const btnAntonym = document.getElementById("btnAntonym");
+
+const cardMeaning = document.querySelector(".word-card .meaningDiv")?.parentNode;
+const cardSynonym = synDisplay.closest(".word-card");
+const cardAntonym = antDisplay.closest(".word-card");
+
+// Determine existence
+const hasMeaning = !cardMeaning?.classList.contains("hidden");
+const hasSynonyms = !cardSynonym?.classList.contains("hidden");
+const hasAntonyms = !cardAntonym?.classList.contains("hidden");
+
+// Hide all buttons by default
+btnMeaning.classList.add("hidden");
+btnSynonym.classList.add("hidden");
+btnAntonym.classList.add("hidden");
+
+// Show only available buttons
+if (hasMeaning) btnMeaning.classList.remove("hidden");
+if (hasSynonyms) btnSynonym.classList.remove("hidden");
+if (hasAntonyms) btnAntonym.classList.remove("hidden");
+
+// Hide all sections initially
+cardMeaning?.classList.add("hidden");
+cardSynonym?.classList.add("hidden");
+cardAntonym?.classList.add("hidden");
+
+// Remove active class from all buttons
+document.querySelectorAll(".wordBtn").forEach(btn => btn.classList.remove("activeBtn"));
+
+// Define click behavior
+function activateSection(button, card) {
+  document.querySelectorAll(".word-card").forEach(c => c.classList.add("hidden"));
+  card?.classList.remove("hidden");
+  document.querySelectorAll(".wordBtn").forEach(btn => btn.classList.remove("activeBtn"));
+  button.classList.add("activeBtn");
+}
+
+// Button click listeners
+if (hasMeaning) {
+  btnMeaning.onclick = () => activateSection(btnMeaning, cardMeaning);
+}
+if (hasSynonyms) {
+  btnSynonym.onclick = () => activateSection(btnSynonym, cardSynonym);
+}
+if (hasAntonyms) {
+  btnAntonym.onclick = () => activateSection(btnAntonym, cardAntonym);
+}
+
+// Auto activate first available
+if (hasMeaning) {
+  activateSection(btnMeaning, cardMeaning);
+} else if (hasSynonyms) {
+  activateSection(btnSynonym, cardSynonym);
+} else if (hasAntonyms) {
+  activateSection(btnAntonym, cardAntonym);
+}
 }
 /*
 function showMetadata() {
