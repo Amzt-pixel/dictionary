@@ -1,6 +1,7 @@
 let csvData = [];
 let selectedCSVUrl = "";
 let selectedMode = "Alphabetic";
+let wordLibrary = [];
 let studyList = [];
 let rootWordList = [];
 let seenRootWord = [];
@@ -368,6 +369,42 @@ async function loadCSV(url) {
     alert(`Error: ${err.message}`);
   }
 }
+function buildLibrary(mode) {
+  const wordMap = new Map();
+
+  // Group words by IDs
+  csvData.forEach(({ word, id }) => {
+    if (!wordMap.has(word)) wordMap.set(word, []);
+    wordMap.get(word).push(id);
+  });
+
+  // Filter valid words
+  const validWords = [...wordMap.keys()].filter((word) => {
+    const ids = wordMap.get(word);
+    const synonyms = new Set();
+    const antonyms = new Set();
+    let hasMeaning = false;
+
+    ids.forEach((id1) => {
+      csvData.forEach(({ word: w2, id: id2, extra1 }) => {
+        if (id1 === id2 && w2 !== word) synonyms.add(w2);
+        if (id1 === -id2) antonyms.add(w2);
+        if (word === w2 && extra1 != null && extra1.trim() !== "") hasMeaning = true;
+      });
+    });
+
+    return synonyms.size > 0 || antonyms.size > 0 || hasMeaning;
+  });
+
+  // Sort based on selected mode
+  if (mode === "Alphabetic") {
+    return validWords.sort();
+  } else if (mode === "Reverse") {
+    return validWords.sort().reverse();
+  } else {
+    return shuffleArray(validWords);
+  }
+}
 function filterAndSortWords(mode) {
   const wordMap = new Map();
 
@@ -404,6 +441,7 @@ function filterAndSortWords(mode) {
 }
 
 function startSession() {
+  wordLibrary = buildLibrary(selectedMode);
   studyList = filterAndSortWords(selectedMode);
   currentIndex = 0;
   wordsSeen = 1;
