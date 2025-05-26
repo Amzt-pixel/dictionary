@@ -1190,7 +1190,7 @@ if (bigTexts === 0) {
     });
   }
   
-  const word = studyList[currentIndex];
+  const word = wordLibrary[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
 
   const synonyms = new Set();
