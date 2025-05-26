@@ -221,7 +221,7 @@ body.dark {
       border: none;
 }
 
-.tabBtn.active, .wordBtns.active{
+.tabBtn.active, .activeBtn{
   background-color: #1d4e89;
   color: #7dcfb6;
 }
