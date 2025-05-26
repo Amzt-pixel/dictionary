@@ -209,7 +209,7 @@ body.dark {
   margin-top: 20px;
 }
 
-.tabBtn {
+.tabBtn, .wordBtns {
   flex: 1;
   padding: 10px;
   cursor: pointer;
@@ -221,7 +221,7 @@ body.dark {
       border: none;
 }
 
-.tabBtn.active {
+.tabBtn.active, .wordBtns.active{
   background-color: #1d4e89;
   color: #7dcfb6;
 }
