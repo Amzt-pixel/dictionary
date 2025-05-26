@@ -290,10 +290,23 @@
       <button id="wordDisplay" class="rootWordButton"></button>
     </div>
       <div class="tab-buttons">
-  <button id="red" class="tabBtn active"><i class="material-icons">lock</i></button>
-  <button id="blue" class="tabBtn"><i class="material-icons">description</i></button>
-  <button id="green" class="tabBtn"><i class="material-icons">verified_user</i></button>
+  <button id="red" class="wordBtns active"><i class="material-icons">lock</i></button>
+  <button id="blue" class="wordBtns"><i class="material-icons">description</i></button>
+  <button id="green" class="wordBtns"><i class="material-icons">verified_user</i></button>
       </div>
+      <div id="wordArea">
+  <div class="word-card light hidden" id="definition">
+    <div class="meaningDiv" id="meaningWord"></div>
+  </div>
+  <div class="word-card light" id="synonym">
+    <div class="label light big" id="synLabel"></div>
+    <div id="synDisplay"></div>
+  </div>
+  <div class="word-card light hidden" id="antonym">
+    <div class="label light big" id="antLabel"></div>
+    <div id="antDisplay"></div>
+  </div>
+        <!--
       <div class = "word-card light">
 <div class="meaningDiv" id="meaningWord"></div>
       </div>
@@ -304,8 +317,8 @@
     <div class="word-card light">
 <div class="label light big" id="antLabel"></div>
 <div id="antDisplay"></div>
-    </div>
-          
+    </div> -->
+      </div>    
 <!-- Add this to your HTML (preferably near other controls) -->
 
     <div class="footer-buttons">
