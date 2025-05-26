@@ -225,6 +225,42 @@ if (pendingBigTexts !== null) {
 displayWord();
 });
 
+//Buttons for viewing Synonyms/Antonyms/Definition
+document.getElementById('red').addEventListener('click', function () {
+  document.querySelectorAll('.wordBtns').forEach(function (btn) {
+    btn.classList.remove('active');
+  });
+  this.classList.add('active');
+
+  document.querySelectorAll('.word-card').forEach(function (card) {
+    card.classList.add('hidden');
+  });
+  document.getElementById('definition').classList.remove('hidden');
+});
+
+document.getElementById('blue').addEventListener('click', function () {
+  document.querySelectorAll('.wordBtns').forEach(function (btn) {
+    btn.classList.remove('active');
+  });
+  this.classList.add('active');
+
+  document.querySelectorAll('.word-card').forEach(function (card) {
+    card.classList.add('hidden');
+  });
+  document.getElementById('synonym').classList.remove('hidden');
+});
+
+document.getElementById('green').addEventListener('click', function () {
+  document.querySelectorAll('.wordBtns').forEach(function (btn) {
+    btn.classList.remove('active');
+  });
+  this.classList.add('active');
+
+  document.querySelectorAll('.word-card').forEach(function (card) {
+    card.classList.add('hidden');
+  });
+  document.getElementById('antonym').classList.remove('hidden');
+});
 
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
