@@ -11,6 +11,12 @@ let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
 let loopMode = 0;
+
+let randomOptionCount = 1;     // Whether number of options is randomized (1 = yes, 0 = no)
+let minOptions = 4;            // Minimum number of MCQ options
+let maxOptions = 6;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
+let correctPercent = 30;       // Minimum percent of correct options (for synonyms/antonyms)
+
 let isSearchActive = false;
 let stepNumber = 1;
 let resultsVisible = false;
@@ -461,6 +467,7 @@ function startSession() {
   showScreen("study");
   viewRootWords();
   displayWord();
+  displayQuestion();
 }
 
 function getRootWords(list) {
