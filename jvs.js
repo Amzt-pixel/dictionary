@@ -1752,7 +1752,7 @@ function viewInfo(mode) {
   }
 }
 ///Latest Addition
-
+/*
 // 1. Get random distractors (incorrect words)
 function getRandomDistractors(correctOptions, count, excludeWord) {
   const allWords = [...new Set(csvData.map(item => item.word))];
@@ -1781,6 +1781,7 @@ function generateMCQOptions(correctOptions, excludeWord) {
   const distractors = getRandomDistractors(correctOptions, totalOptions - correctCount, excludeWord);
   return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
 }
+*/
 /*
 function displayQuestion() {
   const word = wordLibrary[currentIndex];
