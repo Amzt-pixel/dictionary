@@ -16,7 +16,7 @@ let randomOptionCount = 1;     // Whether number of options is randomized (1 = y
 let minOptions = 4;            // Minimum number of MCQ options
 let maxOptions = 6;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
 let correctPercent = 30;       // Minimum percent of correct options (for synonyms/antonyms)
-let questionMode = 0;
+let questionMode = 1;
   
 let isSearchActive = false;
 let stepNumber = 1;
@@ -1751,3 +1751,144 @@ function viewInfo(mode) {
     helpTab.classList.add("active");
   }
 }
+///Latest Addition
+
+// 1. Get random distractors (incorrect words)
+function getRandomDistractors(correctOptions, count, excludeWord) {
+  const allWords = [...new Set(csvData.map(item => item.word))];
+  const pool = allWords.filter(word => 
+    !correctOptions.includes(word) && word !== excludeWord
+  );
+  return [...pool].sort(() => 0.5 - Math.random()).slice(0, count);
+}
+
+// 2. Generate MCQ options
+function generateMCQOptions(correctOptions, excludeWord) {
+  if (correctOptions.length === 0) return []; // Hide section if no correct options
+
+  // Calculate option count
+  const totalOptions = randomOptionCount === 1 
+    ? Math.min(maxOptions, Math.max(minOptions, 
+        Math.floor(Math.random() * (maxOptions - minOptions + 1)) + minOptions)
+    : minOptions;
+
+  // Cap correct options by correctPercent (minimum 1)
+  const maxCorrect = Math.max(1, Math.floor(totalOptions * correctPercent / 100));
+  const correctCount = Math.min(correctOptions.length, maxCorrect);
+  const selectedCorrect = [...correctOptions].sort(() => 0.5 - Math.random()).slice(0, correctCount);
+
+  // Add distractors
+  const distractors = getRandomDistractors(correctOptions, totalOptions - correctCount, excludeWord);
+  return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
+}
+
+function displayQuestion() {
+  const word = wordLibrary[currentIndex];
+   // Display root word prominently (added this section)
+  document.getElementById("wordOrderDisplay").textContent = `Word ${currentIndex + 1}:`;
+  document.getElementById("wordDisplay").innerHTML = `
+    <div class="mcq-prompt">What are the correct options for this word?</div>
+    <div class="root-word">${word}</div>
+  `;
+
+  // Get correct answers
+  const synonyms = new Set(
+    csvData.filter(item => item.word === word && item.id > 0)
+           .flatMap(item => csvData.filter(x => x.id === item.id).map(x => x.word))
+           .filter(w => w !== word)
+  );
+  const antonyms = new Set(
+    csvData.filter(item => item.word === word && item.id > 0)
+           .flatMap(item => csvData.filter(x => x.id === -item.id).map(x => x.word))
+  );
+  const meanings = new Set(
+    csvData.filter(item => item.word === word && item.extra1).map(item => item.extra1)
+  );
+
+  // Generate MCQs
+  const synonymOptions = generateMCQOptions([...synonyms], word);
+  const antonymOptions = generateMCQOptions([...antonyms], word);
+  const meaningOptions = generateMCQOptions([...meanings], word);
+
+  // ========================
+  // Render Sections
+  // ========================
+
+  // 1. Synonyms MCQ
+  const synDisplay = document.getElementById("synDisplay");
+  if (synonymOptions.length > 0) {
+    document.getElementById("synLabel").textContent = "Choose Synonyms:";
+    synDisplay.innerHTML = synonymOptions.map(opt => `
+      <button class="word-button" 
+              data-correct="${synonyms.has(opt)}" 
+              onclick="handleMCQClick(this)">
+        ${opt}
+      </button>
+    `).join(" ");
+    synDisplay.closest(".word-card").classList.remove("hidden");
+  } else {
+    synDisplay.closest(".word-card").classList.add("hidden");
+  }
+
+  // 2. Antonyms MCQ
+  const antDisplay = document.getElementById("antDisplay");
+  if (antonymOptions.length > 0) {
+    document.getElementById("antLabel").textContent = "Choose Antonyms:";
+    antDisplay.innerHTML = antonymOptions.map(opt => `
+      <button class="word-button" 
+              data-correct="${antonyms.has(opt)}" 
+              onclick="handleMCQClick(this)">
+        ${opt}
+      </button>
+    `).join(" ");
+    antDisplay.closest(".word-card").classList.remove("hidden");
+  } else {
+    antDisplay.closest(".word-card").classList.add("hidden");
+  }
+
+  // 3. Meanings MCQ
+  const meaningDisplay = document.getElementById("meaningDisplay");
+  if (meaningOptions.length > 0) {
+    document.getElementById("meaningLabel").textContent = "Choose Meanings:";
+    meaningDisplay.innerHTML = meaningOptions.map(opt => `
+      <div class="meaning-option" 
+           data-correct="${meanings.has(opt)}" 
+           onclick="handleMCQClick(this)">
+        ${opt}
+      </div>
+    `).join("");
+    meaningDisplay.closest(".word-card").classList.remove("hidden");
+  } else {
+    meaningDisplay.closest(".word-card").classList.add("hidden");
+  }
+
+  // Display root word
+  document.getElementById("wordDisplay").textContent = word;
+  document.getElementById("wordOrderDisplay").textContent = `Word ${currentIndex + 1}:`;
+}
+
+// ========================
+// Click Handler (Global)
+// ========================
+function handleMCQClick(clickedElement) {
+  const isCorrect = clickedElement.dataset.correct === "true";
+  const parentCard = clickedElement.closest(".word-card");
+
+  // Reset all options in this card
+  parentCard.querySelectorAll(".word-button, .meaning-option").forEach(el => {
+    el.classList.remove("selected", "correct", "incorrect");
+  });
+
+  // Mark clicked element
+  clickedElement.classList.add("selected");
+  clickedElement.classList.add(isCorrect ? "correct" : "incorrect");
+
+  // Reveal correct answers if wrong
+  if (!isCorrect) {
+    parentCard.querySelectorAll('[data-correct="true"]').forEach(el => {
+      el.classList.add("correct");
+    });
+  }
+}
+
+
