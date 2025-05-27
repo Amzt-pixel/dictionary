@@ -1199,7 +1199,6 @@ if (bigTexts === 0) {
   }
   if (questionMode === 1) {
     displayQuestion();
-    return;
     });
   
   const word = wordLibrary[currentIndex];
