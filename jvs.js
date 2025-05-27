@@ -16,7 +16,7 @@ let randomOptionCount = 1;     // Whether number of options is randomized (1 = y
 let minOptions = 4;            // Minimum number of MCQ options
 let maxOptions = 6;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
 let correctPercent = 30;       // Minimum percent of correct options (for synonyms/antonyms)
-let questionMode = 1;
+let questionMode = 0;
   
 let isSearchActive = false;
 let stepNumber = 1;
@@ -468,7 +468,7 @@ function startSession() {
   showScreen("study");
   viewRootWords();
   displayWord();
-  displayQuestion();
+//  displayQuestion();
 }
 
 function getRootWords(list) {
@@ -1781,7 +1781,7 @@ function generateMCQOptions(correctOptions, excludeWord) {
   const distractors = getRandomDistractors(correctOptions, totalOptions - correctCount, excludeWord);
   return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
 }
-
+/*
 function displayQuestion() {
   const word = wordLibrary[currentIndex];
    // Display root word prominently (added this section)
@@ -1891,4 +1891,4 @@ function handleMCQClick(clickedElement) {
   }
 }
 
-
+*/
