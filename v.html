@@ -285,7 +285,7 @@
 </div>
 <!-- Add these right before </body> -->
 <!-- Bootstrap JS -->
-      <div id="wordArea">
+      <div id="wordReadView">
     <div class="rootWordBox light">
       <div class="label light big" id="wordOrderDisplay"></div>
       <button id="wordDisplay" class="rootWordButton"></button>
@@ -313,6 +313,35 @@
     <div id="antDisplay"></div>
   </div>
 </div>
+<!-- To display question format -->
+            <div id="wordQuestionView hidden">
+    <div class="rootWordBox light">
+      <div class="label light big" id="wordOrderLabel"></div>
+      <button id="wordQuestion" class="rootWordButton"></button>
+    </div>
+      <div class="tab-buttons">
+<button id="Meaningbtn" class="wordBtns"><i class="material-icons">lock</i></button>
+<button id="Synonymbtn" class="wordBtns"><i class="material-icons">description</i></button>
+<button id="Antonymbtn" class="wordBtns"><i class="material-icons">verified_user</i></button>
+</div>
+
+  <!-- Meaning section -->
+  <div class="word-card light hidden" id="definition">
+    <div class="meaningDiv" id="meaningWord"></div>
+  </div>
+
+  <!-- Synonyms section (added id="synonymCard") -->
+  <div class="word-card light" id="synonymCard">
+    <div class="label light big" id="synLabel"></div>
+    <div id="synDisplay"></div>
+  </div>
+
+  <!-- Antonyms section (added id="antonymCard") -->
+  <div class="word-card light hidden" id="antonymCard">
+    <div class="label light big" id="antLabel"></div>
+    <div id="antDisplay"></div>
+  </div>
+            </div>
       <div class="footer-buttons">
       <button id="prevBtn">Previous</button>
       <button id="nextBtn">Next</button>
