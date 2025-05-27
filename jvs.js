@@ -1199,8 +1199,8 @@ if (bigTexts === 0) {
   }
   if (questionMode === 1) {
     displayQuestion();
-    });
-  
+    }
+
   const word = wordLibrary[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
 
