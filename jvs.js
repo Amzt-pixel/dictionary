@@ -1752,35 +1752,6 @@ function viewInfo(mode) {
   }
 }
 ///Latest Addition
-// 1. Get random distractors (incorrect words)
-function getRandomDistractors(correctOptions, count, excludeWord) {
-  const allWords = [...new Set(csvData.map(item => item.word))];
-  const pool = allWords.filter(word => 
-    !correctOptions.includes(word) && word !== excludeWord
-  );
-  return [...pool].sort(() => 0.5 - Math.random()).slice(0, count);
-}
-
-// 2. Generate MCQ options
-function generateMCQOptions(correctOptions, excludeWord) {
-  if (correctOptions.length === 0) return []; // Hide section if no correct options
-
-  // Calculate option count
-  const totalOptions = randomOptionCount === 1 
-    ? Math.min(maxOptions, Math.max(minOptions, 
-        Math.floor(Math.random() * (maxOptions - minOptions + 1)) + minOptions)
-    : minOptions;
-
-  // Cap correct options by correctPercent (minimum 1)
-  const maxCorrect = Math.max(1, Math.floor(totalOptions * correctPercent / 100));
-  const correctCount = Math.min(correctOptions.length, maxCorrect);
-  const selectedCorrect = [...correctOptions].sort(() => 0.5 - Math.random()).slice(0, correctCount);
-
-  // Add distractors
-  const distractors = getRandomDistractors(correctOptions, totalOptions - correctCount, excludeWord);
-  return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
-}
-
 
 function displayQuestion() {
   const word = wordLibrary[currentIndex];
@@ -1889,6 +1860,35 @@ function handleMCQClick(clickedElement) {
       el.classList.add("correct");
     });
   }
+}
+
+// 1. Get random distractors (incorrect words)
+function getRandomDistractors(correctOptions, count, excludeWord) {
+  const allWords = [...new Set(csvData.map(item => item.word))];
+  const pool = allWords.filter(word => 
+    !correctOptions.includes(word) && word !== excludeWord
+  );
+  return [...pool].sort(() => 0.5 - Math.random()).slice(0, count);
+}
+
+// 2. Generate MCQ options
+function generateMCQOptions(correctOptions, excludeWord) {
+  if (correctOptions.length === 0) return []; // Hide section if no correct options
+
+  // Calculate option count
+  const totalOptions = randomOptionCount === 1 
+    ? Math.min(maxOptions, Math.max(minOptions, 
+        Math.floor(Math.random() * (maxOptions - minOptions + 1)) + minOptions)
+    : minOptions;
+
+  // Cap correct options by correctPercent (minimum 1)
+  const maxCorrect = Math.max(1, Math.floor(totalOptions * correctPercent / 100));
+  const correctCount = Math.min(correctOptions.length, maxCorrect);
+  const selectedCorrect = [...correctOptions].sort(() => 0.5 - Math.random()).slice(0, correctCount);
+
+  // Add distractors
+  const distractors = getRandomDistractors(correctOptions, totalOptions - correctCount, excludeWord);
+  return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
 }
 
 
