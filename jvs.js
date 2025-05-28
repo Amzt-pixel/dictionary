@@ -1837,7 +1837,6 @@ function displayQuestion() {
   */
   // 3. Meanings MCQ
   // Meaning MCQ Section
-  function displayQuestion() {
   // ... (existing synonym/antonym code)
 
   // ===== MEANINGS MCQ SECTION =====
