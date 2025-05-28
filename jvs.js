@@ -1850,7 +1850,12 @@ function displayQuestion() {
   // ===== MEANINGS MCQ SECTION =====
   const meanings = new Set(
     csvData
-      .filter(item => item.word === word && item.extra1)
+     // .filter(item => item.word === word && item.extra1)
+    .filter(item =>
+  item.word &&
+  item.extra1 &&
+  item.word.trim().toLowerCase() === word.trim().toLowerCase()
+)
       .map(item => item.extra1)
   );
 
