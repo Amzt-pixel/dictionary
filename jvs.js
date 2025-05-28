@@ -1169,6 +1169,7 @@ function countRootVisit(index) {
         seenRootWord.push(absId);
     }
 }
+/*
 function viewFunction() {
 if (darkMode === 1) {
     // Convert all light elements to dark
@@ -1202,7 +1203,7 @@ if (bigTexts === 0) {
    displayWord();
 }
 }​
-
+*/
 function displayWord() {
   // Add this at the beginning or end of your displayWord() function
 
