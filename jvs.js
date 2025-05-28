@@ -575,7 +575,8 @@ function prevWord() {
   }
 
   wordsSeen++;
-  displayWord();// Single call at the end
+ // displayWord();// Single call at the end
+    displayQuestion();
 }
 
 function nextWord() {
@@ -660,8 +661,9 @@ function nextWord() {
   }
 
   wordsSeen++;
-  displayWord(); // Single call at the end
-   } 
+//  displayWord(); // Single call at the end
+   displayQuestion();
+} 
 
 function completeSession() {
   const confirmQuit = confirm("Are you sure you want to quit?");
