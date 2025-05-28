@@ -1837,34 +1837,54 @@ function displayQuestion() {
   */
   // 3. Meanings MCQ
   // Meaning MCQ Section
+  function displayQuestion() {
+  // ... (existing synonym/antonym code)
+
+  // ===== MEANINGS MCQ SECTION =====
   const meanings = new Set(
     csvData
       .filter(item => item.word === word && item.extra1)
       .map(item => item.extra1)
   );
 
-  const meaningOptions = generateMeaningOptions([...meanings], word);
-  const meaningDisplay = document.getElementById("meaningDisplay");
+  const meaningDiv = document.getElementById("meaningWord");
+  const wordCard = document.getElementById("definition");
 
-  // Always show the section (even if no meaning exists)
-  meaningDisplay.closest(".word-card").classList.remove("hidden");
+  // Always show the card
+  wordCard.classList.remove("hidden");
 
-  if (meaningOptions.length > 0) {
-    document.getElementById("meaningLabel").textContent = "Choose the Correct Definition:";
-    meaningDisplay.innerHTML = meaningOptions.map(opt => `
-      <button 
-        class="definition-button" 
-        data-correct="${meanings.has(opt)}" 
-        onclick="handleMCQClick(this)"
-      >
-        ${opt}
-      </button>
-    `).join("");
+  if (meanings.size > 0) {
+    const meaningOptions = generateMeaningOptions([...meanings], word);
+    
+    meaningDiv.innerHTML = `
+      <div class="meaning-content">
+        <div class="meaning-section">
+          <span class="meaning-header">Definition (MCQ):</span>
+          <div class="meaning-mcq-options">
+            ${meaningOptions.map(opt => `
+              <button 
+                class="meaning-button" 
+                data-correct="${meanings.has(opt)}" 
+                onclick="handleMCQClick(this)"
+              >
+                ${opt}
+              </button>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
   } else {
-    document.getElementById("meaningLabel").textContent = "Definition:";
-    meaningDisplay.innerHTML = '<div class="no-meaning">No meaning exists</div>';
+    meaningDiv.innerHTML = `
+      <div class="meaning-content">
+        <div class="meaning-section">
+          <span class="no-meaning">No definition exists for MCQ</span>
+        </div>
+      </div>
+    `;
   }
 }
+
 
 function handleMCQClick(clickedElement) {
   const isCorrect = clickedElement.dataset.correct === "true";
