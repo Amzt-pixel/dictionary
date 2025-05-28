@@ -1856,7 +1856,6 @@ function displayQuestion() {
   }
   meaningDisplay.closest(".word-card").classList.remove("hidden"); // Always show section
 }
-}
 
 function handleMCQClick(clickedElement) {
   const isCorrect = clickedElement.dataset.correct === "true";
