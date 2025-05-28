@@ -467,9 +467,9 @@ function startSession() {
   rootWordList = getRootWords(studyList);
   showScreen("study");
   viewRootWords();
-  //displayWord();
+  displayWord();
 //displayQuestion();
-  viewFunction();
+ // viewFunction();
 }
 
 function getRootWords(list) {
@@ -575,7 +575,7 @@ function prevWord() {
   }
 
   wordsSeen++;
-  viewFunction(); // Single call at the end
+  displayWord();// Single call at the end
 }
 
 function nextWord() {
@@ -660,7 +660,7 @@ function nextWord() {
   }
 
   wordsSeen++;
-  viewFunction(); // Single call at the end
+  displayWord(); // Single call at the end
    } 
 
 function completeSession() {
@@ -1124,7 +1124,7 @@ function searchResultClick() {
       isSearchActive = false;
       document.getElementById("menuScreen").style.display = "none";
   document.getElementById("mainScreen").style.display = "block";
-      viewFunction();
+      displayWord();
     });
   });
 }
