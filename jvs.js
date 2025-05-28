@@ -468,7 +468,8 @@ function startSession() {
   showScreen("study");
   viewRootWords();
   //displayWord();
-displayQuestion();
+//displayQuestion();
+  viewFunction();
 }
 
 function getRootWords(list) {
@@ -574,7 +575,7 @@ function prevWord() {
   }
 
   wordsSeen++;
-  displayWord(); // Single call at the end
+  viewFunction(); // Single call at the end
 }
 
 function nextWord() {
@@ -659,7 +660,7 @@ function nextWord() {
   }
 
   wordsSeen++;
-  displayWord(); // Single call at the end
+  viewFunction(); // Single call at the end
    } 
 
 function completeSession() {
@@ -1123,7 +1124,7 @@ function searchResultClick() {
       isSearchActive = false;
       document.getElementById("menuScreen").style.display = "none";
   document.getElementById("mainScreen").style.display = "block";
-      displayWord();
+      viewFunction();
     });
   });
 }
@@ -1168,9 +1169,7 @@ function countRootVisit(index) {
         seenRootWord.push(absId);
     }
 }
-
-function displayWord() {
-  // Add this at the beginning or end of your displayWord() function
+function viewFunction() {
 if (darkMode === 1) {
     // Convert all light elements to dark
     document.querySelectorAll('.light').forEach(element => {
@@ -1199,7 +1198,13 @@ if (bigTexts === 0) {
   }
   if (questionMode === 1) {
     displayQuestion();
-    }
+    } else {
+   displayWord();
+}
+}​
+
+function displayWord() {
+  // Add this at the beginning or end of your displayWord() function
 
   const word = wordLibrary[currentIndex];
   const ids = csvData.filter(item => item.word === word).map(item => item.id);
