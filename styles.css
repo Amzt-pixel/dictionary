@@ -971,3 +971,16 @@ input:checked + .slider:before {
   flex: 1;
   margin: 0 5px;
 }
+.word-button.correct {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.word-button.incorrect {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.word-button.selected {
+  border: 2px solid #000099;
+}
