@@ -1773,14 +1773,15 @@ function displayQuestion() {
     csvData.filter(item => item.word === word && item.id > 0)
            .flatMap(item => csvData.filter(x => x.id === -item.id).map(x => x.word))
   );
+  /*
   const meanings = new Set(
     csvData.filter(item => item.word === word && item.extra1).map(item => item.extra1)
-  );
+  );*/
 
   // Generate MCQs
   const synonymOptions = generateMCQOptions([...synonyms], word);
   const antonymOptions = generateMCQOptions([...antonyms], word);
-  const meaningOptions = generateMCQOptions([...meanings], word);
+//  const meaningOptions = generateMCQOptions([...meanings], word);
 
   // ========================
   // Render Sections
@@ -1819,7 +1820,7 @@ function displayQuestion() {
   }
 
   // 3. Meanings MCQ
-  const meaningDisplay = document.getElementById("meaningDisplay");
+/*  const meaningDisplay = document.getElementById("meaningDisplay");
   if (meaningOptions.length > 0) {
     document.getElementById("meaningLabel").textContent = "Choose Meanings:";
     meaningDisplay.innerHTML = meaningOptions.map(opt => `
@@ -1833,6 +1834,26 @@ function displayQuestion() {
   } else {
     meaningDisplay.closest(".word-card").classList.add("hidden");
   }
+  */
+  // 3. Meanings MCQ
+const meanings = getCorrectMeaning(word, csvData);
+const allMeanings = getAllMeanings(csvData);
+const meaningOptions = generateMCQOptionsForMeanings([...meanings], allMeanings);
+
+const meaningDisplay = document.getElementById("meaningDisplay");
+if (meaningOptions.length > 0) {
+  document.getElementById("meaningLabel").textContent = "Choose Meanings:";
+  meaningDisplay.innerHTML = meaningOptions.map(opt => `
+    <div class="meaning-option" 
+         data-correct="${meanings.has(opt)}" 
+         onclick="handleMCQClick(this)">
+      ${opt}
+    </div>
+  `).join("");
+  meaningDisplay.closest(".word-card").classList.remove("hidden");
+} else {
+  meaningDisplay.closest(".word-card").classList.add("hidden");
+}
 }
 
 function handleMCQClick(clickedElement) {
@@ -1883,3 +1904,37 @@ function generateMCQOptions(correctOptions, excludeWord) {
   return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
     }
 
+function getAllMeanings(csvData) {
+  return [...new Set(
+    csvData
+      .filter(item => item.extra1)
+      .map(item => item.extra1)
+  )];
+}
+
+function getCorrectMeaning(word, csvData) {
+  const match = csvData.find(item => item.word === word && item.extra1);
+  return match ? new Set([match.extra1]) : new Set();
+}
+function generateMCQOptionsForMeanings(correctMeanings, allMeanings) {
+  if (correctMeanings.length === 0) return [];
+
+  const totalOptions = randomOptionCount === 1 
+    ? Math.min(maxOptions, Math.max(minOptions, 
+        Math.floor(Math.random() * (maxOptions - minOptions + 1)) + minOptions))
+    : minOptions;
+
+  const maxCorrect = Math.max(1, Math.floor(totalOptions * correctPercent / 100));
+  const correctCount = Math.min(correctMeanings.length, maxCorrect);
+
+  const selectedCorrect = [...correctMeanings]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, correctCount);
+
+  const distractors = allMeanings
+    .filter(m => !selectedCorrect.includes(m))
+    .sort(() => 0.5 - Math.random())
+    .slice(0, totalOptions - correctCount);
+
+  return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
+}
