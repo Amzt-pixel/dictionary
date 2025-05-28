@@ -1836,23 +1836,25 @@ function displayQuestion() {
   }
   */
   // 3. Meanings MCQ
-const meanings = getCorrectMeaning(word, csvData);
-const allMeanings = getAllMeanings(csvData);
-const meaningOptions = generateMCQOptionsForMeanings([...meanings], allMeanings);
+  // Meaning MCQ Section
+  const meanings = new Set(
+    csvData.filter(item => item.word === word && item.extra1).map(item => item.extra1)
+  );
+  const meaningOptions = generateMeaningOptions([...meanings], word);
 
-const meaningDisplay = document.getElementById("meaningDisplay");
-if (meaningOptions.length > 0) {
-  document.getElementById("meaningLabel").textContent = "Choose Meanings:";
-  meaningDisplay.innerHTML = meaningOptions.map(opt => `
-    <div class="meaning-option" 
-         data-correct="${meanings.has(opt)}" 
-         onclick="handleMCQClick(this)">
-      ${opt}
-    </div>
-  `).join("");
-  meaningDisplay.closest(".word-card").classList.remove("hidden");
-} else {
-  meaningDisplay.closest(".word-card").classList.add("hidden");
+  const meaningDisplay = document.getElementById("meaningDisplay");
+  if (meaningOptions.length > 0) {
+    document.getElementById("meaningLabel").textContent = "Choose the Correct Definition:";
+    meaningDisplay.innerHTML = meaningOptions.map(opt => `
+      <button class="definition-button" data-correct="${meanings.has(opt)}" onclick="handleMCQClick(this)">
+        ${opt}
+      </button>
+    `).join("");
+  } else {
+    document.getElementById("meaningLabel").textContent = "Definition:";
+    meaningDisplay.innerHTML = `<div class="no-meaning">No meaning exists</div>`;
+  }
+  meaningDisplay.closest(".word-card").classList.remove("hidden"); // Always show section
 }
 }
 
@@ -1937,4 +1939,35 @@ function generateMCQOptionsForMeanings(correctMeanings, allMeanings) {
     .slice(0, totalOptions - correctCount);
 
   return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
+}
+//Exclusively for meanings
+function generateMeaningOptions(correctDefinitions, currentWord) {
+  if (correctDefinitions.size === 0) return []; // No valid definitions
+
+  // 1. Get ALL definitions (exclude current word's correct definitions)
+  const allDefinitions = csvData
+    .filter(item => item.extra1 && !correctDefinitions.has(item.extra1))
+    .map(item => item.extra1);
+
+  // 2. Determine option count
+  let optionCount;
+  if (config.randomOptionCount === 1) {
+    optionCount = Math.min(
+      Math.max(
+        Math.floor(Math.random() * (config.maxOptions - config.minOptions + 1)) + config.minOptions,
+        config.minOptions
+      ),
+      allDefinitions.length + 1
+    );
+  } else {
+    optionCount = Math.min(config.minOptions, allDefinitions.length + 1);
+  }
+
+  // 3. Pick distractors (wrong definitions)
+  const shuffledDefinitions = shuffleArray(allDefinitions);
+  const distractors = shuffledDefinitions.slice(0, optionCount - 1); // Leave space for correct answer
+
+  // 4. Combine and shuffle (ensure correct answer is included)
+  const options = [...distractors, ...correctDefinitions];
+  return shuffleArray(options).slice(0, optionCount);
 }
