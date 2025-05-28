@@ -1765,12 +1765,12 @@ function displayQuestion() {
 
   // Get correct answers
   const synonyms = new Set(
-    csvData.filter(item => item.word === word && item.id > 0)
+    csvData.filter(item => item.word === word)
            .flatMap(item => csvData.filter(x => x.id === item.id).map(x => x.word))
            .filter(w => w !== word)
   );
   const antonyms = new Set(
-    csvData.filter(item => item.word === word && item.id > 0)
+    csvData.filter(item => item.word === word)
            .flatMap(item => csvData.filter(x => x.id === -item.id).map(x => x.word))
   );
   /*
