@@ -1752,10 +1752,11 @@ function viewInfo(mode) {
   }
 }
 ///Latest Addition
-
 function displayQuestion() {
   const word = wordLibrary[currentIndex];
-   // Display root word prominently (added this section)
+  if (!word) return; // Handle case where word is undefined
+  
+  // Display root word prominently
   document.getElementById("wordOrderDisplay").textContent = `Word ${currentIndex + 1}:`;
   document.getElementById("wordDisplay").innerHTML = `
     <div class="mcq-prompt">What are the correct options for this word?</div>
@@ -1832,15 +1833,8 @@ function displayQuestion() {
   } else {
     meaningDisplay.closest(".word-card").classList.add("hidden");
   }
-
-  // Display root word
-  document.getElementById("wordDisplay").textContent = word;
-  document.getElementById("wordOrderDisplay").textContent = `Word ${currentIndex + 1}:`;
 }
 
-// ========================
-// Click Handler (Global)
-// ========================
 function handleMCQClick(clickedElement) {
   const isCorrect = clickedElement.dataset.correct === "true";
   const parentCard = clickedElement.closest(".word-card");
@@ -1862,7 +1856,6 @@ function handleMCQClick(clickedElement) {
   }
 }
 
-// 1. Get random distractors (incorrect words)
 function getRandomDistractors(correctOptions, count, excludeWord) {
   const allWords = [...new Set(csvData.map(item => item.word))];
   const pool = allWords.filter(word => 
@@ -1871,14 +1864,13 @@ function getRandomDistractors(correctOptions, count, excludeWord) {
   return [...pool].sort(() => 0.5 - Math.random()).slice(0, count);
 }
 
-// 2. Generate MCQ options
 function generateMCQOptions(correctOptions, excludeWord) {
-  if (correctOptions.length === 0) return []; // Hide section if no correct options
+  if (correctOptions.length === 0) return [];
 
   // Calculate option count
   const totalOptions = randomOptionCount === 1 
     ? Math.min(maxOptions, Math.max(minOptions, 
-        Math.floor(Math.random() * (maxOptions - minOptions + 1)) + minOptions)
+        Math.floor(Math.random() * (maxOptions - minOptions + 1)) + minOptions))
     : minOptions;
 
   // Cap correct options by correctPercent (minimum 1)
@@ -1889,6 +1881,5 @@ function generateMCQOptions(correctOptions, excludeWord) {
   // Add distractors
   const distractors = getRandomDistractors(correctOptions, totalOptions - correctCount, excludeWord);
   return [...selectedCorrect, ...distractors].sort(() => 0.5 - Math.random());
-}
-
+    }
 
