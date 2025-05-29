@@ -11,7 +11,7 @@ let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
 let loopMode = 0;
-let revealAns = 1;
+let revealAns = 0;
 let randomOptionCount = 1;     // Whether number of options is randomized (1 = yes, 0 = no)
 let minOptions = 4;            // Minimum number of MCQ options
 let maxOptions = 10;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
