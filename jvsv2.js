@@ -11,7 +11,7 @@ let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
 let loopMode = 0;
-
+let revealAns = 1;
 let randomOptionCount = 1;     // Whether number of options is randomized (1 = yes, 0 = no)
 let minOptions = 4;            // Minimum number of MCQ options
 let maxOptions = 10;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
@@ -1664,7 +1664,7 @@ if (wordObj && wordObj.extra1) {
 }
 }
 
-
+/*
 function handleMCQClick(clickedElement) {
   const isCorrect = clickedElement.dataset.correct === "true";
   const parentCard = clickedElement.closest(".word-card");
@@ -1685,7 +1685,7 @@ function handleMCQClick(clickedElement) {
     });
   }
 }
-
+*/
 function getRandomDistractors(correctOptions, count, excludeWord) {
   const allWords = [...new Set(csvData.map(item => item.word))];
   const pool = allWords.filter(word => 
@@ -1734,4 +1734,26 @@ function getRandomDefinitions(correctDefinition, count) {
   )];
 
   return allDefinitions.sort(() => 0.5 - Math.random()).slice(0, count);
+}
+function handleMCQClick(clickedElement) {
+  const isCorrect = clickedElement.dataset.correct === "true";
+  const parentCard = clickedElement.closest(".word-card");
+
+  // Toggle selection
+  if (clickedElement.classList.contains("selected")) {
+    clickedElement.classList.remove("selected", "correct", "incorrect");
+  } else {
+    clickedElement.classList.add("selected");
+    clickedElement.classList.add(isCorrect ? "correct" : "incorrect");
+  }
+
+  // Conditionally reveal correct answers
+  if (revealAns === 1) {
+    const anyIncorrect = parentCard.querySelectorAll(".selected.incorrect").length > 0;
+    if (anyIncorrect) {
+      parentCard.querySelectorAll('[data-correct="true"]').forEach(el => {
+        el.classList.add("correct");
+      });
+    }
+  }
 }
