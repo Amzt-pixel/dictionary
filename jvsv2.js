@@ -232,44 +232,7 @@ if (pendingBigTexts !== null) {
 }
 viewFunction();
 });
-/*
-//Buttons for viewing Synonyms/Antonyms/Definition
-document.getElementById('red').addEventListener('click', function () {
-  document.querySelectorAll('.wordBtns').forEach(function (btn) {
-    btn.classList.remove('active');
-  });
-  this.classList.add('active');
 
-  document.querySelectorAll('.word-card').forEach(function (card) {
-    card.classList.add('hidden');
-  });
-  document.getElementById('definition').classList.remove('hidden');
-});
-
-document.getElementById('blue').addEventListener('click', function () {
-  document.querySelectorAll('.wordBtns').forEach(function (btn) {
-    btn.classList.remove('active');
-  });
-  this.classList.add('active');
-
-  document.querySelectorAll('.word-card').forEach(function (card) {
-    card.classList.add('hidden');
-  });
-  document.getElementById('synonym').classList.remove('hidden');
-});
-
-document.getElementById('green').addEventListener('click', function () {
-  document.querySelectorAll('.wordBtns').forEach(function (btn) {
-    btn.classList.remove('active');
-  });
-  this.classList.add('active');
-
-  document.querySelectorAll('.word-card').forEach(function (card) {
-    card.classList.add('hidden');
-  });
-  document.getElementById('antonym').classList.remove('hidden');
-});
-*/
 function checkInputs() {
   const csv = document.getElementById("csvSelector").value;
   const mode = document.getElementById("topicSelector").value;
@@ -1430,95 +1393,7 @@ function clearNextHold() {
     nextHoldTimer = null;
   }
 }
-// Tab content functions
 
-// Updated viewRootWords function (mirroring search results structure)
-/*function viewRootWords() {
-  const contentArea = document.getElementById('contentArea');
-  
-  // Clear previous content
-  contentArea.innerHTML = `
-    <div id="rootWordsSection" class="root-section">
-      <div id="rootWordsList"></div>
-    </div>
-  `;
-
-  // Populate root words list
-  const rootWordsList = document.getElementById('rootWordsList');
-  rootWordsList.innerHTML = rootWordList.map(item =>
-    `<div class="root-word-result" data-word="${item.word}">
-      ${item.word} <span class="root-id">– ${item.numId}</span>
-    </div>`
-  ).join('');
-
-  // Add click handlers (same pattern as search results)
-  document.querySelectorAll('.root-word-result').forEach(item => {
-    item.addEventListener('click', function() {
-      const selectedWord = this.dataset.word;
-      const index = studyList.indexOf(selectedWord);
-      
-      if (index !== -1) {
-        currentIndex = index;
-        wordsSeen++;
-        displayWord();
-        document.getElementById("menuScreen").style.display = "none";
-  document.getElementById("mainScreen").style.display = "block";
-      } else {
-        alert("Word not found in current study list");
-      }
-    });
-  });
-}
-function viewWordMeanings() {
-  const contentArea = document.getElementById('contentArea');
-  
-  // Filter words that have a 3rd column (extra1)
-  const wordsWithMeanings = csvData.filter(item => item.extra1);
-
-  // Create container with matching structure
-  contentArea.innerHTML = `
-    <div id="wordMeaningsSection" class="meanings-section">
-      <h3>Words with Definitions</h3>
-      <div id="wordMeaningsList"></div>
-    </div>
-  `;
-
-  const meaningsList = document.getElementById('wordMeaningsList');
-
-  if (wordsWithMeanings.length > 0) {
-    // Populate meanings list if words found
-    meaningsList.innerHTML = wordsWithMeanings.map(item =>
-      `<div class="meaning-result" data-word="${item.word}">
-        <strong>${item.word}</strong>: ${item.extra1}
-      </div>`
-    ).join('');
-
-    // Add click handlers
-    document.querySelectorAll('.meaning-result').forEach(item => {
-      item.addEventListener('click', function() {
-        const selectedWord = this.dataset.word;
-        const index = studyList.indexOf(selectedWord);
-        
-        if (index !== -1) {
-          currentIndex = index;
-          wordsSeen++;
-          displayWord();
-          showScreen("study");
-        } else {
-          alert("Word not found in current study list");
-        }
-      });
-    });
-  } else {
-    // Display message when no words with definitions found
-    meaningsList.innerHTML = `
-      <div class="no-meanings-message">
-        No Words with Definitions
-      </div>
-    `;
-  }
-}
-*/
 function viewRootWords() {
   const contentArea = document.getElementById('contentArea');
   
