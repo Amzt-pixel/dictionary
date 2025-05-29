@@ -467,8 +467,8 @@ function startSession() {
   rootWordList = getRootWords(studyList);
   showScreen("study");
   viewRootWords();
-  displayWord();
-//displayQuestion();
+  //displayWord();
+displayQuestion();
  // viewFunction();
 }
 
