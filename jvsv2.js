@@ -14,8 +14,8 @@ let loopMode = 0;
 
 let randomOptionCount = 1;     // Whether number of options is randomized (1 = yes, 0 = no)
 let minOptions = 4;            // Minimum number of MCQ options
-let maxOptions = 6;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
-let correctPercent = 30;       // Minimum percent of correct options (for synonyms/antonyms)
+let maxOptions = 10;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
+let correctPercent = 50;       // Minimum percent of correct options (for synonyms/antonyms)
 let questionMode = 1;
   
 let isSearchActive = false;
