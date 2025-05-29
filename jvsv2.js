@@ -230,7 +230,7 @@ if (pendingBigTexts !== null) {
   bigTexts = pendingBigTexts;
   pendingBigTexts = null;
 }
-displayWord();
+viewFunction();
 });
 /*
 //Buttons for viewing Synonyms/Antonyms/Definition
@@ -468,8 +468,8 @@ function startSession() {
   showScreen("study");
   viewRootWords();
   //displayWord();
-displayQuestion();
- // viewFunction();
+//displayQuestion();
+  viewFunction();
 }
 
 function getRootWords(list) {
@@ -576,7 +576,7 @@ function prevWord() {
 
   wordsSeen++;
  // displayWord();// Single call at the end
-    displayQuestion();
+    viewFunction();
 }
 
 function nextWord() {
@@ -662,7 +662,7 @@ function nextWord() {
 
   wordsSeen++;
 //  displayWord(); // Single call at the end
-   displayQuestion();
+   viewFunction();
 } 
 
 function completeSession() {
@@ -773,92 +773,7 @@ document.getElementById("bigTexts").addEventListener("change", (e) => {
   pendingBigTexts = e.target.checked ? 1 : 0;
 });
 }
-/*
-function initSearch() {
-  let holdTimer = null;
-  const holdDuration = 1000; // 1 second
 
-  const toggleSearch = () => {
-    if (!resultsVisible) {
-      const term = searchInput.value.trim();
-      if (term.length < 3) {
-        alert("Search Inactive!\n" +
-      "Press and Hold to see Search Guide\n\n" +
-      `Meaning Search: ${searchByMeaning === 1 ? "ON" : "OFF"}`);
-        return;
-      }
-
-      isSearchActive = true;
-      handleSearch({ target: { value: term }, type: "manual" });
-
-      searchInput.addEventListener("input", handleSearch);
-      searchButton.textContent = "×";
-      resultsVisible = true;
-    } else {
-      clearSearch();
-      searchInput.removeEventListener("input", handleSearch);
-      searchButton.textContent = "⌕";
-      resultsVisible = false;
-    }
-  };
-
-  const startHold = () => {
-    if (holdTimer === null) {
-      searchButton.classList.add("search-button-hold");
-      holdTimer = setTimeout(() => {
-        alert(
-  "1. You must enter minimum 3 characters to initiate search.\n" +
-  "2. Search by {ID} to view Word at ID-th position.\n" +
-  "3. Search by {LETTER} to view Words starting with LETTER.\n" +
-  "4. Adjust step value for Previous and Next from Step field (Default : 1).\n" +
-  "5. Click on the Words to view them.\n" +
-  "6. Click the Meta button to view Meta info of session."
-);
-        holdTimer = null;
-        searchButton.classList.remove("search-button-hold");
-      }, holdDuration);
-    }
-  };
-
-  const cancelHold = () => {
-    if (holdTimer) {
-      clearTimeout(holdTimer);
-      holdTimer = null;
-    }
-    searchButton.classList.remove("search-button-hold");
-  };
-
-  // Mouse events
-  searchButton.addEventListener('mousedown', startHold);
-  searchButton.addEventListener('mouseup', cancelHold);
-  searchButton.addEventListener('mouseleave', cancelHold);
-
-  // Touch events — DO NOT call preventDefault
-  searchButton.addEventListener('touchstart', startHold);
-  searchButton.addEventListener('touchend', cancelHold);
-  searchButton.addEventListener('touchcancel', cancelHold);
-
-  // Click handler (remains functional now)
-  searchButton.addEventListener("click", toggleSearch);
-
-  searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      toggleSearch();
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    if (
-      resultsVisible &&
-      searchInput.value.trim() === "" &&
-      e.target !== searchInput &&
-      !searchInput.contains(e.target)
-    ) {
-      toggleSearch();
-    }
-  });
-}
-*/
 function initSearch() {
   let holdTimer = null;
   const holdDuration = 1000; // 1 second
@@ -1126,7 +1041,7 @@ function searchResultClick() {
       isSearchActive = false;
       document.getElementById("menuScreen").style.display = "none";
   document.getElementById("mainScreen").style.display = "block";
-      displayWord();
+      viewFunction();
     });
   });
 }
@@ -1171,41 +1086,43 @@ function countRootVisit(index) {
         seenRootWord.push(absId);
     }
 }
-/*
+
 function viewFunction() {
-if (darkMode === 1) {
-    // Convert all light elements to dark
-    document.querySelectorAll('.light').forEach(element => {
-        element.classList.remove('light');
-        element.classList.add('dark');
-    });
-} else {
-    // Convert back to light mode if needed
-    document.querySelectorAll('.dark').forEach(element => {
-        element.classList.remove('dark');
-        element.classList.add('light');
-    });
-}
-if (bigTexts === 0) {
-    // Convert all big text elements to small
-    document.querySelectorAll('.big').forEach(element => {
-        element.classList.remove('big');
-        element.classList.add('small');
-    });
-} else {
-    // Convert all small text elements to big
-    document.querySelectorAll('.small').forEach(element => {
-        element.classList.remove('small');
-        element.classList.add('big');
-    });
-  }
-  if (questionMode === 1) {
-    displayQuestion();
+    if (darkMode === 1) {
+        // Convert all light elements to dark
+        document.querySelectorAll('.light').forEach(function(element) {
+            element.classList.remove('light');
+            element.classList.add('dark');
+        });
     } else {
-   displayWord();
+        // Convert back to light mode if needed
+        document.querySelectorAll('.dark').forEach(function(element) {
+            element.classList.remove('dark');
+            element.classList.add('light');
+        });
+    }
+
+    if (bigTexts === 0) {
+        // Convert all big text elements to small
+        document.querySelectorAll('.big').forEach(function(element) {
+            element.classList.remove('big');
+            element.classList.add('small');
+        });
+    } else {
+        // Convert all small text elements to big
+        document.querySelectorAll('.small').forEach(function(element) {
+            element.classList.remove('small');
+            element.classList.add('big');
+        });
+    }
+
+    if (questionMode === 1) {
+        displayQuestion();
+    } else {
+        displayWord();
+    }
 }
-}​
-*/
+
 function displayWord() {
   // Add this at the beginning or end of your displayWord() function
 
