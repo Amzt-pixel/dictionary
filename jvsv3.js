@@ -6,60 +6,81 @@ let studyList = [];
 let rootWordList = [];
 let seenRootWord = [];
 let currentIndex = 0;
+
+
+/* ===== CORE VARIABLES ===== */
 let wordsSeen = 0;
-let viewWordsMode = 1; //Default All words
 let startTime = null;
 let timerInterval;
-let loopMode = 0;
-let revealAns = 0;
-let randomOptionCount = 1;     // Whether number of options is randomized (1 = yes, 0 = no)
-let minOptions = 4;            // Minimum number of MCQ options
-let maxOptions = 10;            // Maximum number of MCQ options (only applies if randomOptionCount = 1)
-let correctPercent = 50;       // Minimum percent of correct options (for synonyms/antonyms)
-let questionMode = 1;
-  
+let csvName = null;
+let wordSetsCount = 123;
 let isSearchActive = false;
-let stepNumber = 1;
 let resultsVisible = false;
 let prevHoldTimer = null;
 let nextHoldTimer = null;
-let csvName = null;
-let wordSetsCount = 123;
-const csvColumnLimit = 5; //CSV column limit
-const HOLD_DURATION = 1000; // 1 second
-// Add this near your other constants (around line 11)
-// Add these with your other variables
-const STEP_OPTIONS = {
-  '1': [1, 3, 10, 25, 100, 500],
-  '0': [1, 3, 10, 25]
-};
-let pendingViewMode = null;  // Temporary storage until saved
-let pendingStepNumber = null;
-let pendingLoopMode = null;
-  let wordMeaningMode = 0;
-let pendingWordMeaningMode = null;
+const HOLD_DURATION = 1000;
+const csvColumnLimit = 5;
 
-let clickOnWord = 0;
-let pendingClickOnWord = null;
+/* ===== VIEW SETTINGS ===== */
+let darkMode = 0;              // Default OFF
+let allRootWords = 1;          // Default ON
+let fontSize = 1;              // 0=Small, 1=Normal, 2=Large
+let searchByMeaning = 0;       // Default OFF
+let buttonsControl = 1;        // Default ON
+let alertMessage = 0;          // Default OFF
 
-let searchByMeaning = 0;
-let pendingSearchByMeaning = null;
+/* ===== READ SETTINGS ===== */
+// Learning Mode
+let wordHighlight = 0;         // Default OFF
+let clickOnWord = 1;           // Default ON
+let testMode = 0;              // Default OFF
 
-let wordHighlight = 0; // Default: off
-let pendingWordHighlight = null; // Temporary storage until saved
+// Test Settings
+let minOptions = 4;            // Default 4
+let maxOptions = 6;            // Default 6
+let correctPercent = 30;       // Default 30%
+let randomOptionCount = 1;     // Default ON
+let revealAns = 1;             // Default ON
 
-let darkMode = 0; // Default: off
+/* ===== NAVIGATION ===== */
+let loopMode = 0;              // Default OFF
+let readBy = 1;                // 0=Root, 1=All Words, 2=Synonyms, 3=OneWordSubs
+let stepNumber = 1;            // Default 1
+let questionMode = 1;          // Default 1
+
+/* ===== PENDING CHANGES ===== */
 let pendingDarkMode = null;
+let pendingAllRootWords = null;
+let pendingFontSize = null;
+let pendingSearchByMeaning = null;
+let pendingButtonsControl = null;
+let pendingAlertMessage = null;
+let pendingWordHighlight = null;
+let pendingClickOnWord = null;
+let pendingTestMode = null;
+let pendingMinOptions = null;
+let pendingMaxOptions = null;
+let pendingCorrectPercent = null;
+let pendingRandomOptionCount = null;
+let pendingRevealAns = null;
+let pendingLoopMode = null;
+let pendingReadBy = null;
+let pendingStepNumber = null;
 
-let bigTexts = 1; // Default: on
-let pendingBigTexts = null;
+/* ===== CONSTANTS ===== */
+const STEP_OPTIONS = {
+  0: [1, 3, 5, 25, 100],          // Root Words
+  1: [1, 3, 5, 10, 25, 100, 500], // All Words
+  2: [1, 3, 5, 25, 100, 500],     // Synonyms/Antonyms
+  3: [1, 3, 5, 25, 100, 500]      // One Word Substitutions
+};
 
 // Initialize app
 window.onload = async () => {
   await loadCSVList();
   checkInputs();
   initSearch ();
-  initStepSelector();// Enable Start button if defaults are valid
+  initSettings();// Enable Start button if defaults are valid
 };
 
 // Event Listeners
@@ -87,7 +108,7 @@ const searchButton = document.querySelector(".searchBar-button");
 //document.getElementById("infoButton").addEventListener("click", showMetadata);//
 
 document.getElementById("viewMode").addEventListener("change", (e) => {
-    viewWordsMode = parseInt(e.target.value);
+    readBy = parseInt(e.target.value);
 });
 
 
@@ -185,52 +206,6 @@ document.getElementById('tab3').addEventListener('click', () => {
   document.querySelectorAll('.tabBtn').forEach(btn => btn.classList.remove('active'));
   document.getElementById('tab3').classList.add('active');
   viewNotedWords();
-});
-
-document.getElementById("savePopup").addEventListener("click", () => {
-  // Only save if there are pending changes
-  if (pendingViewMode !== null) {
-    viewWordsMode = pendingViewMode;
-    pendingViewMode = null;
-    if (pendingStepNumber === null) {
-      stepNumber = 1; // Force default to 1
-      document.getElementById("stepSelector").value = 1; // Update UI
-    }
-  }
-  if (pendingStepNumber !== null) {
-    stepNumber = pendingStepNumber;
-    pendingStepNumber = null;
-  }
-  if (pendingLoopMode !== null) {
-    loopMode = pendingLoopMode;
-    pendingLoopMode = null;
-  }
-  if (pendingWordMeaningMode !== null) {
-    wordMeaningMode = pendingWordMeaningMode;
-    pendingWordMeaningMode = null;
-  }
-  if (pendingClickOnWord !== null) {
-    clickOnWord = pendingClickOnWord;
-    pendingClickOnWord = null;
-  }
-  if (pendingSearchByMeaning !== null) {
-    searchByMeaning = pendingSearchByMeaning;
-    pendingSearchByMeaning = null;
-  }
-  if (pendingWordHighlight !== null) {
-  wordHighlight = pendingWordHighlight;
-  pendingWordHighlight = null;
-  }
-  if (pendingDarkMode !== null) {
-  darkMode = pendingDarkMode;
-  pendingDarkMode = null;
-}
-
-if (pendingBigTexts !== null) {
-  bigTexts = pendingBigTexts;
-  pendingBigTexts = null;
-}
-viewFunction();
 });
 
 function checkInputs() {
@@ -478,7 +453,7 @@ function calculateWordSets() {
 }
 
 function prevWord() {
-  if (viewWordsMode === 0) {
+  if (readBy === 0) {
     const currentWordStr = studyList[currentIndex];
     const currentWordData = csvData.find(item => item.word === currentWordStr);
     if (!currentWordData) {
@@ -543,7 +518,7 @@ function prevWord() {
 }
 
 function nextWord() {
-  if (viewWordsMode === 0) {
+  if (readBy === 0) {
     const currentWordStr = studyList[currentIndex];
     const currentWordData = csvData.find(item => item.word === currentWordStr);
     if (!currentWordData) {
@@ -588,7 +563,7 @@ function nextWord() {
       return;
     }
     currentIndex = foundIndex;
-  } else if (viewWordsMode === 2) {
+  } else if (readBy === 2) {
     // Find next word with extra3 === '1' at least stepNumber away
     let stepsRemaining = stepNumber;
     let newIndex = currentIndex;
@@ -662,81 +637,83 @@ function shuffleArray(array) {
   return shuffled;
 }
 
-function initStepSelector() {
-  const stepSelector = document.getElementById("stepSelector");
-  const viewModeSelect = document.getElementById("viewMode");
-
-  function updateStepOptions(viewMode) {
-    const options = STEP_OPTIONS[viewMode];
-    stepSelector.innerHTML = options.map(value => 
-      `<option value="${value}">${value}</option>`
-    ).join('');
-  }
-
-  // Initialize with current viewWordsMode (1 by default)
-  updateStepOptions(viewWordsMode.toString());
-  stepSelector.value = stepNumber; // Set to current stepNumber
-
-  // Handle viewMode changes
-  const viewModeToggle = document.getElementById("viewMode");
-
-// Set initial state: unchecked = 1, checked = 0
-viewModeToggle.checked = (viewWordsMode === 0);
-
-// Update on toggle
-viewModeToggle.addEventListener("change", (e) => {
-  pendingViewMode = e.target.checked ? 0 : 1;
-  updateStepOptions(pendingViewMode.toString());
-});
-
-  // Handle step changes
-  stepSelector.addEventListener("change", (e) => {
-    pendingStepNumber = parseInt(e.target.value);
-  });
-
-const loopModeToggle = document.getElementById("loopMode");
-loopModeToggle.checked = (loopMode === 1);
-
-loopModeToggle.addEventListener("change", (e) => {
-  pendingLoopMode = e.target.checked ? 1 : 0;
-});
-
-// Set initial toggle state
-document.getElementById("wordHighlight").checked = (wordHighlight === 1);
+// Initialize All Settings
+function initSettings() {
+  // View Settings
   document.getElementById("darkMode").checked = (darkMode === 1);
-document.getElementById("bigTexts").checked = (bigTexts === 1);
+  document.getElementById("allRootWords").checked = (allRootWords === 1);
+  document.getElementById("fontSize").value = fontSize;
+  document.getElementById("searchByMeaning").checked = (searchByMeaning === 1);
+  document.getElementById("buttonsControl").checked = (buttonsControl === 1);
+  document.getElementById("alertMessage").checked = (alertMessage === 1);
 
-// Event listener to store pending changes
-document.getElementById("wordHighlight").addEventListener("change", (e) => {
-  pendingWordHighlight = e.target.checked ? 1 : 0;
-});
-  
-// Set initial toggle states
-document.getElementById("wordMeaningMode").checked = (wordMeaningMode === 1);
-document.getElementById("clickOnWord").checked = (clickOnWord === 1);
-document.getElementById("searchByMeaning").checked = (searchByMeaning === 1);
+  // Read Settings
   document.getElementById("wordHighlight").checked = (wordHighlight === 1);
+  document.getElementById("clickOnWord").checked = (clickOnWord === 1);
+  document.getElementById("testMode").checked = (testMode === 1);
+  document.getElementById("minOptions").value = minOptions;
+  document.getElementById("maxOptions").value = maxOptions;
+  document.getElementById("correctPercent").value = correctPercent;
+  document.getElementById("randomOptionCount").checked = (randomOptionCount === 1);
+  document.getElementById("revealAns").checked = (revealAns === 1);
 
-// Event listeners to store pending changes
-document.getElementById("wordMeaningMode").addEventListener("change", (e) => {
-  pendingWordMeaningMode = e.target.checked ? 1 : 0;
-});
-document.getElementById("clickOnWord").addEventListener("change", (e) => {
-  pendingClickOnWord = e.target.checked ? 1 : 0;
-});
-document.getElementById("searchByMeaning").addEventListener("change", (e) => {
-  pendingSearchByMeaning = e.target.checked ? 1 : 0;
-});
-  
-document.getElementById("darkMode").addEventListener("change", (e) => {
-  pendingDarkMode = e.target.checked ? 1 : 0;
-});
-
-document.getElementById("bigTexts").addEventListener("change", (e) => {
-  pendingBigTexts = e.target.checked ? 1 : 0;
-});
+  // Navigation
+  document.getElementById("loopMode").checked = (loopMode === 1);
+  document.getElementById("readBy").value = readBy;
+  updateStepOptions(readBy); // Initialize step selector
 }
 
+// Update Step Options Based on ReadBy
+function updateStepOptions(readByValue) {
+  const stepSelector = document.getElementById("stepSelector");
+  const options = STEP_OPTIONS[readByValue];
+  
+  stepSelector.innerHTML = options.map(value => 
+    `<option value="${value}">${value}</option>`
+  ).join('');
+  
+  stepSelector.value = stepNumber; // Set current step
+}
+
+// Event Listeners
+document.getElementById("readBy").addEventListener("change", (e) => {
+  pendingReadBy = parseInt(e.target.value);
+  updateStepOptions(pendingReadBy);
+});
+
+document.getElementById("savePopup").addEventListener("click", saveSettings);
+
+// Save All Settings
+function saveSettings() {
+  // View Settings
+  darkMode = document.getElementById("darkMode").checked ? 1 : 0;
+  allRootWords = document.getElementById("allRootWords").checked ? 1 : 0;
+  fontSize = parseInt(document.getElementById("fontSize").value);
+  searchByMeaning = document.getElementById("searchByMeaning").checked ? 1 : 0;
+  buttonsControl = document.getElementById("buttonsControl").checked ? 1 : 0;
+  alertMessage = document.getElementById("alertMessage").checked ? 1 : 0;
+
+  // Read Settings
+  wordHighlight = document.getElementById("wordHighlight").checked ? 1 : 0;
+  clickOnWord = document.getElementById("clickOnWord").checked ? 1 : 0;
+  testMode = document.getElementById("testMode").checked ? 1 : 0;
+  minOptions = parseInt(document.getElementById("minOptions").value);
+  maxOptions = parseInt(document.getElementById("maxOptions").value);
+  correctPercent = parseInt(document.getElementById("correctPercent").value);
+  randomOptionCount = document.getElementById("randomOptionCount").checked ? 1 : 0;
+  revealAns = document.getElementById("revealAns").checked ? 1 : 0;
+
+  // Navigation
+  loopMode = document.getElementById("loopMode").checked ? 1 : 0;
+  readBy = parseInt(document.getElementById("readBy").value);
+  stepNumber = parseInt(document.getElementById("stepSelector").value);
+
+  // Apply changes
+  viewFunction(); // Refresh UI
+}
+
+// Initialize on load
+document.addEventListener("DOMContentLoaded", initSettings);
 function initSearch() {
   let holdTimer = null;
   const holdDuration = 1000; // 1 second
@@ -1065,7 +1042,7 @@ function viewFunction() {
         });
     }
 
-    if (bigTexts === 0) {
+    if (fontSize === 0) {
         // Convert all big text elements to small
         document.querySelectorAll('.big').forEach(function(element) {
             element.classList.remove('big');
@@ -1298,30 +1275,30 @@ document.querySelectorAll(".wordBtns").forEach(btn => btn.classList.remove("acti
 
 // Define click behavior
 function activateSection(button, card) {
-  document.querySelectorAll(".word-card").forEach(c => c.classList.add("hidden"));
-  card?.classList.remove("hidden");
-  document.querySelectorAll(".wordBtns").forEach(btn => btn.classList.remove("activeBtn"));
-  button.classList.add("activeBtn");
+  document.querySelectorAll(".word-card").forEach(c => c.classList.add("hidden"));
+  card?.classList.remove("hidden");
+  document.querySelectorAll(".wordBtns").forEach(btn => btn.classList.remove("activeBtn"));
+  button.classList.add("activeBtn");
 }
 
 // Button click listeners
 if (hasMeaning) {
-  btnMeaning.onclick = () => activateSection(btnMeaning, cardMeaning);
+  btnMeaning.onclick = () => activateSection(btnMeaning, cardMeaning);
 }
 if (hasSynonyms) {
-  btnSynonym.onclick = () => activateSection(btnSynonym, cardSynonym);
+  btnSynonym.onclick = () => activateSection(btnSynonym, cardSynonym);
 }
 if (hasAntonyms) {
-  btnAntonym.onclick = () => activateSection(btnAntonym, cardAntonym);
+  btnAntonym.onclick = () => activateSection(btnAntonym, cardAntonym);
 }
 
 // Auto activate first available
 if (hasMeaning) {
-  activateSection(btnMeaning, cardMeaning);
+  activateSection(btnMeaning, cardMeaning);
 } else if (hasSynonyms) {
-  activateSection(btnSynonym, cardSynonym);
+  activateSection(btnSynonym, cardSynonym);
 } else if (hasAntonyms) {
-  activateSection(btnAntonym, cardAntonym);
+  activateSection(btnAntonym, cardAntonym);
 }
 }
 
@@ -1817,3 +1794,4 @@ function handleMCQClick(clickedElement) {
     }
   }
 }
+
