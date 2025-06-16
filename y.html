@@ -209,56 +209,45 @@
 
       </div> -->
     </div>
-    <!-- PopUp Form -->
+    
+
 <div id="formOverlay"></div>
 <div id="formPopup">
   <h3 style="text-align:center; margin-top: 0;">Settings</h3>
 
-
+  <!-- View Settings Group -->
   <div class="form-section">
-    <!-- Dark Mode Toggle -->
-<div class="toggle-row">
-  <label for="darkMode" class="toggle-label">Dark Mode</label>
-  <label class="switch">
-    <input type="checkbox" id="darkMode">
-    <span class="slider"></span>
-  </label>
-<!-- Big Texts Toggle -->
-  <label for="bigTexts" class="toggle-label">Large Text</label>
-  <label class="switch">
-    <input type="checkbox" id="bigTexts" checked>
-    <span class="slider"></span>
-  </label>
-</div>
+    <h4>View Settings</h4>
+    
+    <!-- Dark Mode -->
     <div class="toggle-row">
-      <label for="loopMode" class="toggle-label">Loop Mode</label>
+      <label for="darkMode" class="toggle-label">Dark Mode</label>
       <label class="switch">
-        <input type="checkbox" id="loopMode">
-        <span class="slider"></span>
-      </label>
-    </div>
-<div class="toggle-row">
-  <label for="wordHighlight" class="toggle-label">Word Highlight</label>
-  <label class="switch">
-  <input type="checkbox" id="wordHighlight">
-    <span class="slider"></span>
-</div>
-    <div class="toggle-row">
-      <label for="wordMeaningMode" class="toggle-label">Word Meaning Mode</label>
-      <label class="switch">
-        <input type="checkbox" id="wordMeaningMode">
+        <input type="checkbox" id="darkMode">
         <span class="slider"></span>
       </label>
     </div>
 
+    <!-- All Root Words -->
     <div class="toggle-row">
-      <label for="clickOnWord" class="toggle-label">Activate Click on-word</label>
+      <label for="allRootWords" class="toggle-label">All Root Words</label>
       <label class="switch">
-        <input type="checkbox" id="clickOnWord">
+        <input type="checkbox" id="allRootWords" checked>
         <span class="slider"></span>
       </label>
     </div>
 
+    <!-- Font Size -->
+    <div class="form-row">
+      <label for="fontSize" class="select-label">Font Size</label>
+      <select id="fontSize">
+        <option value="0">Small</option>
+        <option value="1" selected>Normal</option>
+        <option value="2">Large</option>
+      </select>
+    </div>
+
+    <!-- Search by Meaning -->
     <div class="toggle-row">
       <label for="searchByMeaning" class="toggle-label">Search by Meaning</label>
       <label class="switch">
@@ -267,22 +256,157 @@
       </label>
     </div>
 
+    <!-- Buttons Control -->
     <div class="toggle-row">
-      <label for="viewMode" class="toggle-label">Root Word</label>
+      <label for="buttonsControl" class="toggle-label">Buttons Control</label>
       <label class="switch">
-        <input type="checkbox" id="viewMode">
+        <input type="checkbox" id="buttonsControl" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Alert Message -->
+    <div class="toggle-row">
+      <label for="alertMessage" class="toggle-label">Alert Message</label>
+      <label class="switch">
+        <input type="checkbox" id="alertMessage">
         <span class="slider"></span>
       </label>
     </div>
   </div>
 
-  <select id="stepSelector"></select>
+  <!-- Read Settings Group -->
+  <div class="form-section">
+    <h4>Read Settings</h4>
+    
+    <!-- Learning Mode -->
+    <div class="subgroup">
+      <h5>Learning Mode</h5>
+      
+      <!-- Word Highlight -->
+      <div class="toggle-row">
+        <label for="wordHighlight" class="toggle-label">Word Highlight</label>
+        <label class="switch">
+          <input type="checkbox" id="wordHighlight">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Click on Word -->
+      <div class="toggle-row">
+        <label for="clickOnWord" class="toggle-label">Click on Word</label>
+        <label class="switch">
+          <input type="checkbox" id="clickOnWord" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Test Mode -->
+      <div class="toggle-row">
+        <label for="testMode" class="toggle-label">Test Mode</label>
+        <label class="switch">
+          <input type="checkbox" id="testMode">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Test Settings -->
+    <div class="subgroup">
+      <h5>Test Settings</h5>
+      
+      <!-- Min Options -->
+      <div class="form-row">
+        <label for="minOptions" class="select-label">Min Options</label>
+        <select id="minOptions">
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+
+      <!-- Max Options -->
+      <div class="form-row">
+        <label for="maxOptions" class="select-label">Max Options</label>
+        <select id="maxOptions">
+          <option value="5">5</option>
+          <option value="6" selected>6</option>
+          <option value="7">7</option>
+          <!-- ... up to 16 ... -->
+          <option value="16">16</option>
+        </select>
+      </div>
+
+      <!-- Correct Percentage -->
+      <div class="form-row">
+        <label for="correctPercent" class="select-label">Correct %</label>
+        <select id="correctPercent">
+          <option value="20">20%</option>
+          <option value="30" selected>30%</option>
+          <option value="40">40%</option>
+          <!-- ... up to 80% ... -->
+          <option value="80">80%</option>
+        </select>
+      </div>
+
+      <!-- Random Options -->
+      <div class="toggle-row">
+        <label for="randomOptionCount" class="toggle-label">Random Options</label>
+        <label class="switch">
+          <input type="checkbox" id="randomOptionCount" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Reveal Answer -->
+      <div class="toggle-row">
+        <label for="revealAns" class="toggle-label">Reveal Answer</label>
+        <label class="switch">
+          <input type="checkbox" id="revealAns" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Group -->
+  <div class="form-section">
+    <h4>Navigation</h4>
+    
+    <!-- Loop Mode -->
+    <div class="toggle-row">
+      <label for="loopMode" class="toggle-label">Loop Mode</label>
+      <label class="switch">
+        <input type="checkbox" id="loopMode">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Read By -->
+    <div class="form-row">
+      <label for="readBy" class="select-label">Read By</label>
+      <select id="readBy">
+        <option value="0">Root Words only</option>
+        <option value="1" selected>All Words</option>
+        <option value="2">Synonyms and Antonyms</option>
+        <option value="3">One Word Substitutions</option>
+      </select>
+    </div>
+
+    <!-- Step Number -->
+    <div class="form-row">
+      <label for="stepSelector" class="select-label">Step Number</label>
+      <select id="stepSelector"></select>
+    </div>
+  </div>
 
   <div class="footer-buttons">
     <button id="savePopup">Save</button>
     <button id="closeFormBtn">Close</button>
   </div>
 </div>
+      
 <!-- Add these right before </body> -->
 <!-- Bootstrap JS -->
       <div id="wordReadView">
