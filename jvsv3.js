@@ -46,7 +46,7 @@ let revealAns = 1;             // Default ON
 let loopMode = 0;              // Default OFF
 let readBy = 1;                // 0=Root, 1=All Words, 2=Synonyms, 3=OneWordSubs
 let stepNumber = 1;            // Default 1
-let questionMode = 1;          // Default 1
+         // Default 1
 
 /* ===== PENDING CHANGES ===== */
 let pendingDarkMode = null;
@@ -1056,7 +1056,7 @@ function viewFunction() {
         });
     }
 
-    if (questionMode === 1) {
+    if (testMode === 1) {
         displayQuestion();
     } else {
         displayWord();
