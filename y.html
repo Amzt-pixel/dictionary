@@ -11,7 +11,7 @@
 <body class="light">
 
   <div id="setupScreen" class="screen visible light">
-    <h1>Dictionary v79</h1>
+    <h1>Dictionary Y</h1>
     <p>Synonyms and Antonyms</p>
     
     <!--<h1>Setup</h1>-->
@@ -36,7 +36,7 @@
       <!--
     <div class="search-container">
   <input type="text" id="wordSearch" class="search-box" placeholder="Search in Dictionary" autocomplete="off">
-  <button id="clearSearch" class="searchBar-button">⌕</button>
+  <button id="clearSearch" class="searchBar-button">âŒ•</button>
     </div>
       
       <div class="search-container">
@@ -166,12 +166,50 @@
       </div>
       </span>
     </div>
+    <!--
+    <div class="search-container">
+  <input type="text" id="wordSearch" class="search-box" placeholder="Search in Dictionary" autocomplete="off">
+  <button id="clearSearch" class="searchBar-button">âŒ•</button>
+    </div>
+<div id="searchResults" class="hidden">
+ 
+  <div id="searchResultDiv">
+  <div id="noResultsMessage" class="search-no-results hidden">No word found...</div>
+  <div id="exactMatchSection" class="hidden">
+    <h4>Exact Match</h4>
+    <div id="exactMatch"></div>
+  </div>
+  <div id="closeMatchesSection" class="hidden">
+    <h4>Close Matches</h4>
+    <div id="closeMatches"></div>
+  </div>
+  <div id="wordsLocatedSection" class="hidden">
+  <h4>Words Located</h4>
+  <div id="wordsLocated"></div>
+  </div>
+  <div id="wordsFoundSection" class="hidden">
+  <h4>Words Found</h4>
+  <div id="wordsFound"></div>
+  </div>
+</div>
 
+    </div>
+    -->
     <div class="top-bar">
       <h1>Dictionary</h1>
-    </div>
-    
+   <!--   <div class="clock-section">
+        <button id="meta" class="metabutton">â“˜</button>
+      </div> 
+      <div class="header-buttons">
+      <button id="clock" class="clockButton">Time: </button>
+   <button id="completeBtn">Complete</button> 
+        <label>
+      <input type="checkbox" id="viewToggle" /> Toggle Dark Mode
+    </label> 
 
+      </div> -->
+    </div>
+    <!-- PopUp Form -->
 <div id="formOverlay"></div>
 <div id="formPopup">
   <h3 style="text-align:center; margin-top: 0;">Settings</h3>
@@ -367,7 +405,6 @@
     <button id="closeFormBtn">Close</button>
   </div>
 </div>
-      
 <!-- Add these right before </body> -->
 <!-- Bootstrap JS -->
       <div id="wordReadView">
