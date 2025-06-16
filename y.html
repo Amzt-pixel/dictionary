@@ -11,7 +11,7 @@
 <body class="light">
 
   <div id="setupScreen" class="screen visible light">
-    <h1>Dictionary Y</h1>
+    <h1>Dictionary v79</h1>
     <p>Synonyms and Antonyms</p>
     
     <!--<h1>Setup</h1>-->
@@ -214,30 +214,17 @@
 <div id="formPopup">
   <h3 style="text-align:center; margin-top: 0;">Settings</h3>
 
-  <!-- View Settings Group -->
+
   <div class="form-section">
-    <h4>View Settings</h4>
-    
-    <!-- Dark Mode -->
-    <div class="toggle-row">
-      <label for="darkMode" class="toggle-label">Dark Mode</label>
-      <label class="switch">
-        <input type="checkbox" id="darkMode">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <!-- All Root Words -->
-    <div class="toggle-row">
-      <label for="allRootWords" class="toggle-label">All Root Words</label>
-      <label class="switch">
-        <input type="checkbox" id="allRootWords" checked>
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <!-- Font Size -->
-    <div class="form-row">
+    <!-- Dark Mode Toggle -->
+<div class="toggle-row">
+  <label for="darkMode" class="toggle-label">Dark Mode</label>
+  <label class="switch">
+    <input type="checkbox" id="darkMode">
+    <span class="slider"></span>
+  </label>
+</div>
+<div class="form-row">
       <label for="fontSize" class="select-label">Font Size</label>
       <select id="fontSize">
         <option value="0">Small</option>
@@ -245,27 +232,14 @@
         <option value="2">Large</option>
       </select>
     </div>
-
-    <!-- Search by Meaning -->
-    <div class="toggle-row">
-      <label for="searchByMeaning" class="toggle-label">Search by Meaning</label>
-      <label class="switch">
-        <input type="checkbox" id="searchByMeaning">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <!-- Buttons Control -->
-    <div class="toggle-row">
+<div class="toggle-row">
       <label for="buttonsControl" class="toggle-label">Buttons Control</label>
       <label class="switch">
         <input type="checkbox" id="buttonsControl" checked>
         <span class="slider"></span>
       </label>
     </div>
-
-    <!-- Alert Message -->
-    <div class="toggle-row">
+<div class="toggle-row">
       <label for="alertMessage" class="toggle-label">Alert Message</label>
       <label class="switch">
         <input type="checkbox" id="alertMessage">
@@ -273,35 +247,7 @@
       </label>
     </div>
   </div>
-
-  <!-- Read Settings Group -->
-  <div class="form-section">
-    <h4>Read Settings</h4>
-    
-    <!-- Learning Mode -->
-    <div class="subgroup">
-      <h5>Learning Mode</h5>
-      
-      <!-- Word Highlight -->
-      <div class="toggle-row">
-        <label for="wordHighlight" class="toggle-label">Word Highlight</label>
-        <label class="switch">
-          <input type="checkbox" id="wordHighlight">
-          <span class="slider"></span>
-        </label>
-      </div>
-
-      <!-- Click on Word -->
-      <div class="toggle-row">
-        <label for="clickOnWord" class="toggle-label">Click on Word</label>
-        <label class="switch">
-          <input type="checkbox" id="clickOnWord" checked>
-          <span class="slider"></span>
-        </label>
-      </div>
-
-      <!-- Test Mode -->
-      <div class="toggle-row">
+<div class="toggle-row">
         <label for="testMode" class="toggle-label">Test Mode</label>
         <label class="switch">
           <input type="checkbox" id="testMode">
@@ -309,13 +255,7 @@
         </label>
       </div>
     </div>
-
-    <!-- Test Settings -->
-    <div class="subgroup">
-      <h5>Test Settings</h5>
-      
-      <!-- Min Options -->
-      <div class="form-row">
+<div class="form-row">
         <label for="minOptions" class="select-label">Min Options</label>
         <select id="minOptions">
           <option value="3">3</option>
@@ -348,18 +288,14 @@
           <option value="80">80%</option>
         </select>
       </div>
-
-      <!-- Random Options -->
-      <div class="toggle-row">
+<div class="toggle-row">
         <label for="randomOptionCount" class="toggle-label">Random Options</label>
         <label class="switch">
           <input type="checkbox" id="randomOptionCount" checked>
           <span class="slider"></span>
         </label>
       </div>
-
-      <!-- Reveal Answer -->
-      <div class="toggle-row">
+<div class="toggle-row">
         <label for="revealAns" class="toggle-label">Reveal Answer</label>
         <label class="switch">
           <input type="checkbox" id="revealAns" checked>
@@ -368,12 +304,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Navigation Group -->
-  <div class="form-section">
-    <h4>Navigation</h4>
-    
-    <!-- Loop Mode -->
     <div class="toggle-row">
       <label for="loopMode" class="toggle-label">Loop Mode</label>
       <label class="switch">
@@ -381,8 +311,12 @@
         <span class="slider"></span>
       </label>
     </div>
-
-    <!-- Read By -->
+<div class="toggle-row">
+  <label for="wordHighlight" class="toggle-label">Word Highlight</label>
+  <label class="switch">
+  <input type="checkbox" id="wordHighlight">
+    <span class="slider"></span>
+</div>
     <div class="form-row">
       <label for="readBy" class="select-label">Read By</label>
       <select id="readBy">
@@ -393,12 +327,24 @@
       </select>
     </div>
 
-    <!-- Step Number -->
-    <div class="form-row">
-      <label for="stepSelector" class="select-label">Step Number</label>
-      <select id="stepSelector"></select>
+    <div class="toggle-row">
+      <label for="clickOnWord" class="toggle-label">Activate Click on-word</label>
+      <label class="switch">
+        <input type="checkbox" id="clickOnWord">
+        <span class="slider"></span>
+      </label>
     </div>
-  </div>
+
+    <div class="toggle-row">
+      <label for="searchByMeaning" class="toggle-label">Search by Meaning</label>
+      <label class="switch">
+        <input type="checkbox" id="searchByMeaning">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+<label for="stepSelector" class="select-label">Step Number</label>
+  <select id="stepSelector"></select>
 
   <div class="footer-buttons">
     <button id="savePopup">Save</button>
