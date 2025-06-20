@@ -9,7 +9,11 @@ let currentIndex = 0;
 let wordsSeen = 0;
 let viewWordsMode = 1; //Default All words
 let startTime = null;
+let readBy = 1;//Default all words
+let buttonsControl = 1;
+let allRootWords = 1;
 let timerInterval;
+let alertMessage = 0;
 let loopMode = 0;
 let revealAns = 0;
 let randomOptionCount = 1;     // Whether number of options is randomized (1 = yes, 0 = no)
@@ -30,9 +34,12 @@ const HOLD_DURATION = 1000; // 1 second
 // Add this near your other constants (around line 11)
 // Add these with your other variables
 const STEP_OPTIONS = {
-  '1': [1, 3, 10, 25, 100, 500],
-  '0': [1, 3, 10, 25]
+  0: [1, 3, 5, 25, 100],          // Root Words
+  1: [1, 3, 5, 10, 25, 100, 500], // All Words
+  2: [1, 3, 5, 25, 100, 500],     // Synonyms and Antonyms
+  3: [1, 3, 5, 25, 100, 500]      // One Word Substitutions
 };
+
 let pendingViewMode = null;  // Temporary storage until saved
 let pendingStepNumber = null;
 let pendingLoopMode = null;
