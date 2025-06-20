@@ -945,6 +945,8 @@ input:checked + .slider:before {
   flex-direction: column;
   gap: 12px;
   margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 #formPopup .toggle-row {
