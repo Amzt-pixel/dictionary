@@ -92,11 +92,11 @@ const searchInput = document.getElementById("wordSearch");
 const searchButton = document.querySelector(".searchBar-button");
 
 //document.getElementById("infoButton").addEventListener("click", showMetadata);//
-
+/*
 document.getElementById("viewMode").addEventListener("change", (e) => {
     viewWordsMode = parseInt(e.target.value);
 });
-
+*/
 
 //Menu Visibility
 document.getElementById("showMenuBtn").addEventListener("click", function () {
