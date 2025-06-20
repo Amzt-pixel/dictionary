@@ -11,7 +11,7 @@
 <body class="light">
 
   <div id="setupScreen" class="screen visible light">
-    <h1>Dictionary v81</h1>
+    <h1>Dictionary v82</h1>
     <p>Synonyms and Antonyms</p>
     
     <!--<h1>Setup</h1>-->
@@ -306,8 +306,8 @@
 
       
       <div class="toggle-row">
-        <label for="textSizeSelector" class="toggle-label">Large Text</label>
-        <select id="textSizeSelector" name="bigTexts">
+        <label class="toggle-label">Large Text</label>
+        <select>
           <option value="-1">Small</option>
           <option value="0">Normal</option>
           <option value="1">Big</option>
@@ -323,17 +323,17 @@
       </div>
 
       <div class="toggle-row">
-        <label for="alertMessage" class="toggle-label">Alerts</label>
+        <label class="toggle-label">Alerts</label>
         <label class="switch">
-          <input type="checkbox" id="alertMessage">
+          <input type="checkbox"p>
           <span class="slider"></span>
         </label>
       </div>
 
       <div class="toggle-row">
-        <label for="allRootWords" class="toggle-label">All Root Words</label>
+        <label class="toggle-label">All Root Words</label>
         <label class="switch">
-          <input type="checkbox" id="allRootWords" checked>
+          <input type="checkbox" checked>
           <span class="slider"></span>
         </label>
       </div>
@@ -377,16 +377,16 @@
 
       <h5>Test Mode</h5>
 
-      <label for="minOptionSelector">Min Options</label>
-      <select id="minOptionSelector" name="minOptions">
+      <label>Min Options</label>
+      <select>
         <option value="3">3</option>
         <option value="4" selected>4</option>
         <option value="5">5</option>
         <option value="6">6</option>
       </select>
 
-      <label for="maxOptionSelector">Max Options</label>
-      <select id="maxOptionSelector" name="maxOptions">
+      <label>Max Options</label>
+      <select>
         <option value="5">5</option>
         <option value="6" selected>6</option>
         <option value="7">7</option>
@@ -397,8 +397,8 @@
         <option value="12">12</option>
       </select>
 
-      <label for="correctPercentageSelector">Correct Percentage</label>
-      <select id="correctPercentageSelector" name="correctPercent">
+      <label >Correct Percentage</label>
+      <select>
         <option value="20">20%</option>
         <option value="30" selected>30%</option>
         <option value="40">40%</option>
@@ -409,18 +409,18 @@
       </select>
 
       <div class="toggle-row">
-        <label for="randomOptionCount" class="toggle-label">Random Number of Options</label>
+        <label class="toggle-label">Random Number of Options</label>
         <label class="switch">
-          <input type="checkbox" id="randomOptionCount" checked>
+          <input type="checkbox" checked>
           <span class="slider"></span>
         </label>
       </div>
     </div>
 
     <div class="toggle-row">
-      <label for="revealAns" class="toggle-label">Reveal Correct</label>
+      <label  class="toggle-label">Reveal Correct</label>
       <label class="switch">
-        <input type="checkbox" id="revealAns">
+        <input type="checkbox">
         <span class="slider"></span>
       </label>
     </div>
@@ -429,9 +429,9 @@
   <div class="card">
     <h4>Prev & Next</h4>
     <div class="toggle-row">
-      <label for="buttonsControl" class="toggle-label">Navigate with Buttons</label>
+      <label class="toggle-label">Navigate with Buttons</label>
       <label class="switch">
-        <input type="checkbox" id="buttonsControl" checked>
+        <input type="checkbox" checked>
         <span class="slider"></span>
       </label>
     </div>
@@ -444,8 +444,8 @@
       </label>
     </div>
 
-    <label for="readingOrderSelect">Reading Order</label>
-    <select id="readingOrderSelect" name="readBy">
+    <label>Reading Order</label>
+    <select>
       <option value="0">Root Words only</option>
       <option value="1" selected>All Words</option>
       <option value="2">Synonyms and Antonyms</option>
